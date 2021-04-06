@@ -1,34 +1,335 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="//demo.productionready.io/main.css">
-    <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tag above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MineGeek Parts Unlimited</title>
 
-      Unlike "/favicon.ico" or "favico.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Conduit</title>
+    <meta name="title" content="MineGeek Parts Unlimited - For all your mining gear parts and accessories">
+    <meta name="description" content="MineGeek Parts Unlimited - For all your mining gear parts and accessories">
+    <meta name="generator" content="MineGeek">
+
+    <!-- Open Graph / Facebook -->
+
+    <meta property="og:url" content="https://minegeekpartsunlimited.wilco.work/">
+    <meta property="og:title" content="MineGeek Parts Unlimited - For all your mining gear parts and accessories">
+    <meta property="og:description" content="MineGeek Parts Unlimited - For all your mining gear parts and accessories">
+    <meta property="og:image" content="/images/favicon/android-icon-192x192.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:url" content="https://minegeekpartsunlimited.wilco.work/">
+    <meta property="twitter:title" content="MineGeek Parts Unlimited - For all your mining gear parts and accessories">
+    <meta property="twitter:description" content="MineGeek Parts Unlimited - For all your mining gear parts and accessories">
+    <meta property="twitter:image" content="/images/favicon/android-icon-192x192.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.17.0/core.min.js" integrity="sha512-o6alMAMTI5qAmVC1UvuRPgTl3UOOkP8NZ6212+rq1Oslsuy8Owt9r5Z0Wu0LNxpw/Q8N8ToGiyovHV+kyOulxg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
   </head>
+
   <body>
+
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<div class="top-announcement text-center">
+    Welcome to MineGeek Parts Unlimited, get 50% off Using our code <b>[50CRYPTOFF]</b> now!
+</div>
+    <nav class="navbar sticky-top  navbar-expand-lg minegeek-navbar navbar-dark  ">
+    <div class="container-fluid">
+      <a class="navbar-brand logo-text fw-text" href="#">
+        🧱 MineG⍷⍷k
+        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Best Sellers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >Build Your Rig</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >Customer Support</a>
+          </li>
+        </ul>
 
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
+      </div>
+    </div>
+  </nav>
+
+
+<div class="container">
+
+    <div class="row pt-4 pb-4">
+
+            <div class="col-md-12">
+                <div class="card sunray">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img src="50precentoff.png" class="img-fluid">
+                            </div>
+                            <div class="col-md-7">
+                                <h1 class="display-3 fw-bold text-white">Super sale on gear!</h1>
+                                <h2 class="display-7 fw-bold text-white">Shop now 50% off on all our mining gear from top sellers category now with special coupon!</h2>
+                                <a href="/topsellers.html" class="btn btn-success minegear-btn btn-lg mt-2">Claim my coupon!</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+          <p class="fw-bold">Filters</p>
+
+          <hr>
+          <p>Categories</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Motherboards
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              CPUs
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              PSUs
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Memory
+            </label>
+          </div>
+
+          <hr>
+          <p>Brands</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              ASUS
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Intel
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              NVIDIA
+            </label>
+          </div>
+
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="row row-cols-3 row-eq-height">
+
+                <div class="col mb-4 panel">
+                    <div class="card">
+                        <div class="card-body">
+                          <img src="https://www.zdnet.com/a/hub/i/2021/02/09/2e46d80f-427b-4cd8-94a9-d28f27ebc608/2021-02-09-14-47-51.jpg" class="img-fluid">
+
+                          <h5 class="card-title">Asus B250 Mining Expert</h5>
+                          <p class="card-text">Motherboard</p>
+                          <a href="#" class="btn btn-primary minegear-btn">$450 Add To Cart!</a>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col mb-4 panel">
+                  <div class="card">
+                      <div class="card-body">
+                        <img src="https://www.zdnet.com/a/hub/i/2021/02/09/2c9f31d3-dda1-402e-be19-5eadd7204d32/2021-02-09-14-50-29.jpg" class="img-fluid">
+
+                        <h5 class="card-title">Intel Core i5-6500</h5>
+                        <p class="card-text">CPU</p>
+                        <a href="#" class="btn btn-primary minegear-btn">$125 Add To Cart!</a>
+                      </div>
+                    </div>
+              </div>
+
+              <div class="col mb-4 panel">
+                <div class="card">
+                    <div class="card-body">
+                      <img src="https://www.zdnet.com/a/hub/i/2021/02/09/b4c9e66f-ba6a-4d74-ac51-6db53b99aa1b/2021-02-09-14-53-44.jpg" class="img-fluid">
+
+                      <h5 class="card-title">G.SKILL Aegis 16GB (2 x 8GB) </h5>
+                      <p class="card-text">RAM</p>
+                      <a href="#" class="btn btn-primary minegear-btn">$65 Add To Cart!</a>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="col mb-4 panel">
+              <div class="card">
+                  <div class="card-body">
+                    <img src="https://www.zdnet.com/a/hub/i/2021/02/09/944a0507-c064-4067-93e2-f8326d940cea/2021-02-09-14-55-24.jpg" class="img-fluid">
+
+                    <h5 class="card-title">SanDisk SSD Plus 1TB </h5>
+                    <p class="card-text">Storage</p>
+                    <a href="#" class="btn btn-primary minegear-btn">$95 Add To Cart!</a>
+                  </div>
+                </div>
+          </div>
+
+
+          <div class="col mb-4 panel">
+            <div class="card">
+                <div class="card-body">
+                  <img src="https://www.zdnet.com/a/hub/i/2021/02/09/db28d8d9-5b95-42ce-bc6b-412a227ded2c/2021-02-09-14-57-37.jpg" class="img-fluid">
+
+                  <h5 class="card-title">Segotep 850W Full-Modular PSU </h5>
+                  <p class="card-text">PSU</p>
+                  <a href="#" class="btn btn-primary minegear-btn">$100 Add To Cart!</a>
+                </div>
+              </div>
+        </div>
+
+
+        <div class="col mb-4 panel">
+          <div class="card">
+              <div class="card-body">
+                <img src="https://www.zdnet.com/a/hub/i/2021/02/09/baf0f45c-d285-4a53-9d30-7b3fcca48118/2021-02-09-15-00-28.jpg" class="img-fluid">
+
+                <h5 class="card-title">FebSmart 16x to 1x Powered Riser 6-pack</h5>
+                <p class="card-text">PCI-e Riser</p>
+                <a href="#" class="btn btn-primary minegear-btn">$60 Add To Cart!</a>
+              </div>
+            </div>
+      </div>
+
+      <div class="col mb-4 panel">
+        <div class="card">
+            <div class="card-body">
+              <img src="https://www.zdnet.com/a/hub/i/2021/02/09/bbaac6c5-4d57-4d60-b729-f185f08a9035/2021-02-09-15-02-33.jpg" class="img-fluid">
+
+              <h5 class="card-title">ASUS TUF Gaming GeForce RTX 3060 Ti</h5>
+              <p class="card-text">Nvidia graphics card</p>
+              <a href="#" class="btn btn-primary minegear-btn">$540 Add To Cart!</a>
+            </div>
+          </div>
+    </div>
+
+    <div class="col mb-4 panel">
+      <div class="card">
+          <div class="card-body">
+            <img src="https://www.zdnet.com/a/hub/i/2021/02/09/2d70b708-db22-47ef-a2f5-11ef7fbe21cc/2021-02-09-15-04-09.jpg" class="img-fluid">
+
+            <h5 class="card-title">PowerColor RED DEVIL Radeon RX 5700 XT</h5>
+            <p class="card-text">AMD graphics card</p>
+            <a href="#" class="btn btn-primary minegear-btn">$1090 Add To Cart!</a>
+          </div>
+        </div>
+  </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://wilco-xenon.herokuapp.com/js/chartalk.js"></script>
+
+<script>
+
+
+$(document).ready(function(){
+
+    setTimeout(() => {
+        var options = {
+            title:'Congrats setting up your development enviroment!',
+            body:'Hey its Jane Smith, Congrats on setting up your develpment enviroment succesfully, It looks like everything is working. Dont forget to document everything you did for your future team mates and submit a PR',
+            person:'Jane Smith - Head of R&D',
+            personimage:'https://wilco-xenon.herokuapp.com/images/dramaticjanesmith.png'
+        };
+        DramaticModalShow(options);
+    }, 2000);
+
+})
+
+
+</script>
+
+
+<!-- Dramatic Help Modal -->
+<div class="modal fade" id="dramaticHelper" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-labelledby="dramaticHelper" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-body" id="dramaticText">
+            <p id="dramaticHelperBody"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-confirm" data-bs-dismiss="modal" >👍 Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="dramaticPerson"></div>
+
   </body>
 </html>
