@@ -49,7 +49,7 @@ if (isProduction) {
 }
 
 require("./models/User");
-require("./models/Article");
+require("./models/Item");
 require("./models/Comment");
 require("./config/passport");
 

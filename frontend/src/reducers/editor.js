@@ -1,7 +1,7 @@
 import {
   EDITOR_PAGE_LOADED,
   EDITOR_PAGE_UNLOADED,
-  ARTICLE_SUBMITTED,
+  ITEM_SUBMITTED,
   ASYNC_START,
   ADD_TAG,
   REMOVE_TAG,
@@ -13,23 +13,23 @@ export default (state = {}, action) => {
     case EDITOR_PAGE_LOADED:
       return {
         ...state,
-        articleSlug: action.payload ? action.payload.article.slug : '',
-        title: action.payload ? action.payload.article.title : '',
-        description: action.payload ? action.payload.article.description : '',
-        body: action.payload ? action.payload.article.body : '',
+        itemSlug: action.payload ? action.payload.item.slug : '',
+        title: action.payload ? action.payload.item.title : '',
+        description: action.payload ? action.payload.item.description : '',
+        body: action.payload ? action.payload.item.body : '',
         tagInput: '',
-        tagList: action.payload ? action.payload.article.tagList : []
+        tagList: action.payload ? action.payload.item.tagList : []
       };
     case EDITOR_PAGE_UNLOADED:
       return {};
-    case ARTICLE_SUBMITTED:
+    case ITEM_SUBMITTED:
       return {
         ...state,
         inProgress: null,
         errors: action.error ? action.payload.errors : null
       };
     case ASYNC_START:
-      if (action.subtype === ARTICLE_SUBMITTED) {
+      if (action.subtype === ITEM_SUBMITTED) {
         return { ...state, inProgress: true };
       }
       break;

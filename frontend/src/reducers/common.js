@@ -2,12 +2,12 @@ import {
   APP_LOAD,
   REDIRECT,
   LOGOUT,
-  ARTICLE_SUBMITTED,
+  ITEM_SUBMITTED,
   SETTINGS_SAVED,
   LOGIN,
   REGISTER,
-  DELETE_ARTICLE,
-  ARTICLE_PAGE_UNLOADED,
+  DELETE_ITEM,
+  ITEM_PAGE_UNLOADED,
   EDITOR_PAGE_UNLOADED,
   HOME_PAGE_UNLOADED,
   PROFILE_PAGE_UNLOADED,
@@ -36,8 +36,8 @@ export default (state = defaultState, action) => {
       return { ...state, redirectTo: null };
     case LOGOUT:
       return { ...state, redirectTo: "/", token: null, currentUser: null };
-    case ARTICLE_SUBMITTED:
-      const redirectUrl = `/article/${action.payload.article.slug}`;
+    case ITEM_SUBMITTED:
+      const redirectUrl = `/item/${action.payload.item.slug}`;
       return { ...state, redirectTo: redirectUrl };
     case SETTINGS_SAVED:
       return {
@@ -53,9 +53,9 @@ export default (state = defaultState, action) => {
         token: action.error ? null : action.payload.user.token,
         currentUser: action.error ? null : action.payload.user
       };
-    case DELETE_ARTICLE:
+    case DELETE_ITEM:
       return { ...state, redirectTo: "/" };
-    case ARTICLE_PAGE_UNLOADED:
+    case ITEM_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:
     case HOME_PAGE_UNLOADED:
     case PROFILE_PAGE_UNLOADED:

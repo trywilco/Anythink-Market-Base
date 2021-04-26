@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
   bio: String,
   image: String,
-  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   hash: String,
   salt: String

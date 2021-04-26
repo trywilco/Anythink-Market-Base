@@ -55,31 +55,31 @@ const Tags = {
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
-const omitSlug = article => Object.assign({}, article, { slug: undefined });
-const Articles = {
-  all: page => requests.get(`/articles?${limit(10, page)}`),
+const omitSlug = item => Object.assign({}, item, { slug: undefined });
+const Items = {
+  all: page => requests.get(`/items?${limit(10, page)}`),
   byAuthor: (author, page) =>
-    requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
+    requests.get(`/items?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
-    requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
-  del: slug => requests.del(`/articles/${slug}`),
-  favorite: slug => requests.post(`/articles/${slug}/favorite`),
+    requests.get(`/items?tag=${encode(tag)}&${limit(10, page)}`),
+  del: slug => requests.del(`/items/${slug}`),
+  favorite: slug => requests.post(`/items/${slug}/favorite`),
   favoritedBy: (author, page) =>
-    requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
-  feed: () => requests.get("/articles/feed?limit=10&offset=0"),
-  get: slug => requests.get(`/articles/${slug}`),
-  unfavorite: slug => requests.del(`/articles/${slug}/favorite`),
-  update: article =>
-    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: article => requests.post("/articles", { article })
+    requests.get(`/items?favorited=${encode(author)}&${limit(5, page)}`),
+  feed: () => requests.get("/items/feed?limit=10&offset=0"),
+  get: slug => requests.get(`/items/${slug}`),
+  unfavorite: slug => requests.del(`/items/${slug}/favorite`),
+  update: item =>
+    requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),
+  create: item => requests.post("/items", { item })
 };
 
 const Comments = {
   create: (slug, comment) =>
-    requests.post(`/articles/${slug}/comments`, { comment }),
+    requests.post(`/items/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
-    requests.del(`/articles/${slug}/comments/${commentId}`),
-  forArticle: slug => requests.get(`/articles/${slug}/comments`)
+    requests.del(`/items/${slug}/comments/${commentId}`),
+  forItem: slug => requests.get(`/items/${slug}/comments`)
 };
 
 const Profile = {
@@ -89,7 +89,7 @@ const Profile = {
 };
 
 export default {
-  Articles,
+  Items,
   Auth,
   Comments,
   Profile,

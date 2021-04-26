@@ -237,7 +237,7 @@
       ]
     },
     {
-      "name": "Articles with authentication",
+      "name": "Items with authentication",
       "description": "",
       "item": [{
           "name": "Feed",
@@ -253,29 +253,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -283,7 +283,7 @@
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/feed",
+            "url": "{{apiUrl}}/items/feed",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -310,7 +310,7 @@
           "response": []
         },
         {
-          "name": "All Articles",
+          "name": "All Items",
           "event": [{
             "listen": "test",
             "script": {
@@ -323,29 +323,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -353,7 +353,7 @@
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles",
+            "url": "{{apiUrl}}/items",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -380,7 +380,7 @@
           "response": []
         },
         {
-          "name": "All Articles with auth",
+          "name": "All Items with auth",
           "event": [{
             "listen": "test",
             "script": {
@@ -393,29 +393,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -423,7 +423,7 @@
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles",
+            "url": "{{apiUrl}}/items",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -450,7 +450,7 @@
           "response": []
         },
         {
-          "name": "Articles by Author",
+          "name": "Items by Author",
           "event": [{
             "listen": "test",
             "script": {
@@ -463,29 +463,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -494,12 +494,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?author=johnjacob",
+              "raw": "{{apiUrl}}/items?author=johnjacob",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "author",
@@ -533,7 +533,7 @@
           "response": []
         },
         {
-          "name": "Articles by Author with auth",
+          "name": "Items by Author with auth",
           "event": [{
             "listen": "test",
             "script": {
@@ -546,29 +546,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -577,12 +577,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?author=johnjacob",
+              "raw": "{{apiUrl}}/items?author=johnjacob",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "author",
@@ -615,7 +615,7 @@
           "response": []
         },
         {
-          "name": "Articles Favorited by Username",
+          "name": "Items Favorited by Username",
           "event": [{
             "listen": "test",
             "script": {
@@ -628,29 +628,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "    ",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -659,12 +659,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?favorited=jane",
+              "raw": "{{apiUrl}}/items?favorited=jane",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "favorited",
@@ -698,7 +698,7 @@
           "response": []
         },
         {
-          "name": "Articles Favorited by Username with auth",
+          "name": "Items Favorited by Username with auth",
           "event": [{
             "listen": "test",
             "script": {
@@ -711,29 +711,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "    ",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -742,12 +742,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?favorited=jane",
+              "raw": "{{apiUrl}}/items?favorited=jane",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "favorited",
@@ -781,7 +781,7 @@
           "response": []
         },
         {
-          "name": "Articles by Tag",
+          "name": "Items by Tag",
           "event": [{
             "listen": "test",
             "script": {
@@ -794,29 +794,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -825,12 +825,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?tag=dragons",
+              "raw": "{{apiUrl}}/items?tag=dragons",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "tag",
@@ -864,7 +864,7 @@
           "response": []
         },
         {
-          "name": "Create Article",
+          "name": "Create Item",
           "event": [{
             "listen": "test",
             "script": {
@@ -872,33 +872,33 @@
               "exec": [
                 "var responseJSON = JSON.parse(responseBody);",
                 "",
-                "tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+                "tests['Response contains \"item\" property'] = responseJSON.hasOwnProperty('item');",
                 "",
-                "var article = responseJSON.article || {};",
+                "var item = responseJSON.item || {};",
                 "",
-                "tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "if(tests['Article has \"slug\" property']){",
-                "    postman.setEnvironmentVariable('slug', article.slug);",
+                "tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "if(tests['Item has \"slug\" property']){",
+                "    postman.setEnvironmentVariable('slug', item.slug);",
                 "}",
-                "tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 ""
               ]
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles",
+            "url": "{{apiUrl}}/items",
             "method": "POST",
             "header": [{
                 "key": "Content-Type",
@@ -918,14 +918,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"article\":{\"title\":\"How to train your dragon\", \"description\":\"Ever wonder how?\", \"body\":\"Very carefully.\", \"tagList\":[\"dragons\",\"training\"]}}"
+              "raw": "{\"item\":{\"title\":\"How to train your dragon\", \"description\":\"Ever wonder how?\", \"body\":\"Very carefully.\", \"tagList\":[\"dragons\",\"training\"]}}"
             },
             "description": ""
           },
           "response": []
         },
         {
-          "name": "Single Article by slug",
+          "name": "Single Item by slug",
           "event": [{
             "listen": "test",
             "script": {
@@ -933,30 +933,30 @@
               "exec": [
                 "var responseJSON = JSON.parse(responseBody);",
                 "",
-                "tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+                "tests['Response contains \"item\" property'] = responseJSON.hasOwnProperty('item');",
                 "",
-                "var article = responseJSON.article || {};",
+                "var item = responseJSON.item || {};",
                 "",
-                "tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 ""
               ]
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}",
+            "url": "{{apiUrl}}/items/{{slug}}",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -980,7 +980,7 @@
           "response": []
         },
         {
-          "name": "Update Article",
+          "name": "Update Item",
           "event": [{
             "listen": "test",
             "script": {
@@ -989,31 +989,31 @@
                 "if (!(environment.isIntegrationTest)) {",
                 "var responseJSON = JSON.parse(responseBody);",
                 "",
-                "tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+                "tests['Response contains \"item\" property'] = responseJSON.hasOwnProperty('item');",
                 "",
-                "var article = responseJSON.article || {};",
+                "var item = responseJSON.item || {};",
                 "",
-                "tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "}",
                 ""
               ]
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}",
+            "url": "{{apiUrl}}/items/{{slug}}",
             "method": "PUT",
             "header": [{
                 "key": "Content-Type",
@@ -1033,14 +1033,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"article\":{\"body\":\"With two hands\"}}"
+              "raw": "{\"item\":{\"body\":\"With two hands\"}}"
             },
             "description": ""
           },
           "response": []
         },
         {
-          "name": "Favorite Article",
+          "name": "Favorite Item",
           "event": [{
             "listen": "test",
             "script": {
@@ -1048,32 +1048,32 @@
               "exec": [
                 "var responseJSON = JSON.parse(responseBody);",
                 "",
-                "tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+                "tests['Response contains \"item\" property'] = responseJSON.hasOwnProperty('item');",
                 "",
-                "var article = responseJSON.article || {};",
+                "var item = responseJSON.item || {};",
                 "",
-                "tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "tests[\"Article's 'favorited' property is true\"] = article.favorited === true;",
-                "tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
-                "tests[\"Article's 'favoritesCount' property is greater than 0\"] = article.favoritesCount > 0;",
+                "tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "tests[\"Item's 'favorited' property is true\"] = item.favorited === true;",
+                "tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
+                "tests[\"Item's 'favoritesCount' property is greater than 0\"] = item.favoritesCount > 0;",
                 ""
               ]
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}/favorite",
+            "url": "{{apiUrl}}/items/{{slug}}/favorite",
             "method": "POST",
             "header": [{
                 "key": "Content-Type",
@@ -1100,7 +1100,7 @@
           "response": []
         },
         {
-          "name": "Unfavorite Article",
+          "name": "Unfavorite Item",
           "event": [{
             "listen": "test",
             "script": {
@@ -1108,31 +1108,31 @@
               "exec": [
                 "var responseJSON = JSON.parse(responseBody);",
                 "",
-                "tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+                "tests['Response contains \"item\" property'] = responseJSON.hasOwnProperty('item');",
                 "",
-                "var article = responseJSON.article || {};",
+                "var item = responseJSON.item || {};",
                 "",
-                "tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
-                "tests[\"Article's \\\"favorited\\\" property is true\"] = article.favorited === false;",
+                "tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
+                "tests[\"Item's \\\"favorited\\\" property is true\"] = item.favorited === false;",
                 ""
               ]
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}/favorite",
+            "url": "{{apiUrl}}/items/{{slug}}/favorite",
             "method": "DELETE",
             "header": [{
                 "key": "Content-Type",
@@ -1161,10 +1161,10 @@
       ]
     },
     {
-      "name": "Articles",
+      "name": "Items",
       "description": "",
       "item": [{
-          "name": "All Articles",
+          "name": "All Items",
           "event": [{
             "listen": "test",
             "script": {
@@ -1177,29 +1177,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -1207,7 +1207,7 @@
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles",
+            "url": "{{apiUrl}}/items",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -1229,7 +1229,7 @@
           "response": []
         },
         {
-          "name": "Articles by Author",
+          "name": "Items by Author",
           "event": [{
             "listen": "test",
             "script": {
@@ -1242,29 +1242,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -1273,12 +1273,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?author=johnjacob",
+              "raw": "{{apiUrl}}/items?author=johnjacob",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "author",
@@ -1307,7 +1307,7 @@
           "response": []
         },
         {
-          "name": "Articles Favorited by Username",
+          "name": "Items Favorited by Username",
           "event": [{
             "listen": "test",
             "script": {
@@ -1320,29 +1320,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "    ",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -1351,12 +1351,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?favorited=jane",
+              "raw": "{{apiUrl}}/items?favorited=jane",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "favorited",
@@ -1385,7 +1385,7 @@
           "response": []
         },
         {
-          "name": "Articles by Tag",
+          "name": "Items by Tag",
           "event": [{
             "listen": "test",
             "script": {
@@ -1398,29 +1398,29 @@
                 "if(is200Response){",
                 "    var responseJSON = JSON.parse(responseBody);",
                 "",
-                "    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
-                "    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
-                "    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+                "    tests['Response contains \"items\" property'] = responseJSON.hasOwnProperty('items');",
+                "    tests['Response contains \"itemsCount\" property'] = responseJSON.hasOwnProperty('itemsCount');",
+                "    tests['itemsCount is an integer'] = Number.isInteger(responseJSON.itemsCount);",
                 "",
-                "    if(responseJSON.articles.length){",
-                "        var article = responseJSON.articles[0];",
+                "    if(responseJSON.items.length){",
+                "        var item = responseJSON.items[0];",
                 "",
-                "        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "        tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "        tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "        tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "        tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "        tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "        tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "        tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 "    } else {",
-                "        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+                "        tests['itemsCount is 0 when feed is empty'] = responseJSON.itemsCount === 0;",
                 "    }",
                 "}",
                 ""
@@ -1429,12 +1429,12 @@
           }],
           "request": {
             "url": {
-              "raw": "{{apiUrl}}/articles?tag=dragons",
+              "raw": "{{apiUrl}}/items?tag=dragons",
               "host": [
                 "{{apiUrl}}"
               ],
               "path": [
-                "articles"
+                "items"
               ],
               "query": [{
                 "key": "tag",
@@ -1463,7 +1463,7 @@
           "response": []
         },
         {
-          "name": "Single Article by slug",
+          "name": "Single Item by slug",
           "event": [{
             "listen": "test",
             "script": {
@@ -1471,30 +1471,30 @@
               "exec": [
                 "var responseJSON = JSON.parse(responseBody);",
                 "",
-                "tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+                "tests['Response contains \"item\" property'] = responseJSON.hasOwnProperty('item');",
                 "",
-                "var article = responseJSON.article || {};",
+                "var item = responseJSON.item || {};",
                 "",
-                "tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-                "tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-                "tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-                "tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-                "tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-                "tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-                "tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-                "tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-                "tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-                "tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-                "tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-                "tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-                "tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-                "tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+                "tests['Item has \"title\" property'] = item.hasOwnProperty('title');",
+                "tests['Item has \"slug\" property'] = item.hasOwnProperty('slug');",
+                "tests['Item has \"body\" property'] = item.hasOwnProperty('body');",
+                "tests['Item has \"createdAt\" property'] = item.hasOwnProperty('createdAt');",
+                "tests['Item\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(item.createdAt).toISOString() === item.createdAt;",
+                "tests['Item has \"updatedAt\" property'] = item.hasOwnProperty('updatedAt');",
+                "tests['Item\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(item.updatedAt).toISOString() === item.updatedAt;",
+                "tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
+                "tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
+                "tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
+                "tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+                "tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
+                "tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
+                "tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
                 ""
               ]
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}",
+            "url": "{{apiUrl}}/items/{{slug}}",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -1518,7 +1518,7 @@
       "name": "Comments",
       "description": "",
       "item": [{
-          "name": "All Comments for Article",
+          "name": "All Comments for Item",
           "event": [{
             "listen": "test",
             "script": {
@@ -1550,7 +1550,7 @@
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}/comments",
+            "url": "{{apiUrl}}/items/{{slug}}/comments",
             "method": "GET",
             "header": [{
                 "key": "Content-Type",
@@ -1574,7 +1574,7 @@
           "response": []
         },
         {
-          "name": "Create Comment for Article",
+          "name": "Create Comment for Item",
           "event": [{
             "listen": "test",
             "script": {
@@ -1596,7 +1596,7 @@
             }
           }],
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}/comments",
+            "url": "{{apiUrl}}/items/{{slug}}/comments",
             "method": "POST",
             "header": [{
                 "key": "Content-Type",
@@ -1623,9 +1623,9 @@
           "response": []
         },
         {
-          "name": "Delete Comment for Article",
+          "name": "Delete Comment for Item",
           "request": {
-            "url": "{{apiUrl}}/articles/{{slug}}/comments/1",
+            "url": "{{apiUrl}}/items/{{slug}}/comments/1",
             "method": "DELETE",
             "header": [{
                 "key": "Content-Type",
@@ -1867,9 +1867,9 @@
       "name": "Cleanup",
       "description": "",
       "item": [{
-        "name": "Delete Article",
+        "name": "Delete Item",
         "request": {
-          "url": "{{apiUrl}}/articles/{{slug}}",
+          "url": "{{apiUrl}}/items/{{slug}}",
           "method": "DELETE",
           "header": [{
               "key": "Content-Type",

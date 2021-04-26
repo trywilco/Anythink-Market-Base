@@ -1,6 +1,6 @@
 import {
-  ARTICLE_FAVORITED,
-  ARTICLE_UNFAVORITED,
+  ITEM_FAVORITED,
+  ITEM_UNFAVORITED,
   SET_PAGE,
   APPLY_TAG_FILTER,
   HOME_PAGE_LOADED,
@@ -10,38 +10,38 @@ import {
   PROFILE_PAGE_UNLOADED,
   PROFILE_FAVORITES_PAGE_LOADED,
   PROFILE_FAVORITES_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from "../constants/actionTypes";
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case ARTICLE_FAVORITED:
-    case ARTICLE_UNFAVORITED:
+    case ITEM_FAVORITED:
+    case ITEM_UNFAVORITED:
       return {
         ...state,
-        articles: state.articles.map(article => {
-          if (article.slug === action.payload.article.slug) {
+        items: state.items.map(item => {
+          if (item.slug === action.payload.item.slug) {
             return {
-              ...article,
-              favorited: action.payload.article.favorited,
-              favoritesCount: action.payload.article.favoritesCount
+              ...item,
+              favorited: action.payload.item.favorited,
+              favoritesCount: action.payload.item.favoritesCount
             };
           }
-          return article;
+          return item;
         })
       };
     case SET_PAGE:
       return {
         ...state,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        items: action.payload.items,
+        itemsCount: action.payload.itemsCount,
         currentPage: action.page
       };
     case APPLY_TAG_FILTER:
       return {
         ...state,
         pager: action.pager,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        items: action.payload.items,
+        itemsCount: action.payload.itemsCount,
         tab: null,
         tag: action.tag,
         currentPage: 0
@@ -51,8 +51,8 @@ export default (state = {}, action) => {
         ...state,
         pager: action.pager,
         tags: action.payload[0].tags,
-        articles: action.payload[1].articles,
-        articlesCount: action.payload[1].articlesCount,
+        items: action.payload[1].items,
+        itemsCount: action.payload[1].itemsCount,
         currentPage: 0,
         tab: action.tab
       };
@@ -62,8 +62,8 @@ export default (state = {}, action) => {
       return {
         ...state,
         pager: action.pager,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        items: action.payload.items,
+        itemsCount: action.payload.itemsCount,
         tab: action.tab,
         currentPage: 0,
         tag: null
@@ -73,8 +73,8 @@ export default (state = {}, action) => {
       return {
         ...state,
         pager: action.pager,
-        articles: action.payload[1].articles,
-        articlesCount: action.payload[1].articlesCount,
+        items: action.payload[1].items,
+        itemsCount: action.payload[1].itemsCount,
         currentPage: 0
       };
     case PROFILE_PAGE_UNLOADED:
