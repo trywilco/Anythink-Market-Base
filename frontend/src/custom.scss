@@ -8,3 +8,14 @@ $secondary: orange;
 .page {
   margin-top: 2 * $spacer;
 }
+
+.user-pic {
+  height: 26px;
+  border-radius: 50px;
+}
+
+.user-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}

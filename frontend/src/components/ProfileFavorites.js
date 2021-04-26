@@ -1,26 +1,28 @@
-import { Profile, mapStateToProps } from './Profile';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import { Profile, mapStateToProps } from "./Profile";
+import React from "react";
+import { Link } from "react-router-dom";
+import agent from "../agent";
+import { connect } from "react-redux";
 import {
   PROFILE_PAGE_LOADED,
   PROFILE_PAGE_UNLOADED
-} from '../constants/actionTypes';
+} from "../constants/actionTypes";
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (pager, payload) =>
     dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
-  onUnload: () =>
-    dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
 class ProfileFavorites extends Profile {
   componentWillMount() {
-    this.props.onLoad(page => agent.Items.favoritedBy(this.props.match.params.username, page), Promise.all([
-      agent.Profile.get(this.props.match.params.username),
-      agent.Items.favoritedBy(this.props.match.params.username)
-    ]));
+    this.props.onLoad(
+      page => agent.Items.favoritedBy(this.props.match.params.username, page),
+      Promise.all([
+        agent.Profile.get(this.props.match.params.username),
+        agent.Items.favoritedBy(this.props.match.params.username)
+      ])
+    );
   }
 
   componentWillUnmount() {
@@ -29,11 +31,9 @@ class ProfileFavorites extends Profile {
 
   renderTabs() {
     return (
-      <ul className="nav nav-pills outline-active">
+      <ul className="nav nav-tabs outline-active">
         <li className="nav-item">
-          <Link
-            className="nav-link"
-            to={`/@${this.props.profile.username}`}>
+          <Link className="nav-link" to={`/@${this.props.profile.username}`}>
             My Items
           </Link>
         </li>
@@ -41,7 +41,8 @@ class ProfileFavorites extends Profile {
         <li className="nav-item">
           <Link
             className="nav-link active"
-            to={`/@${this.props.profile.username}/favorites`}>
+            to={`/@${this.props.profile.username}/favorites`}
+          >
             Favorited Items
           </Link>
         </li>
@@ -50,4 +51,7 @@ class ProfileFavorites extends Profile {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileFavorites);

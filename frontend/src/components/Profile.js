@@ -91,7 +91,7 @@ class Profile extends React.Component {
 
   renderTabs() {
     return (
-      <ul className="nav nav-pills outline-active">
+      <ul className="nav nav-tabs outline-active">
         <li className="nav-item">
           <Link
             className="nav-link active"
@@ -125,16 +125,16 @@ class Profile extends React.Component {
 
     return (
       <div className="profile-page">
-        <div className="user-info">
+        <div className="user-info bg-light text-dark">
           <div className="container">
-            <div className="row">
+            <div className="row p-4 text-center">
               <div className="col-xs-12 col-md-10 offset-md-1">
                 <img
                   src={profile.image}
                   className="user-img"
                   alt={profile.username}
                 />
-                <h4>{profile.username}</h4>
+                <h4 className="py-2">{profile.username}</h4>
                 <p>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />
@@ -150,7 +150,7 @@ class Profile extends React.Component {
         </div>
 
         <div className="container">
-          <div className="row">
+          <div className="row py-4">
             <div className="col-xs-12 col-md-10 offset-md-1">
               <div className="items-toggle">{this.renderTabs()}</div>
 
