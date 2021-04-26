@@ -6,18 +6,18 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   UPDATE_FIELD_EDITOR
-} from '../constants/actionTypes';
+} from "../constants/actionTypes";
 
 export default (state = {}, action) => {
   switch (action.type) {
     case EDITOR_PAGE_LOADED:
       return {
         ...state,
-        itemSlug: action.payload ? action.payload.item.slug : '',
-        title: action.payload ? action.payload.item.title : '',
-        description: action.payload ? action.payload.item.description : '',
-        body: action.payload ? action.payload.item.body : '',
-        tagInput: '',
+        itemSlug: action.payload ? action.payload.item.slug : "",
+        title: action.payload ? action.payload.item.title : "",
+        description: action.payload ? action.payload.item.description : "",
+        image: action.payload ? action.payload.item.image : "",
+        tagInput: "",
         tagList: action.payload ? action.payload.item.tagList : []
       };
     case EDITOR_PAGE_UNLOADED:
@@ -37,7 +37,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         tagList: state.tagList.concat([state.tagInput]),
-        tagInput: ''
+        tagInput: ""
       };
     case REMOVE_TAG:
       return {
