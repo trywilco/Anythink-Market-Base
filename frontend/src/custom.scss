@@ -1,5 +1,10 @@
 // Override default variables before the import
 $primary: #88c840;
+$secondary: orange;
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+.page {
+  margin-top: 2 * $spacer;
+}
