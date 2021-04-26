@@ -1,13 +1,13 @@
-import CommentInput from './CommentInput';
-import CommentList from './CommentList';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import CommentInput from "./CommentInput";
+import CommentList from "./CommentList";
+import { Link } from "react-router-dom";
+import React from "react";
 
 const CommentContainer = props => {
   if (props.currentUser) {
     return (
       <div className="col-xs-12 col-md-8 offset-md-2">
-        <div>
+        <div className="mb-4">
           <list-errors errors={props.errors}></list-errors>
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
         </div>
@@ -15,7 +15,8 @@ const CommentContainer = props => {
         <CommentList
           comments={props.comments}
           slug={props.slug}
-          currentUser={props.currentUser} />
+          currentUser={props.currentUser}
+        />
       </div>
     );
   } else {
@@ -31,7 +32,8 @@ const CommentContainer = props => {
         <CommentList
           comments={props.comments}
           slug={props.slug}
-          currentUser={props.currentUser} />
+          currentUser={props.currentUser}
+        />
       </div>
     );
   }

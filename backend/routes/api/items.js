@@ -298,7 +298,7 @@ router.post("/:item/comments", auth.required, function(req, res, next) {
       comment.seller = user;
 
       return comment.save().then(function() {
-        req.item.comments.push(comment);
+        req.item.comments = req.item.comments.concat([comment]);
 
         return req.item.save().then(function(item) {
           res.json({ comment: comment.toJSONFor(user) });

@@ -45,23 +45,29 @@ class Item extends React.Component {
       this.props.currentUser &&
       this.props.currentUser.username === this.props.item.seller.username;
     return (
-      <div className="item-page">
-        <div className="banner">
-          <div className="container">
+      <div>
+        <div className="banner bg-secondary text-white">
+          <div className="container p-4">
             <h1>{this.props.item.title}</h1>
             <ItemMeta item={this.props.item} canModify={canModify} />
           </div>
         </div>
 
         <div className="container page">
-          <div className="row item-content">
-            <div className="col-xs-12">
+          <div className="row">
+            <div className="col-3">
+              <img src={this.props.item.image} className="item-img" />
+            </div>
+            <div className="col-9">
               <div dangerouslySetInnerHTML={markup}></div>
 
               <ul className="tag-list">
                 {this.props.item.tagList.map(tag => {
                   return (
-                    <li className="tag-default tag-pill tag-outline" key={tag}>
+                    <li
+                      className="badge badge-pill badge-secondary p-2 mx-1"
+                      key={tag}
+                    >
                       {tag}
                     </li>
                   );
