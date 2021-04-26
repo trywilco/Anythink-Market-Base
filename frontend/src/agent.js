@@ -58,19 +58,18 @@ const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = item => Object.assign({}, item, { slug: undefined });
 const Items = {
   all: page => requests.get(`/items?${limit(10, page)}`),
-  byAuthor: (author, page) =>
-    requests.get(`/items?author=${encode(author)}&${limit(5, page)}`),
+  bySeller: (seller, page) =>
+    requests.get(`/items?seller=${encode(seller)}&${limit(5, page)}`),
   byTag: (tag, page) =>
     requests.get(`/items?tag=${encode(tag)}&${limit(10, page)}`),
   del: slug => requests.del(`/items/${slug}`),
   favorite: slug => requests.post(`/items/${slug}/favorite`),
-  favoritedBy: (author, page) =>
-    requests.get(`/items?favorited=${encode(author)}&${limit(5, page)}`),
+  favoritedBy: (seller, page) =>
+    requests.get(`/items?favorited=${encode(seller)}&${limit(5, page)}`),
   feed: () => requests.get("/items/feed?limit=10&offset=0"),
   get: slug => requests.get(`/items/${slug}`),
   unfavorite: slug => requests.del(`/items/${slug}/favorite`),
-  update: item =>
-    requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),
+  update: item => requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),
   create: item => requests.post("/items", { item })
 };
 

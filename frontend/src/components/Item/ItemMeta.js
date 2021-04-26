@@ -6,13 +6,13 @@ const ItemMeta = props => {
   const item = props.item;
   return (
     <div className="item-meta">
-      <Link to={`/@${item.author.username}`}>
-        <img src={item.author.image} alt={item.author.username} />
+      <Link to={`/@${item.seller.username}`}>
+        <img src={item.seller.image} alt={item.seller.username} />
       </Link>
 
       <div className="info">
-        <Link to={`/@${item.author.username}`} className="author">
-          {item.author.username}
+        <Link to={`/@${item.seller.username}`} className="seller">
+          {item.seller.username}
         </Link>
         <span className="date">
           {new Date(item.createdAt).toDateString()}

@@ -8,7 +8,7 @@ var auth = require('../auth');
 // Preload item objects on routes with ':item'
 router.param('item', function(req, res, next, slug) {
   Item.findOne({ slug: slug})
-    .populate('author')
+    .populate('seller')
     .then(function (item) {
       if (!item) { return res.sendStatus(404); }
 
@@ -46,14 +46,14 @@ router.get('/', auth.optional, function(req, res, next) {
   }
 
   Promise.all([
-    req.query.author ? User.findOne({username: req.query.author}) : null,
+    req.query.seller ? User.findOne({username: req.query.seller}) : null,
     req.query.favorited ? User.findOne({username: req.query.favorited}) : null
   ]).then(function(results){
-    var author = results[0];
+    var seller = results[0];
     var favoriter = results[1];
 
-    if(author){
-      query.author = author._id;
+    if(seller){
+      query.seller = seller._id;
     }
 
     if(favoriter){
@@ -67,7 +67,7 @@ router.get('/', auth.optional, function(req, res, next) {
         .limit(Number(limit))
         .skip(Number(offset))
         .sort({createdAt: 'desc'})
-        .populate('author')
+        .populate('seller')
         .exec(),
       Item.count(query).exec(),
       req.payload ? User.findById(req.payload.id) : null,
@@ -102,12 +102,12 @@ router.get('/feed', auth.required, function(req, res, next) {
     if (!user) { return res.sendStatus(401); }
 
     Promise.all([
-      Item.find({ author: {$in: user.following}})
+      Item.find({ seller: {$in: user.following}})
         .limit(Number(limit))
         .skip(Number(offset))
-        .populate('author')
+        .populate('seller')
         .exec(),
-      Item.count({ author: {$in: user.following}})
+      Item.count({ seller: {$in: user.following}})
     ]).then(function(results){
       var items = results[0];
       var itemsCount = results[1];
@@ -128,10 +128,10 @@ router.post('/', auth.required, function(req, res, next) {
 
     var item = new Item(req.body.item);
 
-    item.author = user;
+    item.seller = user;
 
     return item.save().then(function(){
-      console.log(item.author);
+      console.log(item.seller);
       return res.json({item: item.toJSONFor(user)});
     });
   }).catch(next);
@@ -141,7 +141,7 @@ router.post('/', auth.required, function(req, res, next) {
 router.get('/:item', auth.optional, function(req, res, next) {
   Promise.all([
     req.payload ? User.findById(req.payload.id) : null,
-    req.item.populate('author').execPopulate()
+    req.item.populate('seller').execPopulate()
   ]).then(function(results){
     var user = results[0];
 
@@ -152,7 +152,7 @@ router.get('/:item', auth.optional, function(req, res, next) {
 // update item
 router.put('/:item', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
-    if(req.item.author._id.toString() === req.payload.id.toString()){
+    if(req.item.seller._id.toString() === req.payload.id.toString()){
       if(typeof req.body.item.title !== 'undefined'){
         req.item.title = req.body.item.title;
       }
@@ -183,7 +183,7 @@ router.delete('/:item', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    if(req.item.author._id.toString() === req.payload.id.toString()){
+    if(req.item.seller._id.toString() === req.payload.id.toString()){
       return req.item.remove().then(function(){
         return res.sendStatus(204);
       });
@@ -229,7 +229,7 @@ router.get('/:item/comments', auth.optional, function(req, res, next){
     return req.item.populate({
       path: 'comments',
       populate: {
-        path: 'author'
+        path: 'seller'
       },
       options: {
         sort: {
@@ -251,7 +251,7 @@ router.post('/:item/comments', auth.required, function(req, res, next) {
 
     var comment = new Comment(req.body.comment);
     comment.item = req.item;
-    comment.author = user;
+    comment.seller = user;
 
     return comment.save().then(function(){
       req.item.comments.push(comment);
@@ -264,7 +264,7 @@ router.post('/:item/comments', auth.required, function(req, res, next) {
 });
 
 router.delete('/:item/comments/:comment', auth.required, function(req, res, next) {
-  if(req.comment.author.toString() === req.payload.id.toString()){
+  if(req.comment.seller.toString() === req.payload.id.toString()){
     req.item.comments.remove(req.comment._id);
     req.item.save()
       .then(Comment.find({_id: req.comment._id}).remove().exec())

@@ -38,13 +38,13 @@ const ItemPreview = props => {
   return (
     <div className="item-preview">
       <div className="item-meta">
-        <Link to={`/@${item.author.username}`}>
-          <img src={item.author.image} alt={item.author.username} />
+        <Link to={`/@${item.seller.username}`}>
+          <img src={item.seller.image} alt={item.seller.username} />
         </Link>
 
         <div className="info">
-          <Link className="author" to={`/@${item.author.username}`}>
-            {item.author.username}
+          <Link className="seller" to={`/@${item.seller.username}`}>
+            {item.seller.username}
           </Link>
           <span className="date">
             {new Date(item.createdAt).toDateString()}
