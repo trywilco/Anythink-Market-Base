@@ -38,11 +38,13 @@ const LoggedInView = props => {
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Item
-          </Link>
-        </li>
+        {props.currentUser.role === "admin" && (
+          <li className="nav-item">
+            <Link to="/editor" className="nav-link">
+              <i className="ion-compose"></i>&nbsp;New Item
+            </Link>
+          </li>
+        )}
 
         <li className="nav-item">
           <Link to="/settings" className="nav-link">
