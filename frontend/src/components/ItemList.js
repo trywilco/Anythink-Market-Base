@@ -12,10 +12,16 @@ const ItemList = props => {
   }
 
   return (
-    <div className="py-2">
-      {props.items.map(item => {
-        return <ItemPreview item={item} key={item.slug} />;
-      })}
+    <div class="container py-2">
+      <div class="row">
+        {props.items.map(item => {
+          return (
+            <div class="col-sm-4 pb-2" key={item.slug}>
+              <ItemPreview item={item} />
+            </div>
+          );
+        })}
+      </div>
 
       <ListPagination
         pager={props.pager}

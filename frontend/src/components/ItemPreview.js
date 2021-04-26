@@ -36,42 +36,26 @@ const ItemPreview = props => {
   };
 
   return (
-    <div className="item-preview">
-      <div className="item-meta">
-        <Link to={`/@${item.seller.username}`}>
-          <img src={item.seller.image} alt={item.seller.username} />
+    <div className="card">
+      <img src={item.image} className="card-img-top item-img" />
+      <div className="card-body">
+        <Link to={`/item/${item.slug}`} className="preview-link">
+          <h1 className="card-title">{item.title}</h1>
+          <p className="card-text">{item.description}</p>
         </Link>
-
-        <div className="info">
-          <Link className="seller" to={`/@${item.seller.username}`}>
-            {item.seller.username}
+        <div class="d-flex flex-row align-items-center pt-2">
+          <Link to={`/@${item.seller.username}`} className="flex-grow-1">
+            <img
+              src={item.seller.image}
+              alt={item.seller.username}
+              className="user-pic pr-1"
+            />
           </Link>
-          <span className="date">
-            {new Date(item.createdAt).toDateString()}
-          </span>
-        </div>
-
-        <div className="pull-xs-right">
-          <button className={favoriteButtonClass} onClick={handleClick}>
+          <button className="btn btn-outline-secondary" onClick={handleClick}>
             <i className="ion-heart"></i> {item.favoritesCount}
           </button>
         </div>
       </div>
-
-      <Link to={`/item/${item.slug}`} className="preview-link">
-        <h1>{item.title}</h1>
-        <p>{item.description}</p>
-        <span>Read more...</span>
-        <ul className="tag-list">
-          {item.tagList.map(tag => {
-            return (
-              <li className="tag-default tag-pill tag-outline" key={tag}>
-                {tag}
-              </li>
-            );
-          })}
-        </ul>
-      </Link>
     </div>
   );
 };
