@@ -136,10 +136,13 @@ class Editor extends React.Component {
                       onKeyUp={this.watchForEnter}
                     />
 
-                    <div className="tag-list">
+                    <div className="tag-list pt-2">
                       {(this.props.tagList || []).map(tag => {
                         return (
-                          <span className="tag-default tag-pill" key={tag}>
+                          <span
+                            className="badge badge-pill badge-secondary p-2 mx-1"
+                            key={tag}
+                          >
                             <i
                               className="ion-close-round"
                               onClick={this.removeTagHandler(tag)}
