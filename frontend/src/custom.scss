@@ -21,6 +21,14 @@ $secondary: orange;
 }
 
 .item-img {
-  height: 100px;
+  height: 150px;
   object-fit: cover;
+}
+
+.crop-text-3 {
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }

@@ -40,8 +40,8 @@ const ItemPreview = props => {
       <img src={item.image} className="card-img-top item-img" />
       <div className="card-body">
         <Link to={`/item/${item.slug}`} className="preview-link">
-          <h1 className="card-title">{item.title}</h1>
-          <p className="card-text">{item.description}</p>
+          <h3 className="card-title">{item.title}</h3>
+          <p className="card-text crop-text-3">{item.description}</p>
         </Link>
         <div class="d-flex flex-row align-items-center pt-2">
           <Link to={`/@${item.seller.username}`} className="flex-grow-1">
