@@ -20,7 +20,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 - [ ] Test A
 - [ ] Test B
 
-* If this is a UI change / fix, please also add a screenshot \*
+**If this is a UI change / fix, please also add a screenshot**
 
 # Checklist:
 
