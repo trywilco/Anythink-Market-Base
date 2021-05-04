@@ -2,17 +2,14 @@
   "name": "PartsUnlimitedBackend",
   "version": "1.0.0",
   "main": "app.js",
+  "engines": {
+    "node": "15.0.0"
+  },
   "scripts": {
-    "mongo:start": "docker run --name realworld-mongo -p 27017:27017 mongo & sleep 5",
     "start": "node ./app.js",
     "dev": "nodemon ./app.js",
     "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",
-    "stop": "lsof -ti :3000 | xargs kill",
-    "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gothinkster/productionready-node-api.git"
+    "stop": "lsof -ti :3000 | xargs kill"
   },
   "dependencies": {
     "body-parser": "1.15.0",
