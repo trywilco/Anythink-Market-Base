@@ -76,7 +76,6 @@ router.post("/users", function(req, res, next) {
   user.username = req.body.user.username;
   user.email = req.body.user.email;
   user.setPassword(req.body.user.password);
-  user.role = "admin";
 
   user
     .save()
