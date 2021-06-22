@@ -11,8 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2021_04_12_061614) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :serial, force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
     t.integer "item_id"
@@ -22,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_061614) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "favorites", force: :cascade do |t|
+  create_table "favorites", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "item_id"
     t.datetime "created_at", null: false
@@ -31,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_061614) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "follows", force: :cascade do |t|
+  create_table "follows", id: :serial, force: :cascade do |t|
     t.string "followable_type", null: false
     t.integer "followable_id", null: false
     t.string "follower_type", null: false
@@ -45,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_061614) do
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", id: :serial, force: :cascade do |t|
     t.string "title"
     t.string "slug"
     t.string "description"
@@ -58,7 +60,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_061614) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "taggings", force: :cascade do |t|
+  create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -72,13 +74,13 @@ ActiveRecord::Schema.define(version: 2021_04_12_061614) do
     t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -98,5 +100,11 @@ ActiveRecord::Schema.define(version: 2021_04_12_061614) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
+  
+  add_foreign_key "comments", "items"
+  add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "items"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "items", "users"
 
 end
