@@ -19,6 +19,6 @@ class FavoritesController < ApplicationController
   private
 
   def find_item!
-    @item = item.find_by!(slug: params[:item_slug])
+    @item = Item.find_by!(slug: params[:item_slug])
   end
 end
