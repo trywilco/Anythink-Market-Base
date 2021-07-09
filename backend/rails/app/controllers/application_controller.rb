@@ -6,6 +6,10 @@ class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user
 
+  def root
+    render plain: "API server is up and running, please use the frontend app to interact with the system"
+  end
+
   private
 
   def configure_permitted_parameters
