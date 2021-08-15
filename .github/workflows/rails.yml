@@ -28,4 +28,4 @@ jobs:
 
       - name: Wilco checks
         id: Wilco
-        uses: trywilco/actions@v0.1.11
+        uses: trywilco/actions@main
