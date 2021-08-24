@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/tcocca/acts_as_follower.git
+  revision: c5ac7b9601c4af01eb4d9112330b27be4d694ecc
+  specs:
+    acts_as_follower (0.2.1)
+      activerecord (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,7 +51,6 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (7.0.0)
       activerecord (>= 5.0, < 6.2)
-    acts_as_follower (0.2.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     archive-zip (0.12.0)
@@ -109,6 +115,7 @@ GEM
     mini_portile2 (2.5.1)
     minitest (5.14.4)
     msgpack (1.4.2)
+    newrelic_rpm (7.2.0)
     nio4r (2.5.7)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
@@ -211,7 +218,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 7.0)
-  acts_as_follower
+  acts_as_follower!
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15, < 4.0)
@@ -221,6 +228,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jwt
   listen (>= 3.0.5, < 3.2)
+  newrelic_rpm
   pg
   puma (~> 3.11)
   rack-cors
