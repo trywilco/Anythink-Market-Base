@@ -1,0 +1,31 @@
+on: [push]
+
+jobs:
+  wilco:
+    runs-on: ubuntu-latest
+    name: Pr checks
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          working-directory: backend
+          bundler-cache: true
+
+      - name: Wilco checks
+        id: Wilco
+        uses: trywilco/actions@main
