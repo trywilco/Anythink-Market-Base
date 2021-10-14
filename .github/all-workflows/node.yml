@@ -1,0 +1,24 @@
+on: [push]
+
+jobs:
+  wilco:
+    runs-on: ubuntu-latest
+    name: Pr checks
+
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "15.x"
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.6.0
+        with:
+          mongodb-version: "4.4"
+
+      - name: Wilco checks
+        id: Wilco
+        uses: trywilco/actions@main
