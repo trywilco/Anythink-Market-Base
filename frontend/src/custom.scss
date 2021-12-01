@@ -5,6 +5,9 @@ $secondary: #ff2b98;
 $body-color: white; //this is the text color
 $body-bg: $primary;
 
+$dark: #170539;
+$light: #af93f2;
+
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
 
@@ -19,7 +22,6 @@ body {
 
 .user-pic {
   height: 26px;
-  border-radius: 50px;
 }
 
 .user-img {
