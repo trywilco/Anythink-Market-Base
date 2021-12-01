@@ -9,8 +9,8 @@ const Comment = (props) => {
   return (
     <div className="col-xs-10 col-md-6">
       <div className="card m-2 shadow-sm" style={{ minHeight: "200px" }}>
-        <div className="card-body">
-          <p className="card-text">{comment.body}</p>
+        <div className="card-body d-flex flex-column">
+          <p className="card-text flex-grow-1">{comment.body}</p>
           <div class="d-flex flex-row align-items-center pt-2">
             <Link to={`/@${comment.seller.username}`} className="user-pic mr-2">
               <img
