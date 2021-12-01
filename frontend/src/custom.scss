@@ -1,12 +1,14 @@
 // Override default variables before the import
 $primary: #2b1456;
-$secondary: #2b1456;
+$secondary: #ff2b98;
+
+$body-color: white; //this is the text color
+$body-bg: $primary;
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
 
 body {
-  background-color: $primary;
   background-image: url("./imgs/background.png");
   background-position: top;
   background-repeat: no-repeat;

@@ -48,20 +48,8 @@ class Home extends React.Component {
         <Banner />
 
         <div className="container page">
-          <div className="row">
-            <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-                <p>Popular Tags</p>
-
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag}
-                />
-              </div>
-            </div>
-          </div>
+          <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
+          <MainView />
         </div>
       </div>
     );

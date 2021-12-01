@@ -6,7 +6,7 @@ const Banner = () => {
     <div className="banner text-white">
       <div className="container p-4 text-center">
         <img src={logo} />
-        <p>A place to get the cool stuff.</p>
+        <h2>A place to get the cool stuff.</h2>
       </div>
     </div>
   );
