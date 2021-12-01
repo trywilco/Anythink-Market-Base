@@ -8,12 +8,15 @@ $body-bg: $primary;
 $dark: #170539;
 $light: #af93f2;
 
+$input-border-color: #d0d0d0;
+
 $theme-colors: (
   "light-gray": #f2f2f2,
 );
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 body {
   background-image: url("./imgs/background.png");
