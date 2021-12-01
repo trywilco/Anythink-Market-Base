@@ -8,6 +8,10 @@ $body-bg: $primary;
 $dark: #170539;
 $light: #af93f2;
 
+$theme-colors: (
+  "light-gray": #f2f2f2,
+);
+
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
 
@@ -21,7 +25,7 @@ body {
 }
 
 .user-pic {
-  height: 26px;
+  height: 40px;
 }
 
 .user-img {

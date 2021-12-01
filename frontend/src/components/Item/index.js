@@ -6,17 +6,17 @@ import { connect } from "react-redux";
 import marked from "marked";
 import {
   ITEM_PAGE_LOADED,
-  ITEM_PAGE_UNLOADED
+  ITEM_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.item,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: ITEM_PAGE_LOADED, payload }),
-  onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED })
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: ITEM_PAGE_LOADED, payload }),
+  onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED }),
 });
 
 class Item extends React.Component {
@@ -24,7 +24,7 @@ class Item extends React.Component {
     this.props.onLoad(
       Promise.all([
         agent.Items.get(this.props.match.params.id),
-        agent.Comments.forItem(this.props.match.params.id)
+        agent.Comments.forItem(this.props.match.params.id),
       ])
     );
   }
@@ -39,48 +39,38 @@ class Item extends React.Component {
     }
 
     const markup = {
-      __html: marked(this.props.item.description, { sanitize: true })
+      __html: marked(this.props.item.description, { sanitize: true }),
     };
     const canModify =
       this.props.currentUser &&
       this.props.currentUser.username === this.props.item.seller.username;
     return (
-      <div>
-        <div className="banner bg-secondary text-white">
-          <div className="container p-4">
-            <h1>{this.props.item.title}</h1>
-            <ItemMeta item={this.props.item} canModify={canModify} />
-          </div>
-        </div>
-
-        <div className="container page">
-          <div className="row">
-            <div className="col-3">
-              <img src={this.props.item.image} className="item-img" />
+      <div className="container page">
+        <div className="text-dark">
+          <div className="row bg-white p-4">
+            <div className="col-6">
+              <img
+                src={this.props.item.image}
+                className="item-img"
+                style={{ height: "500px", width: "100%" }}
+              />
             </div>
-            <div className="col-9">
+
+            <div className="col-6">
+              <h1>{this.props.item.title}</h1>
+              <ItemMeta item={this.props.item} canModify={canModify} />
               <div dangerouslySetInnerHTML={markup}></div>
-
-              <ul className="tag-list">
-                {this.props.item.tagList.map(tag => {
-                  return (
-                    <li
-                      className="badge badge-pill badge-secondary p-2 mx-1"
-                      key={tag}
-                    >
-                      {tag}
-                    </li>
-                  );
-                })}
-              </ul>
+              {this.props.item.tagList.map((tag) => {
+                return (
+                  <span className="badge badge-secondary p-2 mx-1" key={tag}>
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
           </div>
 
-          <hr />
-
-          <div className="item-actions"></div>
-
-          <div className="row">
+          <div className="row bg-light-gray p-4">
             <CommentContainer
               comments={this.props.comments || []}
               errors={this.props.commentErrors}
@@ -94,7 +84,4 @@ class Item extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Item);
+export default connect(mapStateToProps, mapDispatchToProps)(Item);
