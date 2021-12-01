@@ -1,3 +1,5 @@
+@import url("http://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800");
+
 // Override default variables before the import
 $primary: #2b1456;
 $secondary: #ff2b98;
@@ -9,6 +11,8 @@ $dark: #170539;
 $light: #af93f2;
 
 $input-border-color: #d0d0d0;
+
+$font-family-base: "Poppins", sans-serif !important;
 
 $theme-colors: (
   "light-gray": #f2f2f2,
