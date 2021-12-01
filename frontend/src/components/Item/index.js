@@ -52,7 +52,7 @@ class Item extends React.Component {
               <img
                 src={this.props.item.image}
                 className="item-img"
-                style={{ height: "500px", width: "100%" }}
+                style={{ height: "500px", width: "100%", borderRadius: "6px" }}
               />
             </div>
 
