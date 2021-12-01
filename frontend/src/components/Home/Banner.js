@@ -1,14 +1,12 @@
 import React from "react";
+import logo from "../../imgs/logo.png";
 
-const Banner = ({ appName, token }) => {
-  if (token) {
-    return null;
-  }
+const Banner = () => {
   return (
-    <div className="banner bg-secondary text-white">
+    <div className="banner text-white">
       <div className="container p-4 text-center">
-        <h1>{appName}</h1>
-        <p>A place to share your knowledge.</p>
+        <img src={logo} />
+        <p>A place to get the cool stuff.</p>
       </div>
     </div>
   );
