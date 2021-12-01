@@ -6,21 +6,23 @@ import React from "react";
 const CommentContainer = (props) => {
   if (props.currentUser) {
     return (
-      <div>
+      <div className="w-100">
         <CommentList
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser}
         />
-        <div className="mt-4">
-          <list-errors errors={props.errors}></list-errors>
-          <CommentInput slug={props.slug} currentUser={props.currentUser} />
+        <div className="row">
+          <div className="mt-4 col-xs-10 col-md-6">
+            <list-errors errors={props.errors}></list-errors>
+            <CommentInput slug={props.slug} currentUser={props.currentUser} />
+          </div>
         </div>
       </div>
     );
   } else {
     return (
-      <div>
+      <div className="w-100">
         <CommentList
           comments={props.comments}
           slug={props.slug}
