@@ -2,7 +2,7 @@ import ItemActions from "./ItemActions";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const ItemMeta = props => {
+const ItemMeta = (props) => {
   const item = props.item;
   return (
     <div class="d-flex flex-row align-items-center pt-2">

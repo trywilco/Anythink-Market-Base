@@ -6,17 +6,17 @@ import { connect } from "react-redux";
 import marked from "marked";
 import {
   ITEM_PAGE_LOADED,
-  ITEM_PAGE_UNLOADED
+  ITEM_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.item,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: ITEM_PAGE_LOADED, payload }),
-  onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED })
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: ITEM_PAGE_LOADED, payload }),
+  onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED }),
 });
 
 class Item extends React.Component {
@@ -24,7 +24,7 @@ class Item extends React.Component {
     this.props.onLoad(
       Promise.all([
         agent.Items.get(this.props.match.params.id),
-        agent.Comments.forItem(this.props.match.params.id)
+        agent.Comments.forItem(this.props.match.params.id),
       ])
     );
   }
@@ -39,7 +39,7 @@ class Item extends React.Component {
     }
 
     const markup = {
-      __html: marked(this.props.item.description, { sanitize: true })
+      __html: marked(this.props.item.description, { sanitize: true }),
     };
     const canModify =
       this.props.currentUser &&
@@ -62,7 +62,7 @@ class Item extends React.Component {
               <div dangerouslySetInnerHTML={markup}></div>
 
               <ul className="tag-list">
-                {this.props.item.tagList.map(tag => {
+                {this.props.item.tagList.map((tag) => {
                   return (
                     <li
                       className="badge badge-pill badge-secondary p-2 mx-1"
@@ -94,7 +94,4 @@ class Item extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Item);
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

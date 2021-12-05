@@ -7,26 +7,26 @@ import { ITEM_FAVORITED, ITEM_UNFAVORITED } from "../constants/actionTypes";
 const FAVORITED_CLASS = "btn btn-sm btn-primary";
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
 
-const mapDispatchToProps = dispatch => ({
-  favorite: slug =>
+const mapDispatchToProps = (dispatch) => ({
+  favorite: (slug) =>
     dispatch({
       type: ITEM_FAVORITED,
-      payload: agent.Items.favorite(slug)
+      payload: agent.Items.favorite(slug),
     }),
-  unfavorite: slug =>
+  unfavorite: (slug) =>
     dispatch({
       type: ITEM_UNFAVORITED,
-      payload: agent.Items.unfavorite(slug)
-    })
+      payload: agent.Items.unfavorite(slug),
+    }),
 });
 
-const ItemPreview = props => {
+const ItemPreview = (props) => {
   const item = props.item;
   const favoriteButtonClass = item.favorited
     ? FAVORITED_CLASS
     : NOT_FAVORITED_CLASS;
 
-  const handleClick = ev => {
+  const handleClick = (ev) => {
     ev.preventDefault();
     if (item.favorited) {
       props.unfavorite(item.slug);
@@ -60,7 +60,4 @@ const ItemPreview = props => {
   );
 };
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(ItemPreview);
+export default connect(() => ({}), mapDispatchToProps)(ItemPreview);

@@ -7,10 +7,10 @@ import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
+  PROFILE_PAGE_UNLOADED,
 } from "../constants/actionTypes";
 
-const EditProfileSettings = props => {
+const EditProfileSettings = (props) => {
   if (props.isUser) {
     return (
       <Link
@@ -24,7 +24,7 @@ const EditProfileSettings = props => {
   return null;
 };
 
-const FollowUserButton = props => {
+const FollowUserButton = (props) => {
   if (props.isUser) {
     return null;
   }
@@ -36,7 +36,7 @@ const FollowUserButton = props => {
     classes += " btn-outline-secondary";
   }
 
-  const handleClick = ev => {
+  const handleClick = (ev) => {
     ev.preventDefault();
     if (props.user.following) {
       props.unfollow(props.user.username);
@@ -54,25 +54,25 @@ const FollowUserButton = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.itemList,
   currentUser: state.common.currentUser,
-  profile: state.profile
+  profile: state.profile,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onFollow: username =>
+const mapDispatchToProps = (dispatch) => ({
+  onFollow: (username) =>
     dispatch({
       type: FOLLOW_USER,
-      payload: agent.Profile.follow(username)
+      payload: agent.Profile.follow(username),
     }),
-  onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
-  onUnfollow: username =>
+  onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
+  onUnfollow: (username) =>
     dispatch({
       type: UNFOLLOW_USER,
-      payload: agent.Profile.unfollow(username)
+      payload: agent.Profile.unfollow(username),
     }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 });
 
 class Profile extends React.Component {
@@ -80,7 +80,7 @@ class Profile extends React.Component {
     this.props.onLoad(
       Promise.all([
         agent.Profile.get(this.props.match.params.username),
-        agent.Items.bySeller(this.props.match.params.username)
+        agent.Items.bySeller(this.props.match.params.username),
       ])
     );
   }
@@ -168,8 +168,5 @@ class Profile extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 export { Profile, mapStateToProps };

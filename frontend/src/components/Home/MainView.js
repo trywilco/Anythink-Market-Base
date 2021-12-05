@@ -4,9 +4,9 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import { CHANGE_TAB } from "../../constants/actionTypes";
 
-const YourFeedTab = props => {
+const YourFeedTab = (props) => {
   if (props.token) {
-    const clickHandler = ev => {
+    const clickHandler = (ev) => {
       ev.preventDefault();
       props.onTabClick("feed", agent.Items.feed, agent.Items.feed());
     };
@@ -26,8 +26,8 @@ const YourFeedTab = props => {
   return null;
 };
 
-const GlobalFeedTab = props => {
-  const clickHandler = ev => {
+const GlobalFeedTab = (props) => {
+  const clickHandler = (ev) => {
     ev.preventDefault();
     props.onTabClick("all", agent.Items.all, agent.Items.all());
   };
@@ -44,7 +44,7 @@ const GlobalFeedTab = props => {
   );
 };
 
-const TagFilterTab = props => {
+const TagFilterTab = (props) => {
   if (!props.tag) {
     return null;
   }
@@ -58,18 +58,18 @@ const TagFilterTab = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state.itemList,
   tags: state.home.tags,
-  token: state.common.token
+  token: state.common.token,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onTabClick: (tab, pager, payload) =>
-    dispatch({ type: CHANGE_TAB, tab, pager, payload })
+    dispatch({ type: CHANGE_TAB, tab, pager, payload }),
 });
 
-const MainView = props => {
+const MainView = (props) => {
   return (
     <div className="col-md-9">
       <div className="feed-toggle">
@@ -97,7 +97,4 @@ const MainView = props => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainView);
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);

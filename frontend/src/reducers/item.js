@@ -2,8 +2,8 @@ import {
   ITEM_PAGE_LOADED,
   ITEM_PAGE_UNLOADED,
   ADD_COMMENT,
-  DELETE_COMMENT
-} from '../constants/actionTypes';
+  DELETE_COMMENT,
+} from "../constants/actionTypes";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         item: action.payload[0].item,
-        comments: action.payload[1].comments
+        comments: action.payload[1].comments,
       };
     case ITEM_PAGE_UNLOADED:
       return {};
@@ -19,15 +19,15 @@ export default (state = {}, action) => {
       return {
         ...state,
         commentErrors: action.error ? action.payload.errors : null,
-        comments: action.error ?
-          null :
-          (state.comments || []).concat([action.payload.comment])
+        comments: action.error
+          ? null
+          : (state.comments || []).concat([action.payload.comment]),
       };
     case DELETE_COMMENT:
-      const commentId = action.commentId
+      const commentId = action.commentId;
       return {
         ...state,
-        comments: state.comments.filter(comment => comment.id !== commentId)
+        comments: state.comments.filter((comment) => comment.id !== commentId),
       };
     default:
       return state;

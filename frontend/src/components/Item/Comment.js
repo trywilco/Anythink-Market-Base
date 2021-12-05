@@ -2,7 +2,7 @@ import DeleteButton from "./DeleteButton";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const Comment = props => {
+const Comment = (props) => {
   const comment = props.comment;
   const show =
     props.currentUser && props.currentUser.username === comment.seller.username;
