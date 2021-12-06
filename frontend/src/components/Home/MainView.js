@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const MainView = (props) => {
   return (
-    <div className="col-md-9">
+    <div>
       <div className="feed-toggle">
         <ul className="nav nav-tabs">
           <YourFeedTab

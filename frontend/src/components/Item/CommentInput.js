@@ -30,7 +30,7 @@ class CommentInput extends React.Component {
 
   render() {
     return (
-      <form className="card comment-form" onSubmit={this.createComment}>
+      <form className="card comment-form m-2" onSubmit={this.createComment}>
         <div className="card-block">
           <textarea
             className="form-control"

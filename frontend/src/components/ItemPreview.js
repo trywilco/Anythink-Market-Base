@@ -36,10 +36,17 @@ const ItemPreview = (props) => {
   };
 
   return (
-    <div className="card">
-      <img src={item.image} className="card-img-top item-img" />
+    <div
+      className="card bg-dark border-light p-3"
+      style={{ borderRadius: "20px" }}
+    >
+      <img
+        src={item.image}
+        className="card-img-top item-img"
+        style={{ borderRadius: "20px" }}
+      />
       <div className="card-body">
-        <Link to={`/item/${item.slug}`} className="preview-link">
+        <Link to={`/item/${item.slug}`} className="text-white">
           <h3 className="card-title">{item.title}</h3>
           <p className="card-text crop-text-3">{item.description}</p>
         </Link>
@@ -48,7 +55,7 @@ const ItemPreview = (props) => {
             <img
               src={item.seller.image}
               alt={item.seller.username}
-              className="user-pic pr-1"
+              className="user-pic rounded-circle pr-1"
             />
           </Link>
           <button className="btn btn-outline-secondary" onClick={handleClick}>

@@ -14,7 +14,7 @@ const ItemMeta = (props) => {
         />
       </Link>
 
-      <div className="flex-grow-1 d-flex flex-column">
+      <div className="flex-grow-1 d-flex flex-column py-2">
         <Link to={`/@${item.seller.username}`} className="seller">
           {item.seller.username}
         </Link>
