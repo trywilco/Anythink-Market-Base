@@ -23,7 +23,7 @@ const defaultState = {
   viewChangeCounter: 0,
 };
 
-export default (state = defaultState, action) => {
+const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case APP_LOAD:
       return {
@@ -36,9 +36,10 @@ export default (state = defaultState, action) => {
       return { ...state, redirectTo: null };
     case LOGOUT:
       return { ...state, redirectTo: "/", token: null, currentUser: null };
-    case ITEM_SUBMITTED:
+    case ITEM_SUBMITTED: {
       const redirectUrl = `/item/${action.payload.item.slug}`;
       return { ...state, redirectTo: redirectUrl };
+    }
     case SETTINGS_SAVED:
       return {
         ...state,
@@ -68,3 +69,5 @@ export default (state = defaultState, action) => {
       return state;
   }
 };
+
+export default reducer;

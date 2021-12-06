@@ -4,9 +4,6 @@ import agent from "../agent";
 import { connect } from "react-redux";
 import { ITEM_FAVORITED, ITEM_UNFAVORITED } from "../constants/actionTypes";
 
-const FAVORITED_CLASS = "btn btn-sm btn-primary";
-const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
-
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
     dispatch({
@@ -22,9 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ItemPreview = (props) => {
   const item = props.item;
-  const favoriteButtonClass = item.favorited
-    ? FAVORITED_CLASS
-    : NOT_FAVORITED_CLASS;
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -41,6 +35,7 @@ const ItemPreview = (props) => {
       style={{ borderRadius: "20px" }}
     >
       <img
+        alt="item"
         src={item.image}
         className="card-img-top item-img"
         style={{ borderRadius: "20px" }}
