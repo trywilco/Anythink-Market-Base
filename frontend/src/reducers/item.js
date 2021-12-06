@@ -5,7 +5,7 @@ import {
   DELETE_COMMENT,
 } from "../constants/actionTypes";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case ITEM_PAGE_LOADED:
       return {
@@ -23,13 +23,16 @@ export default (state = {}, action) => {
           ? null
           : (state.comments || []).concat([action.payload.comment]),
       };
-    case DELETE_COMMENT:
+    case DELETE_COMMENT: {
       const commentId = action.commentId;
       return {
         ...state,
         comments: state.comments.filter((comment) => comment.id !== commentId),
       };
+    }
     default:
       return state;
   }
 };
+
+export default reducer;
