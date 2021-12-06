@@ -5,22 +5,22 @@ import agent from "../agent";
 import { connect } from "react-redux";
 import {
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
+  PROFILE_PAGE_UNLOADED,
 } from "../constants/actionTypes";
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onLoad: (pager, payload) =>
     dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 });
 
 class ProfileFavorites extends Profile {
   componentWillMount() {
     this.props.onLoad(
-      page => agent.Items.favoritedBy(this.props.match.params.username, page),
+      (page) => agent.Items.favoritedBy(this.props.match.params.username, page),
       Promise.all([
         agent.Profile.get(this.props.match.params.username),
-        agent.Items.favoritedBy(this.props.match.params.username)
+        agent.Items.favoritedBy(this.props.match.params.username),
       ])
     );
   }
@@ -51,7 +51,4 @@ class ProfileFavorites extends Profile {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProfileFavorites);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);

@@ -4,11 +4,11 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import { DELETE_ITEM } from "../../constants/actionTypes";
 
-const mapDispatchToProps = dispatch => ({
-  onClickDelete: payload => dispatch({ type: DELETE_ITEM, payload })
+const mapDispatchToProps = (dispatch) => ({
+  onClickDelete: (payload) => dispatch({ type: DELETE_ITEM, payload }),
 });
 
-const ItemActions = props => {
+const ItemActions = (props) => {
   const item = props.item;
   const del = () => {
     props.onClickDelete(agent.Items.del(item.slug));
@@ -33,7 +33,4 @@ const ItemActions = props => {
   return <span></span>;
 };
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(ItemActions);
+export default connect(() => ({}), mapDispatchToProps)(ItemActions);
