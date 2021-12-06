@@ -22,3 +22,5 @@ jobs:
       - name: Wilco checks
         id: Wilco
         uses: trywilco/actions@main
+        with:
+          owner: ${{ github.repository_owner }}

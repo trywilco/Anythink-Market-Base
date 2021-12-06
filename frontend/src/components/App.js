@@ -15,19 +15,19 @@ import Settings from "../components/Settings";
 import { store } from "../store";
 import { push } from "react-router-redux";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     appLoaded: state.common.appLoaded,
     appName: state.common.appName,
     currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo
+    redirectTo: state.common.redirectTo,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload, token) =>
     dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
-  onRedirect: () => dispatch({ type: REDIRECT })
+  onRedirect: () => dispatch({ type: REDIRECT }),
 });
 
 class App extends React.Component {
@@ -85,7 +85,4 @@ class App extends React.Component {
 //   router: PropTypes.object.isRequired
 // };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

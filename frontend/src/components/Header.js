@@ -1,16 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../imgs/topbar_logo.png";
 
-const LoggedOutView = props => {
+const LoggedOutView = (props) => {
   if (!props.currentUser) {
     return (
       <ul class="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
         <li className="nav-item">
           <Link to="/login" className="nav-link">
             Sign in
@@ -28,16 +23,10 @@ const LoggedOutView = props => {
   return null;
 };
 
-const LoggedInView = props => {
+const LoggedInView = (props) => {
   if (props.currentUser) {
     return (
       <ul class="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
         {props.currentUser.role === "admin" && (
           <li className="nav-item">
             <Link to="/editor" className="nav-link">
@@ -72,9 +61,9 @@ const LoggedInView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-md navbar-dark">
         <Link to="/" className="navbar-brand">
-          {this.props.appName}
+          <img src={logo} />
         </Link>
 
         <LoggedOutView currentUser={this.props.currentUser} />
