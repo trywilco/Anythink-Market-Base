@@ -1,6 +1,6 @@
-# Parts Unlimited Backend
+# Anythink Market Backend
 
-The Parts Unlimited backend is Ruby web app written with [Ruby On Rails](https://rubyonrails.org/)
+The Anythink Market backend is Ruby web app written with [Ruby On Rails](https://rubyonrails.org/)
 
 ## Getting started
 
