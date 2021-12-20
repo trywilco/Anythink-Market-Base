@@ -1,6 +1,6 @@
-# Parts Unlimited Frontend
+# Anythink Frontend
 
-The Parts Unlimited Frontend is an SPA written with [React](https://reactjs.org/) and [Redux](https://redux.js.org/)
+The Anythink Frontend is an SPA written with [React](https://reactjs.org/) and [Redux](https://redux.js.org/)
 
 ## Getting started
 
