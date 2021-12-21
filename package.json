@@ -2,6 +2,9 @@
   "name": "anythink-market",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "concurrently --kill-others \"cd frontend && yarn start\" \"cd backend && yarn start\""
   },
