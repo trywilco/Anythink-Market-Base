@@ -1,6 +1,9 @@
 {
   "name": "anythink-market-front",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=16"
+  },
   "private": true,
   "devDependencies": {
     "react-scripts": "4.0.3",
