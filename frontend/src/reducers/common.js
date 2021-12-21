@@ -18,7 +18,7 @@ import {
 } from "../constants/actionTypes";
 
 const defaultState = {
-  appName: "MineGeek Parts Unlimited",
+  appName: "Anythink Market",
   token: null,
   viewChangeCounter: 0,
 };
