@@ -11,7 +11,7 @@ const Comment = (props) => {
       <div className="card m-2 shadow-sm" style={{ minHeight: "200px" }}>
         <div className="card-body d-flex flex-column">
           <p className="card-text flex-grow-1">{comment.body}</p>
-          <div class="d-flex flex-row align-items-center pt-2">
+          <div className="d-flex flex-row align-items-center pt-2">
             <Link to={`/@${comment.seller.username}`} className="user-pic mr-2">
               <img
                 src={comment.seller.image}

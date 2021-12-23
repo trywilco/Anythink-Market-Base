@@ -5,7 +5,7 @@ import logo from "../imgs/topbar_logo.png";
 const LoggedOutView = (props) => {
   if (!props.currentUser) {
     return (
-      <ul class="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link to="/login" className="nav-link">
             Sign in
@@ -26,7 +26,7 @@ const LoggedOutView = (props) => {
 const LoggedInView = (props) => {
   if (props.currentUser) {
     return (
-      <ul class="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-auto">
         {props.currentUser.role === "admin" && (
           <li className="nav-item">
             <Link to="/editor" className="nav-link">

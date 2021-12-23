@@ -12,11 +12,11 @@ const ItemList = (props) => {
   }
 
   return (
-    <div class="container py-2">
-      <div class="row">
+    <div className="container py-2">
+      <div className="row">
         {props.items.map((item) => {
           return (
-            <div class="col-sm-4 pb-2" key={item.slug}>
+            <div className="col-sm-4 pb-2" key={item.slug}>
               <ItemPreview item={item} />
             </div>
           );
