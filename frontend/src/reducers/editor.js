@@ -8,7 +8,7 @@ import {
   UPDATE_FIELD_EDITOR,
 } from "../constants/actionTypes";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case EDITOR_PAGE_LOADED:
       return {
@@ -52,3 +52,5 @@ export default (state = {}, action) => {
 
   return state;
 };
+
+export default reducer;

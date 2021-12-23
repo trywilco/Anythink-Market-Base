@@ -12,7 +12,7 @@ import {
   PROFILE_FAVORITES_PAGE_UNLOADED,
 } from "../constants/actionTypes";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case ITEM_FAVORITED:
     case ITEM_UNFAVORITED:
@@ -84,3 +84,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;
