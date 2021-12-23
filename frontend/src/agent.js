@@ -82,7 +82,7 @@ const Profile = {
   unfollow: (username) => requests.del(`/profiles/${username}/follow`),
 };
 
-export default {
+const agentObj = {
   Items,
   Auth,
   Comments,
@@ -92,3 +92,5 @@ export default {
     token = _token;
   },
 };
+
+export default agentObj;

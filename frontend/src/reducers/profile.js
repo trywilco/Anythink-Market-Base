@@ -5,7 +5,7 @@ import {
   UNFOLLOW_USER,
 } from "../constants/actionTypes";
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case PROFILE_PAGE_LOADED:
       return {
@@ -22,3 +22,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;

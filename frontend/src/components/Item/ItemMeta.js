@@ -5,7 +5,7 @@ import React from "react";
 const ItemMeta = (props) => {
   const item = props.item;
   return (
-    <div class="d-flex flex-row align-items-center pt-2">
+    <div className="d-flex flex-row align-items-center pt-2">
       <Link to={`/@${item.seller.username}`}>
         <img
           src={item.seller.image}
