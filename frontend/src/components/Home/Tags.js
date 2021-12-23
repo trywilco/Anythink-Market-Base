@@ -19,14 +19,14 @@ const Tags = (props) => {
             };
 
             return (
-              <a
-                href=""
-                className="badge badge-secondary p-2 m-1"
+              <button
+                type="button"
                 key={tag}
+                className="btn badge badge-secondary p-2 m-1"
                 onClick={handleClick}
               >
                 {tag}
-              </a>
+              </button>
             );
           })}
         </span>
