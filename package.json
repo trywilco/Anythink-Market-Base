@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "concurrently --kill-others \"cd frontend && yarn start\" \"cd backend && yarn start\""
+    "start": "concurrently --kill-others \"cd frontend && ./start.sh\" \"cd backend && ./start.sh\""
   },
   "keywords": [],
   "author": "Wilco Inc.",
