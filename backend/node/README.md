@@ -1,6 +1,6 @@
-# Parts Unlimited Backend
+# Anythink Market Backend
 
-The Parts Unlimited backend is Node web app written with [Express](https://expressjs.com/)
+The Anythink Market backend is Node web app written with [Express](https://expressjs.com/)
 
 ## Getting started
 

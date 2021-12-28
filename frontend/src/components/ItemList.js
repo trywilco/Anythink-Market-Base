@@ -2,7 +2,7 @@ import ItemPreview from "./ItemPreview";
 import ListPagination from "./ListPagination";
 import React from "react";
 
-const ItemList = props => {
+const ItemList = (props) => {
   if (!props.items) {
     return <div className="py-4">Loading...</div>;
   }
@@ -12,11 +12,11 @@ const ItemList = props => {
   }
 
   return (
-    <div class="container py-2">
-      <div class="row">
-        {props.items.map(item => {
+    <div className="container py-2">
+      <div className="row">
+        {props.items.map((item) => {
           return (
-            <div class="col-sm-4 pb-2" key={item.slug}>
+            <div className="col-sm-4 pb-2" key={item.slug}>
               <ItemPreview item={item} />
             </div>
           );

@@ -1,17 +1,40 @@
+@import url("http://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800");
+
 // Override default variables before the import
-$primary: #88c840;
-$secondary: orange;
+$primary: #2b1456;
+$secondary: #ff2b98;
+
+$body-color: white; //this is the text color
+$body-bg: $primary;
+
+$dark: #170539;
+$light: #af93f2;
+
+$input-border-color: #d0d0d0;
+
+$font-family-base: "Poppins", sans-serif !important;
+
+$theme-colors: (
+  "light-gray": #f2f2f2,
+);
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
+body {
+  background-image: url("./imgs/background.png");
+  background-position: top;
+  background-repeat: no-repeat;
+}
 .page {
   margin-top: 2 * $spacer;
+  margin-bottom: 2 * $spacer;
 }
 
 .user-pic {
-  height: 26px;
-  border-radius: 50px;
+  height: 40px;
+  width: 40px;
 }
 
 .user-img {

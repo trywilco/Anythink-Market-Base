@@ -12,7 +12,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "15.x"
+          node-version: "16"
 
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.6.0
@@ -22,3 +22,5 @@ jobs:
       - name: Wilco checks
         id: Wilco
         uses: trywilco/actions@main
+        with:
+          owner: ${{ github.repository_owner }}

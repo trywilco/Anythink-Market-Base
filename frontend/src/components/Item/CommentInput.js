@@ -3,25 +3,25 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import { ADD_COMMENT } from "../../constants/actionTypes";
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => dispatch({ type: ADD_COMMENT, payload })
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
 });
 
 class CommentInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      body: ""
+      body: "",
     };
 
-    this.setBody = ev => {
+    this.setBody = (ev) => {
       this.setState({ body: ev.target.value });
     };
 
-    this.createComment = ev => {
+    this.createComment = (ev) => {
       ev.preventDefault();
       const payload = agent.Comments.create(this.props.slug, {
-        body: this.state.body
+        body: this.state.body,
       });
       this.setState({ body: "" });
       this.props.onSubmit(payload);
@@ -30,7 +30,7 @@ class CommentInput extends React.Component {
 
   render() {
     return (
-      <form className="card comment-form" onSubmit={this.createComment}>
+      <form className="card comment-form m-2" onSubmit={this.createComment}>
         <div className="card-block">
           <textarea
             className="form-control"
@@ -55,7 +55,4 @@ class CommentInput extends React.Component {
   }
 }
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(CommentInput);
+export default connect(() => ({}), mapDispatchToProps)(CommentInput);

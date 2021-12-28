@@ -1,7 +1,10 @@
 {
-  "name": "PartsUnlimited",
+  "name": "anythink-market",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "concurrently --kill-others \"cd frontend && ./start.sh\" \"cd backend && ./start.sh\""
   },

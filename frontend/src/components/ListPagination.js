@@ -3,11 +3,11 @@ import agent from "../agent";
 import { connect } from "react-redux";
 import { SET_PAGE } from "../constants/actionTypes";
 
-const mapDispatchToProps = dispatch => ({
-  onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload })
+const mapDispatchToProps = (dispatch) => ({
+  onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload }),
 });
 
-const ListPagination = props => {
+const ListPagination = (props) => {
   if (props.itemsCount <= 10) {
     return null;
   }
@@ -17,7 +17,7 @@ const ListPagination = props => {
     range.push(i);
   }
 
-  const setPage = page => {
+  const setPage = (page) => {
     if (props.pager) {
       props.onSetPage(page, props.pager(page));
     } else {
@@ -28,9 +28,9 @@ const ListPagination = props => {
   return (
     <nav>
       <ul className="pagination">
-        {range.map(v => {
+        {range.map((v) => {
           const isCurrent = v === props.currentPage;
-          const onClick = ev => {
+          const onClick = (ev) => {
             ev.preventDefault();
             setPage(v);
           };
@@ -40,9 +40,7 @@ const ListPagination = props => {
               onClick={onClick}
               key={v.toString()}
             >
-              <a className="page-link" href="">
-                {v + 1}
-              </a>
+              <button className="page-link">{v + 1}</button>
             </li>
           );
         })}
@@ -51,7 +49,4 @@ const ListPagination = props => {
   );
 };
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(ListPagination);
+export default connect(() => ({}), mapDispatchToProps)(ListPagination);
