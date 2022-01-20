@@ -13,12 +13,14 @@
     "stop": "lsof -ti :3000 | xargs kill"
   },
   "dependencies": {
+    "axios": "^0.25.0",
     "body-parser": "1.15.0",
     "cors": "2.7.1",
     "dotenv": "^8.2.0",
     "ejs": "2.4.1",
     "errorhandler": "1.4.3",
     "express": "4.13.4",
+    "express-async-handler": "^1.2.0",
     "express-jwt": "3.3.0",
     "express-session": "1.13.0",
     "jsonwebtoken": "7.1.9",
