@@ -7,7 +7,8 @@ const auth = require("../auth");
 router.get("/",
     auth.optional,
     asyncHandler(async (req, res) => {
-        const baseURL = 'https://wilco-engine.herokuapp.com';
+        const isProduction = process.env.NODE_ENV === "production";
+        const baseURL = isProduction ? 'https://wilco-engine.herokuapp.com' : 'https://wilco-engine-staging.herokuapp.com/';
         const axios = axiosLib.create({
             baseURL: `${baseURL}/api/v1`,
             headers: {
