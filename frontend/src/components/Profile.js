@@ -85,6 +85,19 @@ class Profile extends React.Component {
     );
   }
 
+  async componentDidMount() {
+    const hasPingedEngineWithFrontend =
+      window.localStorage.getItem("hasPingedFrontend");
+    if (!hasPingedEngineWithFrontend) {
+      try {
+        await agent.Ping.ping();
+        window.localStorage.setItem("hasPingedFrontend", "1");
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.props.onUnload();
   }
