@@ -8,19 +8,9 @@ router.get("/",
     auth.optional,
     asyncHandler(async (req, res) => {
         let baseURL = 'https://wilco-engine.herokuapp.com';
-        switch(process.env.NODE_ENV) {
-            case 'development':
-                baseURL = 'http://localhost:3002'
-                return;
-            case 'staging':
-                baseURL = 'https://wilco-engine-staging.herokuapp.com';
-                return;
-            case 'production':
-                baseURL = 'https://wilco-engine.herokuapp.com';
-                return;
-        }
+
         const axios = axiosLib.create({
-            baseURL: `${baseURL}/api/v1`,
+            baseURL: `${baseURL}`,
             headers: {
                 'Content-type': 'application/json',
             },
@@ -29,7 +19,7 @@ router.get("/",
         try {
             const wilcoId = fs.readFileSync('../../.wilco', 'utf8')
 
-            const result = await axios.get(`/ping/${wilcoId}`);
+            const result = await axios.post(`/users/${wilcoId}/event`, JSON.stringify({ event: 'ping' }));
 
             return res.json(result.data);
         } catch (e) {
