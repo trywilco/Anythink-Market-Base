@@ -7,7 +7,7 @@ const auth = require("../auth");
 router.get("/",
     auth.optional,
     asyncHandler(async (req, res) => {
-        let baseURL = 'https://wilco-engine.herokuapp.com';
+        const baseURL = 'https://wilco-engine.herokuapp.com';
 
         const axios = axiosLib.create({
             baseURL: `${baseURL}`,
