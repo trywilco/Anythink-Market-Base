@@ -82,17 +82,12 @@ const Profile = {
   unfollow: (username) => requests.del(`/profiles/${username}/follow`),
 };
 
-const Ping = {
-  ping: () => requests.get("/ping"),
-};
-
 const agentObj = {
   Items,
   Auth,
   Comments,
   Profile,
   Tags,
-  Ping,
   setToken: (_token) => {
     token = _token;
   },
