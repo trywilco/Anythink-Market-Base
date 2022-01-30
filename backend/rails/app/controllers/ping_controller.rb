@@ -15,7 +15,7 @@ class PingController < ApplicationController
       req.body = { event: 'ping'}.to_json
     end
 
-    render json: {}
+    render json: response.body
   end
 
 end
