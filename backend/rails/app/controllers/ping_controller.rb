@@ -5,8 +5,6 @@ class PingController < ApplicationController
   def index
     wilcoId = File.read("../.wilco")
 
-    puts wilcoId
-
     conn = Faraday.new(
       url: "https://wilco-engine.herokuapp.com/users/#{wilcoId}/",
       headers: {'Content-Type' => 'application/json'}
