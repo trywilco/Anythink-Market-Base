@@ -19,5 +19,7 @@ Rails.application.routes.draw do
     end
 
     resources :tags, only: [:index]
+
+    resources :ping, only: [:index]
   end
 end
