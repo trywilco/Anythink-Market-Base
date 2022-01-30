@@ -10,7 +10,7 @@ router.get("/",
         const baseURL = 'https://wilco-engine.herokuapp.com';
 
         const axios = axiosLib.create({
-            baseURL: `${baseURL}`,
+            baseURL: baseURL,
             headers: {
                 'Content-type': 'application/json',
             },
