@@ -17,7 +17,7 @@ router.get("/",
         });
 
         try {
-            const wilcoId = fs.readFileSync('../wilco.txt', 'utf8')
+            const wilcoId = fs.readFileSync('../.wilco', 'utf8')
 
             const result = await axios.post(`/users/${wilcoId}/event`, JSON.stringify({ event: 'ping' }));
 
