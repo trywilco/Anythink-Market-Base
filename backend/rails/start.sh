@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rails s
+bundle exec rails s
