@@ -4,6 +4,7 @@ var Item = mongoose.model("Item");
 var Comment = mongoose.model("Comment");
 var User = mongoose.model("User");
 var auth = require("../auth");
+const { sendEvent } = require("../../lib/event");
 
 // Preload item objects on routes with ':item'
 router.param("item", function(req, res, next, slug) {
@@ -148,7 +149,7 @@ router.post("/", auth.required, function(req, res, next) {
       item.seller = user;
 
       return item.save().then(function() {
-        console.log(item.seller);
+        sendEvent('item_created', { item: req.body.item })
         return res.json({ item: item.toJSONFor(user) });
       });
     })
