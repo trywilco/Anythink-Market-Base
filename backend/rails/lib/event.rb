@@ -1,6 +1,6 @@
 module Event
   def sendEvent(eventName, metadata)
-    wilcoId = File.read("../.wilco")
+    wilcoId = File.read(Rails.root.join("../.wilco"))
     conn = Faraday.new(
       url: "https://wilco-engine.herokuapp.com/users/#{wilcoId}/",
       headers: {'Content-Type' => 'application/json'}
