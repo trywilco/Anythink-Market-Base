@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "engines": {
-    "node": ">=16"
+    "node": "^16"
   },
   "scripts": {
     "start": "node ./app.js",
