@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rails db:seed
+bin/rails db:seed
