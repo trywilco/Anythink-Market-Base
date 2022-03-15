@@ -3,6 +3,7 @@ var router = require("express").Router();
 var passport = require("passport");
 var User = mongoose.model("User");
 var auth = require("../auth");
+const { sendEvent } = require("../../lib/event");
 
 router.get("/user", auth.required, function(req, res, next) {
   User.findById(req.payload.id)
@@ -80,6 +81,7 @@ router.post("/users", function(req, res, next) {
   user
     .save()
     .then(function() {
+      sendEvent('user_created', { username: req.body.user.username })
       return res.json({ user: user.toAuthJSON() });
     })
     .catch(next);

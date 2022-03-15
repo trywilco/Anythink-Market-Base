@@ -1,10 +1,10 @@
-# Parts Unlimited Backend
+# Anythink Market Backend
 
-The Parts Unlimited backend is Node web app written with [Express](https://expressjs.com/)
+The Anythink Market backend is Node web app written with [Express](https://expressjs.com/)
 
 ## Getting started
 
-To start the app use: `yarn dev` from the backend directory.
+To start the app use: `./start.sh` from the backend directory.
 
 Make sure your DB is up and running.
 

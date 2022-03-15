@@ -2,10 +2,10 @@ import ItemActions from "./ItemActions";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const ItemMeta = props => {
+const ItemMeta = (props) => {
   const item = props.item;
   return (
-    <div class="d-flex flex-row align-items-center pt-2">
+    <div className="d-flex flex-row align-items-center pt-2">
       <Link to={`/@${item.seller.username}`}>
         <img
           src={item.seller.image}
@@ -14,7 +14,7 @@ const ItemMeta = props => {
         />
       </Link>
 
-      <div className="flex-grow-1 d-flex flex-column">
+      <div className="flex-grow-1 d-flex flex-column py-2">
         <Link to={`/@${item.seller.username}`} className="seller">
           {item.seller.username}
         </Link>

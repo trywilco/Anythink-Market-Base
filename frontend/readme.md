@@ -1,10 +1,10 @@
-# Parts Unlimited Frontend
+# Anythink Frontend
 
-The Parts Unlimited Frontend is an SPA written with [React](https://reactjs.org/) and [Redux](https://redux.js.org/)
+The Anythink Frontend is an SPA written with [React](https://reactjs.org/) and [Redux](https://redux.js.org/)
 
 ## Getting started
 
-To start the app use: `yarn start` from the frontend directory.
+To start the app use: `./start.sh` from the frontend directory.
 
 Make sure your server is up and running to serve requests.
 

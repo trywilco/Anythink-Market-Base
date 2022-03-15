@@ -1,4 +1,4 @@
-on: [push]
+on: [pull_request]
 
 jobs:
   wilco:
@@ -29,3 +29,20 @@ jobs:
       - name: Wilco checks
         id: Wilco
         uses: trywilco/actions@main
+        with:
+          owner: ${{ github.repository_owner }}
+  Lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v2
+      - name: Lint code
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn lint

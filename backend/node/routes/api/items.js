@@ -4,6 +4,7 @@ var Item = mongoose.model("Item");
 var Comment = mongoose.model("Comment");
 var User = mongoose.model("User");
 var auth = require("../auth");
+const { sendEvent } = require("../../lib/event");
 
 // Preload item objects on routes with ':item'
 router.param("item", function(req, res, next, slug) {
@@ -75,19 +76,20 @@ router.get("/", auth.optional, function(req, res, next) {
           .limit(Number(limit))
           .skip(Number(offset))
           .sort({ createdAt: "desc" })
-          .populate("seller")
           .exec(),
         Item.count(query).exec(),
         req.payload ? User.findById(req.payload.id) : null
-      ]).then(function(results) {
+      ]).then(async function(results) {
         var items = results[0];
         var itemsCount = results[1];
         var user = results[2];
-
         return res.json({
-          items: items.map(function(item) {
-            return item.toJSONFor(user);
-          }),
+          items: await Promise.all(
+            items.map(async function(item) {
+              item.seller = await User.findById(item.seller);
+              return item.toJSONFor(user);
+            })
+          ),
           itemsCount: itemsCount
         });
       });
@@ -147,7 +149,7 @@ router.post("/", auth.required, function(req, res, next) {
       item.seller = user;
 
       return item.save().then(function() {
-        console.log(item.seller);
+        sendEvent('item_created', { item: req.body.item })
         return res.json({ item: item.toJSONFor(user) });
       });
     })
