@@ -2,7 +2,7 @@ version: "3.8"
 services:
   anythink-backend:
     build: ./backend
-    container_name: anything-backend
+    container_name: anythink-backend
     command: sh -c "cd backend && yarn install && yarn dev"
     environment:
       - NODE_ENV=development
@@ -17,7 +17,7 @@ services:
 
   anythink-frontend:
     build: ./frontend
-    container_name: anything-frontend
+    container_name: anythink-frontend
     command: sh -c "cd frontend && yarn install && yarn start"
     environment:
       - NODE_ENV=development
@@ -28,7 +28,7 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - anything-backend
+      - anythink-backend
 
   mongodb:
     container_name: mongodb
