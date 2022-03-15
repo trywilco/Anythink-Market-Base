@@ -56,10 +56,15 @@ require("./config/passport");
 app.use(require("./routes"));
 
 /// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error("Not Found");
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+  if (req.url === "/favicon.ico") {
+    res.writeHead(200, { "Content-Type": "image/x-icon" });
+    res.end();
+  } else {
+    const err = new Error("Not Found");
+    err.status = 404;
+    next(err);
+  }
 });
 
 /// error handlers
