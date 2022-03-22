@@ -144,7 +144,7 @@ class Editor extends React.Component {
                             key={tag}
                           >
                             <i
-                              className="ion-close-round"
+                              className="ion-close-round p-1"
                               onClick={this.removeTagHandler(tag)}
                             ></i>
                             {tag}
