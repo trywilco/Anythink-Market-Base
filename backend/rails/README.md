@@ -2,12 +2,6 @@
 
 The Anythink Market backend is Ruby web app written with [Ruby On Rails](https://rubyonrails.org/)
 
-## Getting started
-
-To start the app use: `./start.sh` from the backend directory.
-
-Make sure your DB is up and running.
-
 ## Dependencies
 
 - [acts_as_follower](https://github.com/tcocca/acts_as_follower) - For implementing followers/following
