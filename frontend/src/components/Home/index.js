@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Home extends React.Component {
   componentWillMount() {
-    const tab = "all" ;
+    const tab = "all";
     const itemsPromise = agent.Items.all;
 
     this.props.onLoad(
