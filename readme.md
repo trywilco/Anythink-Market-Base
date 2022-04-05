@@ -7,3 +7,6 @@ Please find more info about each part in the relevant Readme file ([frontend](fr
 ## Development
 
 When implementing a new feature or fixing a bug, please create a new pull request against `main` from a feature/bug branch and add `@vanessa-cooper` as reviewer.
+
+## How to run?
+Please add PORT=3000 to your backend env var to your .env file, make sure you don't push it to github. 
