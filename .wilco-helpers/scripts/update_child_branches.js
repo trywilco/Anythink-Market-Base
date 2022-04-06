@@ -12,7 +12,7 @@ let HAS_ERRORS = false;
 
 function printUsage() {
   console.log(
-    "Run using the command: \n node ./scripts/update_child_branches.js updateChildBranches --repoPath=<local-path-to-market-base-repo> --branch=<branch-name>"
+    "Run using the command: \n node update_child_branches.js --repoPath=<local-path-to-market-base-repo> --branch=<branch-name>"
   );
 }
 
