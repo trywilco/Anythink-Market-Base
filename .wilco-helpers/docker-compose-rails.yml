@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  anythink-backend:
+    build: ./backend
+    container_name: anythink-backend
+    command: sh -c "cd backend && bundle install && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+    working_dir: /usr/src
+    volumes:
+      - ./:/usr/src/
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgres://user:@postgres:5432
+    depends_on:
+      - postgres
+
+  anythink-frontend:
+    build: ./frontend
+    container_name: anythink-frontend
+    command: sh -c "cd frontend && yarn install && yarn start"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    working_dir: /usr/src
+    volumes:
+      - ./:/usr/src/
+    ports:
+      - "3001:3001"
+    depends_on:
+      - anythink-backend
+
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ~/posgres/data:/data/db
+    ports:
+      - '5433:5432'
