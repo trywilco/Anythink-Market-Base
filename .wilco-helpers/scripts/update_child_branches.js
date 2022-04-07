@@ -1,7 +1,9 @@
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const args = require("yargs").argv;
-const { branchHierarchyMap } = require("../quests_branches");
+const axios = require("axios");
+
+const ENGINE_URL = 'http://localhost:3002';
 
 let git;
 let BRANCH;
@@ -9,10 +11,11 @@ let ANYTHINK_REPO_PATH;
 let RESULTS = [];
 let BRANCHES_TO_UPDATE = [];
 let HAS_ERRORS = false;
+const branchHierarchyMap = {};
 
 function printUsage() {
   console.log(
-    "Run using the command: \n node update_child_branches.js --repoPath=<local-path-to-market-base-repo> --branch=<branch-name>"
+    "Run using the command: \n node update_child_branches.js --repoPath=<local-path-to-market-base-repo> --branch=<branch-name> --onlyPrintTree"
   );
 }
 
@@ -25,12 +28,26 @@ async function main() {
     ANYTHINK_REPO_PATH = args.repoPath;
   }
 
+  const { data } = await axios.get(`${ENGINE_URL}/api/v1/quests`);
+  const questsMap = data.quests.reduce((map, quest) => {
+    map[quest._id] = quest;
+    return map;
+  }, {});
+  branchHierarchyMap.main = ['quest_solution/tutorial'];
+  for (const quest of data.quests) {
+    if (quest.questDependency) {
+      const questDependency = questsMap[quest.questDependency];
+      branchHierarchyMap[questDependency.solutionBranch] = branchHierarchyMap[questDependency.solutionBranch] || [];
+      branchHierarchyMap[questDependency.solutionBranch].push(quest.solutionBranch);
+    }
+  }
   git = initGit(args.repoPath);
   await git("status");
 
-  console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
-  console.log("Updating all child branches of '" + args.branch + "':");
-  console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
+  printTreeView(args.branch, branchHierarchyMap);
+  if (args.onlyPrintTree) {
+    return;
+  }
 
   await updateChildBranches(args.branch);
   if (args.forcePush === "true" && !HAS_ERRORS) {
@@ -55,6 +72,7 @@ const initGit = (path) => async (args) => {
 };
 
 let treeOutput = "";
+
 function buildTreeView(branch, branchHierarchyMap, tabs = 2) {
   if (branchHierarchyMap[branch]) {
     branchHierarchyMap[branch].map((childBranch) => {
@@ -65,6 +83,15 @@ function buildTreeView(branch, branchHierarchyMap, tabs = 2) {
       buildTreeView(childBranch, branchHierarchyMap, tabs + 3);
     });
   }
+}
+
+function printTreeView(branch, branchHierarchyMap) {
+  console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+  console.log("Tree of child branches for '" + branch + "':");
+  console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
+  console.log(branch);
+  buildTreeView(branch, branchHierarchyMap);
+  console.log(treeOutput);
 }
 
 async function rebaseTree(branch, branchHierarchyMap) {
@@ -95,11 +122,11 @@ async function rebaseTree(branch, branchHierarchyMap) {
 }
 
 async function updateChildBranches(branch) {
-  await git(`checkout ${branch}`);
+  console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+  console.log("Updating all child branches of '" + branch + "':");
+  console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
 
-  console.log(branch);
-  buildTreeView(branch, branchHierarchyMap);
-  console.log(treeOutput);
+  await git(`checkout ${branch}`);
 
   await rebaseTree(branch, branchHierarchyMap);
 
@@ -125,6 +152,7 @@ async function updateChildBranches(branch) {
     console.log("\n **** DONE SUCCESSFULLY.");
   }
 }
+
 function getSubstringAfter(str, substr) {
   return str.substring(str.indexOf(substr) + substr.length);
 }
@@ -136,13 +164,13 @@ main()
   .catch((err) => {
     if (err.code === "ENOENT") {
       console.log(`ERROR: Path not found: ${ANYTHINK_REPO_PATH}`);
-    } else if (err.stderr.includes("you need to resolve")) {
+    } else if (err?.stderr?.includes("you need to resolve")) {
       console.log("ERROR: Git is in the middle of a conflict");
-    } else if (err.stderr.includes("did not match any file")) {
+    } else if (err?.stderr?.includes("did not match any file")) {
       const badBranch = getSubstringAfter(err.cmd, "git checkout ");
       console.log(`ERROR: Branch name "${badBranch}" not found`);
     } else {
-      console.log(err.message);
+      console.log(err);
     }
     process.exit(1);
   });
