@@ -28,7 +28,13 @@ async function main() {
     ANYTHINK_REPO_PATH = args.repoPath;
   }
 
-  const { data } = await axios.get(`${ENGINE_URL}/api/v1/quests`);
+  if (!process.env.API_SERVER_TOKEN) {
+    console.log("Please include the API_SERVER_TOKEN env var");
+  }
+
+  const { data } = await axios.get(`${ENGINE_URL}/api/v1/quests`, {
+    headers: { Authorization: `ServerToken ${process.env.API_SERVER_TOKEN}` }
+  });
   const questsMap = data.quests.reduce((map, quest) => {
     map[quest._id] = quest;
     return map;
