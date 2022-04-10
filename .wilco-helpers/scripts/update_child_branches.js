@@ -3,7 +3,7 @@ const exec = util.promisify(require("child_process").exec);
 const args = require("yargs").argv;
 const axios = require("axios");
 
-const ENGINE_URL = 'http://localhost:3002';
+const ENGINE_URL = 'https://wilco-engine.herokuapp.com';
 
 let git;
 let BRANCH;
@@ -12,6 +12,7 @@ let RESULTS = [];
 let BRANCHES_TO_UPDATE = [];
 let HAS_ERRORS = false;
 const branchHierarchyMap = {};
+const questHierarchyMap = {};
 
 function printUsage() {
   console.log(
@@ -43,14 +44,27 @@ async function main() {
   for (const quest of data.quests) {
     if (quest.questDependency) {
       const questDependency = questsMap[quest.questDependency];
-      branchHierarchyMap[questDependency.solutionBranch] = branchHierarchyMap[questDependency.solutionBranch] || [];
-      branchHierarchyMap[questDependency.solutionBranch].push(quest.solutionBranch);
+      if (quest.solutionBranch) {
+        branchHierarchyMap[questDependency.solutionBranch] = branchHierarchyMap[questDependency.solutionBranch] || [];
+        branchHierarchyMap[questDependency.solutionBranch].push(quest.solutionBranch);
+      }
+      questHierarchyMap[questDependency._id] = questHierarchyMap[questDependency._id] || [];
+      questHierarchyMap[questDependency._id].push(quest._id);
     }
   }
   git = initGit(args.repoPath);
   await git("status");
 
+  console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+  console.log("Tree of child branches for '" + args.branch + "':");
+  console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
   printTreeView(args.branch, branchHierarchyMap);
+
+  console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+  console.log("Tree of quests:");
+  console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
+  printTreeView('tutorial', questHierarchyMap);
+
   if (args.onlyPrintTree) {
     return;
   }
@@ -79,24 +93,22 @@ const initGit = (path) => async (args) => {
 
 let treeOutput = "";
 
-function buildTreeView(branch, branchHierarchyMap, tabs = 2) {
-  if (branchHierarchyMap[branch]) {
-    branchHierarchyMap[branch].map((childBranch) => {
+function buildTreeView(item, hierarchyMap, tabs = 2) {
+  if (hierarchyMap[item]) {
+    hierarchyMap[item].map((childItem) => {
       for (let i = 0; i < tabs; i++) {
         treeOutput += " ";
       }
-      treeOutput += `|_ ${childBranch} \n`;
-      buildTreeView(childBranch, branchHierarchyMap, tabs + 3);
+      treeOutput += `|_ ${childItem} \n`;
+      buildTreeView(childItem, hierarchyMap, tabs + 3);
     });
   }
 }
 
-function printTreeView(branch, branchHierarchyMap) {
-  console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
-  console.log("Tree of child branches for '" + branch + "':");
-  console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
-  console.log(branch);
-  buildTreeView(branch, branchHierarchyMap);
+function printTreeView(root, hierarchyMap) {
+  treeOutput = "";
+  console.log(root);
+  buildTreeView(root, hierarchyMap);
   console.log(treeOutput);
 }
 
@@ -104,10 +116,10 @@ async function rebaseTree(branch, branchHierarchyMap) {
   if (branchHierarchyMap[branch]) {
     for (const childBranch of branchHierarchyMap[branch]) {
       const report = { branch: childBranch };
-      process.stdout.write(`* Rebasing "${branch}" onto "${childBranch}"...`);
-
+      process.stdout.write(`* Rebasing "${childBranch}" onto "${branch}"...`);
       try {
-        await git(`rebase ${branch} ${childBranch}`);
+        await git(`checkout ${childBranch}`)
+        await git(`rebase ${branch}`);
         console.log(` DONE.`);
         await rebaseTree(childBranch, branchHierarchyMap);
       } catch (e) {
@@ -131,10 +143,10 @@ async function updateChildBranches(branch) {
   console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
   console.log("Updating all child branches of '" + branch + "':");
   console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
-
   await git(`checkout ${branch}`);
 
   await rebaseTree(branch, branchHierarchyMap);
+  await git(`checkout ${branch}`);
 
   if (RESULTS.filter((b) => b.error).length > 0) {
     console.log("\n DETAILED REPORT: \n");
