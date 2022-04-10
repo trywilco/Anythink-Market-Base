@@ -4,6 +4,7 @@
 /node_modules
 /backend/node_modules
 /frontend/node_modules
+/.wilco-helpers/node_modules
 /.pnp
 .pnp.js
 
