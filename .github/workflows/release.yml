@@ -1,8 +1,10 @@
 name: Release
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - main
+      - 'quest_solution/**'
 
 jobs:
   backup-repo:
@@ -17,7 +19,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: DELETE /repos/{owner}/{repo}
-          owner: trywilco 
+          owner: trywilco
           repo: Anythink-Market-Base-Previous-Version
         env:
           GITHUB_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
@@ -27,7 +29,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/{template_owner}/{template_repo}/generate
-          template_owner: trywilco 
+          template_owner: trywilco
           template_repo: Anythink-Market-Base
           owner: trywilco
           name: Anythink-Market-Base-Previous-Version
