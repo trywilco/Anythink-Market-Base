@@ -1,0 +1,38 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  backup-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M')"
+
+      - name: Delete previous backup repo
+        id: delete_previous_repo
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/{owner}/{repo}
+          owner: trywilco 
+          repo: Anythink-Market-Base-Previous-Version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
+
+      - name: Create new backup
+        id: generate_previous_repo
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/{template_owner}/{template_repo}/generate
+          template_owner: trywilco 
+          template_repo: Anythink-Market-Base
+          owner: trywilco
+          name: Anythink-Market-Base-Previous-Version
+          include_all_branches: true
+          private: true
+          description: Anythink-Market-Base automatic backup, created at ${{ steps.date.outputs.date }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
