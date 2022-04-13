@@ -1,0 +1,31 @@
+name: Check conflicts on quest branches
+on:
+  pull_request:
+    branches:
+      - main
+      - 'quest_solution/**'
+jobs:
+  check-quest-solution-branches:
+    name: Check quest solution branches
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .wilco-helpers
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: Check quest solution branches
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: yarn install
+      - run: git checkout ${{ github.head_ref }}
+      - run: git checkout ${{ github.base_ref }}
+      - run: git merge ${{ github.head_ref }} # merge PR locally to validate conflicts
+      - run: API_SERVER_TOKEN=${{ secrets.API_SERVER_TOKEN }} node scripts/update_child_branches.js --repoPath=. --branch=${{ github.base_ref }}
