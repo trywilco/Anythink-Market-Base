@@ -8,6 +8,7 @@ on:
 
 jobs:
   backup-repo:
+    name: Backup repo
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
@@ -38,3 +39,26 @@ jobs:
           description: Anythink-Market-Base automatic backup, created at ${{ steps.date.outputs.date }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
+
+  update-quest-solution-branches:
+    name: Update quest solution branches
+    needs: backup-repo
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .wilco-helpers
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # fetch all git history with branches
+      - name: Setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: Update quest solution branches
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: yarn install
+      - run: API_SERVER_TOKEN=${{ secrets.API_SERVER_TOKEN }} node scripts/update_child_branches.js --repoPath=. --branch=main --forcePush=true
