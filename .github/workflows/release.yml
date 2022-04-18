@@ -24,6 +24,9 @@ jobs:
           repo: Anythink-Market-Base-Previous-Version
         env:
           GITHUB_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
+          INPUT_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE: ${{ github.base_ref }}
+          INPUT_HEAD: ${{ github.ref }}
 
       - name: Create new backup
         id: generate_previous_repo
@@ -39,6 +42,9 @@ jobs:
           description: Anythink-Market-Base automatic backup, created at ${{ steps.date.outputs.date }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_WRITE_TOKEN }}
+          INPUT_REPOSITORY: ${{ github.repository }}
+          INPUT_BASE: ${{ github.base_ref }}
+          INPUT_HEAD: ${{ github.ref }}
 
   update-quest-solution-branches:
     name: Update quest solution branches
