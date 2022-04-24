@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @items = Item.all.includes(:user)
+    @items = Item.includes(:tags)
 
     @items = @items.tagged_with(params[:tag]) if params[:tag].present?
     @items = @items.sellered_by(params[:seller]) if params[:seller].present?
@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
           following: signed_in? ? current_user.following?(user) : false,
         },
         favorited: signed_in? ? current_user.favorited?(item) : false,
-        favorites_count: item.favorites_count || 0,
+        favorites_count: item.favorites_count || 0
       }
     }
   end
