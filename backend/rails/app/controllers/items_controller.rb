@@ -16,24 +16,27 @@ class ItemsController < ApplicationController
 
     @items = @items.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
 
-    render json: @items.map { |item|
-      {
-        title: item.title,
-        slug: item.slug,
-        description: item.description,
-        image: item.image,
-        tagList: item.tags.map(&:name),
-        createdAt: item.created_at,
-        updatedAt: item.updated_at,
-        seller: {
-          username: item.user.username,
-          bio: item.user.bio,
-          image: item.user.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-          following: signed_in? ? current_user.following?(user) : false,
-        },
-        favorited: signed_in? ? current_user.favorited?(item) : false,
-        favorites_count: item.favorites_count || 0
-      }
+    render json: {
+      items: @items.map { |item|
+        {
+          title: item.title,
+          slug: item.slug,
+          description: item.description,
+          image: item.image,
+          tagList: item.tags.map(&:name),
+          createdAt: item.created_at,
+          updatedAt: item.updated_at,
+          seller: {
+            username: item.user.username,
+            bio: item.user.bio,
+            image: item.user.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
+            following: signed_in? ? current_user.following?(user) : false,
+          },
+          favorited: signed_in? ? current_user.favorited?(item) : false,
+          favorites_count: item.favorites_count || 0
+        }
+      },
+      items_count: @items_count
     }
   end
 
