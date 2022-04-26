@@ -10,6 +10,6 @@ module Event
       req.headers['Content-Type'] = 'application/json'
       req.body = { event: eventName, metadata: metadata}.to_json
     end
-  response
+    response
   end
 end

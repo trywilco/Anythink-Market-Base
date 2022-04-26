@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
             username: item.user.username,
             bio: item.user.bio,
             image: item.user.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-            following: signed_in? ? current_user.following?(user) : false,
+            following: signed_in? ? current_user.following?(item.user) : false,
           },
           favorited: signed_in? ? current_user.favorited?(item) : false,
           favorites_count: item.favorites_count || 0
