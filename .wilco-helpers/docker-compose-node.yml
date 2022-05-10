@@ -35,6 +35,8 @@ services:
     container_name: mongodb
     restart: always
     image: mongo
+    logging:
+      driver: none
     volumes:
       - ~/mongo/data:/data/db
     ports:

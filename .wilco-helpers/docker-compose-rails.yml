@@ -35,6 +35,8 @@ services:
     container_name: postgres
     restart: always
     image: postgres
+    logging:
+      driver: none
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_USER: user
