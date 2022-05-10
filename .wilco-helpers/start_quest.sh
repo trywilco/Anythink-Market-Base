@@ -5,7 +5,7 @@ WILCO_ID="`cat .wilco 2> /dev/null`"
 
 sendEvent() {
   body='{"event":"start_quest_script_ran", "metadata": {"success": '$1', "remote": false, "error": "'$2'"}}'
-  curl -m 5 -X POST $API_BASE_URL/users/$WILCO_ID/event -d "$body" -H 'Content-Type: application/json'
+  curl -m 5 -X POST $API_BASE_URL/users/$WILCO_ID/event -d "$body" -H 'Content-Type: application/json' &> /dev/null
 }
 
 if [[ -z $WILCO_ID ]]; then
