@@ -10,4 +10,4 @@ When implementing a new feature or fixing a bug, please create a new pull reques
 
 ## First setup
 
-_It's been a while since the last engineer started this repo from scrach, maybe it's worth someone will document what it needed to install the system on a new machine?_
+**[TODO 05/01/2018 @vanessa-cooper]:** _It's been a while since the last engineer started this repo from scrach, maybe it's worth someone will document what it needed to install the system on a new machine?_
