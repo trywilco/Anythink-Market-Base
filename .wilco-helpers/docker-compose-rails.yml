@@ -4,6 +4,7 @@ services:
     build: ./backend
     container_name: anythink-backend
     command: sh -c "/wait-for-it.sh postgres:5432 -q -t 60 && cd backend && bundle install && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+    
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/

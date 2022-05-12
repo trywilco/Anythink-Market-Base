@@ -4,6 +4,7 @@ services:
     build: ./backend
     container_name: anythink-backend
     command: sh -c "/wait-for-it.sh mongodb:27017 -q -t 60 && cd backend && yarn install && yarn dev"
+
     environment:
       - NODE_ENV=development
       - PORT=3000
