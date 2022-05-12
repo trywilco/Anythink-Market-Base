@@ -14,7 +14,7 @@ services:
       - PORT=3000
       - DATABASE_URL=postgres://user:@postgres:5432
     depends_on:
-      - postgres
+      - "postgres"
 
   anythink-frontend:
     build: ./frontend
