@@ -3,7 +3,7 @@ services:
   anythink-backend:
     build: ./backend
     container_name: anythink-backend
-    command: sh -c "cd backend && bundle install && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+    command: sh -c "cd backend && bundle install && sleep 10 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/

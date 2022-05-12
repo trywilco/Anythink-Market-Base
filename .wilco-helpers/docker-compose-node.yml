@@ -3,7 +3,7 @@ services:
   anythink-backend:
     build: ./backend
     container_name: anythink-backend
-    command: sh -c "cd backend && yarn install && yarn dev"
+    command: sh -c "cd backend && yarn install && sleep 10 && yarn dev"
     environment:
       - NODE_ENV=development
       - PORT=3000
