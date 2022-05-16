@@ -9,11 +9,8 @@ const Item = mongoose.model("Item");
 const Comment = mongoose.model("Comment");
 
 const connectedToDatabase = () => {
-  if (!process.env.MONGODB_URI) {
-    console.warn("Missing MONGODB_URI in env, please add it to your .env file");
-  }
-
-  mongoose.connect(process.env.MONGODB_URI);
+  const connection = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+  mongoose.connect(connection);
   mongoose.set("debug", true);
 };
 
