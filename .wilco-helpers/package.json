@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "print-tree": "node scripts/update_child_branches.js --repoPath=. --branch=main --onlyPrintTree",
+    "print-tree-of-branch": "node scripts/update_child_branches.js --repoPath=. --branch=$BRANCH --onlyPrintTree",
+    "update-child-branches": "node scripts/update_child_branches.js --repoPath=. --branch=$BRANCH"
+  },
   "dependencies": {
     "axios": "^0.26.1",
     "yargs": "^17.4.0"
