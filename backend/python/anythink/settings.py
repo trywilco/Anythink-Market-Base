@@ -133,11 +133,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = (
-    'http://0.0.0.0:3001',
-    'http://localhost:3001',
-)
-
+CORS_ALLOW_ALL_ORIGINS = True
 # Tell Django about the custom `User` model we created. The string
 # `authentication.User` tells Django we are referring to the `User` model in
 # the `authentication` module. This module is registered above in a setting
