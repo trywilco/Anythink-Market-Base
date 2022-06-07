@@ -8,7 +8,7 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 
-from conduit.apps.core.models import TimestampedModel
+from anythink.apps.core.models import TimestampedModel
 
 
 class UserManager(BaseUserManager):

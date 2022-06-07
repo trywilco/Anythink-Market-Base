@@ -1,4 +1,4 @@
-from conduit.apps.core.renderers import ConduitJSONRenderer
+from anythink.apps.core.renderers import ConduitJSONRenderer
 
 
 class UserJSONRenderer(ConduitJSONRenderer):

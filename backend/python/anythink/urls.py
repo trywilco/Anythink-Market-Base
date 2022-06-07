@@ -1,4 +1,4 @@
-"""conduit URL Configuration
+"""anythink URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -19,7 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
 
-    re_path(r'^api/', include('conduit.apps.articles.urls')),
-    re_path(r'^api/', include('conduit.apps.authentication.urls')),
-    re_path(r'^api/', include('conduit.apps.profiles.urls')),
+    re_path(r'^api/', include('anythink.apps.articles.urls')),
+    re_path(r'^api/', include('anythink.apps.authentication.urls')),
+    re_path(r'^api/', include('anythink.apps.profiles.urls')),
 ]

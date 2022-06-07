@@ -2,11 +2,11 @@ from django.apps import AppConfig
 
 
 class ArticlesAppConfig(AppConfig):
-    name = 'conduit.apps.articles'
+    name = 'anythink.apps.articles'
     label = 'articles'
     verbose_name = 'Articles'
 
     def ready(self):
-        import conduit.apps.articles.signals
+        import anythink.apps.articles.signals
 
-default_app_config = 'conduit.apps.articles.ArticlesAppConfig'
+default_app_config = 'anythink.apps.articles.ArticlesAppConfig'

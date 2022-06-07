@@ -2,7 +2,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 
-from conduit.apps.core.utils import generate_random_string
+from anythink.apps.core.utils import generate_random_string
 
 from .models import Article
 
