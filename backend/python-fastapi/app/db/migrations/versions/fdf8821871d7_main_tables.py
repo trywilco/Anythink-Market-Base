@@ -96,9 +96,9 @@ def create_followers_to_followings_table() -> None:
     )
 
 
-def create_articles_table() -> None:
+def create_items_table() -> None:
     op.create_table(
-        "articles",
+        "items",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("slug", sa.Text, unique=True, nullable=False, index=True),
         sa.Column("title", sa.Text, nullable=False),
@@ -111,9 +111,9 @@ def create_articles_table() -> None:
     )
     op.execute(
         """
-        CREATE TRIGGER update_article_modtime
+        CREATE TRIGGER update_item_modtime
             BEFORE UPDATE
-            ON articles
+            ON items
             FOR EACH ROW
         EXECUTE PROCEDURE update_updated_at_column();
         """
@@ -124,13 +124,13 @@ def create_tags_table() -> None:
     op.create_table("tags", sa.Column("tag", sa.Text, primary_key=True))
 
 
-def create_articles_to_tags_table() -> None:
+def create_items_to_tags_table() -> None:
     op.create_table(
-        "articles_to_tags",
+        "items_to_tags",
         sa.Column(
-            "article_id",
+            "item_id",
             sa.Integer,
-            sa.ForeignKey("articles.id", ondelete="CASCADE"),
+            sa.ForeignKey("items.id", ondelete="CASCADE"),
             nullable=False,
         ),
         sa.Column(
@@ -141,7 +141,7 @@ def create_articles_to_tags_table() -> None:
         ),
     )
     op.create_primary_key(
-        "pk_articles_to_tags", "articles_to_tags", ["article_id", "tag"]
+        "pk_items_to_tags", "items_to_tags", ["item_id", "tag"]
     )
 
 
@@ -155,13 +155,13 @@ def create_favorites_table() -> None:
             nullable=False,
         ),
         sa.Column(
-            "article_id",
+            "item_id",
             sa.Integer,
-            sa.ForeignKey("articles.id", ondelete="CASCADE"),
+            sa.ForeignKey("items.id", ondelete="CASCADE"),
             nullable=False,
         ),
     )
-    op.create_primary_key("pk_favorites", "favorites", ["user_id", "article_id"])
+    op.create_primary_key("pk_favorites", "favorites", ["user_id", "item_id"])
 
 
 def create_commentaries_table() -> None:
@@ -176,9 +176,9 @@ def create_commentaries_table() -> None:
             nullable=False,
         ),
         sa.Column(
-            "article_id",
+            "item_id",
             sa.Integer,
-            sa.ForeignKey("articles.id", ondelete="CASCADE"),
+            sa.ForeignKey("items.id", ondelete="CASCADE"),
             nullable=False,
         ),
         *timestamps(),
@@ -198,9 +198,9 @@ def upgrade() -> None:
     create_updated_at_trigger()
     create_users_table()
     create_followers_to_followings_table()
-    create_articles_table()
+    create_items_table()
     create_tags_table()
-    create_articles_to_tags_table()
+    create_items_to_tags_table()
     create_favorites_table()
     create_commentaries_table()
 
@@ -208,9 +208,9 @@ def upgrade() -> None:
 def downgrade() -> None:
     op.drop_table("commentaries")
     op.drop_table("favorites")
-    op.drop_table("articles_to_tags")
+    op.drop_table("items_to_tags")
     op.drop_table("tags")
-    op.drop_table("articles")
+    op.drop_table("items")
     op.drop_table("followers_to_followings")
     op.drop_table("users")
     op.execute("DROP FUNCTION update_updated_at_column")

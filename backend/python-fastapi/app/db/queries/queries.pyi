@@ -49,37 +49,37 @@ class ProfilesQueriesMixin:
     ) -> None: ...
 
 class CommentsQueriesMixin:
-    async def get_comments_for_article_by_slug(
+    async def get_comments_for_item_by_slug(
         self, conn: Connection, *, slug: str
     ) -> Record: ...
     async def get_comment_by_id_and_slug(
-        self, conn: Connection, *, comment_id: int, article_slug: str
+        self, conn: Connection, *, comment_id: int, item_slug: str
     ) -> Record: ...
     async def create_new_comment(
-        self, conn: Connection, *, body: str, article_slug: str, author_username: str
+        self, conn: Connection, *, body: str, item_slug: str, author_username: str
     ) -> Record: ...
     async def delete_comment_by_id(
         self, conn: Connection, *, comment_id: int, author_username: str
     ) -> None: ...
 
-class ArticlesQueriesMixin:
-    async def add_article_to_favorites(
+class ItemsQueriesMixin:
+    async def add_item_to_favorites(
         self, conn: Connection, *, username: str, slug: str
     ) -> None: ...
-    async def remove_article_from_favorites(
+    async def remove_item_from_favorites(
         self, conn: Connection, *, username: str, slug: str
     ) -> None: ...
-    async def is_article_in_favorites(
+    async def is_item_in_favorites(
         self, conn: Connection, *, username: str, slug: str
     ) -> Record: ...
-    async def get_favorites_count_for_article(
+    async def get_favorites_count_for_item(
         self, conn: Connection, *, slug: str
     ) -> Record: ...
-    async def get_tags_for_article_by_slug(
+    async def get_tags_for_item_by_slug(
         self, conn: Connection, *, slug: str
     ) -> Record: ...
-    async def get_article_by_slug(self, conn: Connection, *, slug: str) -> Record: ...
-    async def create_new_article(
+    async def get_item_by_slug(self, conn: Connection, *, slug: str) -> Record: ...
+    async def create_new_item(
         self,
         conn: Connection,
         *,
@@ -89,10 +89,10 @@ class ArticlesQueriesMixin:
         body: str,
         author_username: str
     ) -> Record: ...
-    async def add_tags_to_article(
+    async def add_tags_to_item(
         self, conn: Connection, tags_slugs: Sequence[Dict[str, str]]
     ) -> None: ...
-    async def update_article(
+    async def update_item(
         self,
         conn: Connection,
         *,
@@ -103,10 +103,10 @@ class ArticlesQueriesMixin:
         new_body: str,
         new_description: str
     ) -> Record: ...
-    async def delete_article(
+    async def delete_item(
         self, conn: Connection, *, slug: str, author_username: str
     ) -> None: ...
-    async def get_articles_for_feed(
+    async def get_items_for_feed(
         self, conn: Connection, *, follower_username: str, limit: int, offset: int
     ) -> Record: ...
 
@@ -115,7 +115,7 @@ class Queries(
     UsersQueriesMixin,
     ProfilesQueriesMixin,
     CommentsQueriesMixin,
-    ArticlesQueriesMixin,
+    ItemsQueriesMixin,
 ): ...
 
 queries: Queries

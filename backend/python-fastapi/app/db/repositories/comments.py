@@ -6,7 +6,7 @@ from app.db.errors import EntityDoesNotExist
 from app.db.queries.queries import queries
 from app.db.repositories.base import BaseRepository
 from app.db.repositories.profiles import ProfilesRepository
-from app.models.domain.articles import Article
+from app.models.domain.items import Item
 from app.models.domain.comments import Comment
 from app.models.domain.users import User
 
@@ -20,13 +20,13 @@ class CommentsRepository(BaseRepository):
         self,
         *,
         comment_id: int,
-        article: Article,
+        item: Item,
         user: Optional[User] = None,
     ) -> Comment:
         comment_row = await queries.get_comment_by_id_and_slug(
             self.connection,
             comment_id=comment_id,
-            article_slug=article.slug,
+            item_slug=item.slug,
         )
         if comment_row:
             return await self._get_comment_from_db_record(
@@ -39,15 +39,15 @@ class CommentsRepository(BaseRepository):
             "comment with id {0} does not exist".format(comment_id),
         )
 
-    async def get_comments_for_article(
+    async def get_comments_for_item(
         self,
         *,
-        article: Article,
+        item: Item,
         user: Optional[User] = None,
     ) -> List[Comment]:
-        comments_rows = await queries.get_comments_for_article_by_slug(
+        comments_rows = await queries.get_comments_for_item_by_slug(
             self.connection,
-            slug=article.slug,
+            slug=item.slug,
         )
         return [
             await self._get_comment_from_db_record(
@@ -58,17 +58,17 @@ class CommentsRepository(BaseRepository):
             for comment_row in comments_rows
         ]
 
-    async def create_comment_for_article(
+    async def create_comment_for_item(
         self,
         *,
         body: str,
-        article: Article,
+        item: Item,
         user: User,
     ) -> Comment:
         comment_row = await queries.create_new_comment(
             self.connection,
             body=body,
-            article_slug=article.slug,
+            item_slug=item.slug,
             author_username=user.username,
         )
         return await self._get_comment_from_db_record(

@@ -93,7 +93,7 @@ To run all the tests of a project, simply run the ``pytest`` command: ::
 
     tests/test_api/test_errors/test_422_error.py .                                                                   [  1%]
     tests/test_api/test_errors/test_error.py .                                                                       [  2%]
-    tests/test_api/test_routes/test_articles.py .................................                                    [ 38%]
+    tests/test_api/test_routes/test_items.py .................................                                    [ 38%]
     tests/test_api/test_routes/test_authentication.py ..                                                             [ 41%]
     tests/test_api/test_routes/test_comments.py ....                                                                 [ 45%]
     tests/test_api/test_routes/test_login.py ...                                                                     [ 48%]

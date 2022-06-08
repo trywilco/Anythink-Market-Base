@@ -1,40 +1,40 @@
--- name: add-article-to-favorites!
-INSERT INTO favorites (user_id, article_id)
+-- name: add-item-to-favorites!
+INSERT INTO favorites (user_id, item_id)
 VALUES ((SELECT id FROM users WHERE username = :username),
-        (SELECT id FROM articles WHERE slug = :slug))
+        (SELECT id FROM items WHERE slug = :slug))
 ON CONFLICT DO NOTHING;
 
 
--- name: remove-article-from-favorites!
+-- name: remove-item-from-favorites!
 DELETE
 FROM favorites
 WHERE user_id = (SELECT id FROM users WHERE username = :username)
-  AND article_id = (SELECT id FROM articles WHERE slug = :slug);
+  AND item_id = (SELECT id FROM items WHERE slug = :slug);
 
 
--- name: is-article-in-favorites^
+-- name: is-item-in-favorites^
 SELECT CASE WHEN count(user_id) > 0 THEN TRUE ELSE FALSE END AS favorited
 FROM favorites
 WHERE user_id = (SELECT id FROM users WHERE username = :username)
-  AND article_id = (SELECT id FROM articles WHERE slug = :slug);
+  AND item_id = (SELECT id FROM items WHERE slug = :slug);
 
 
--- name: get-favorites-count-for-article^
+-- name: get-favorites-count-for-item^
 SELECT count(*) as favorites_count
 FROM favorites
-WHERE article_id = (SELECT id FROM articles WHERE slug = :slug);
+WHERE item_id = (SELECT id FROM items WHERE slug = :slug);
 
 
--- name: get-tags-for-article-by-slug
+-- name: get-tags-for-item-by-slug
 SELECT t.tag
 FROM tags t
-         INNER JOIN articles_to_tags att ON
+         INNER JOIN items_to_tags att ON
         t.tag = att.tag
         AND
-        att.article_id = (SELECT id FROM articles WHERE slug = :slug);
+        att.item_id = (SELECT id FROM items WHERE slug = :slug);
 
 
--- name: get-article-by-slug^
+-- name: get-item-by-slug^
 SELECT id,
        slug,
        title,
@@ -43,19 +43,19 @@ SELECT id,
        created_at,
        updated_at,
        (SELECT username FROM users WHERE id = author_id) AS author_username
-FROM articles
+FROM items
 WHERE slug = :slug
 LIMIT 1;
 
 
--- name: create-new-article<!
+-- name: create-new-item<!
 WITH author_subquery AS (
     SELECT id, username
     FROM users
     WHERE username = :author_username
 )
 INSERT
-INTO articles (slug, title, description, body, author_id)
+INTO items (slug, title, description, body, author_id)
 VALUES (:slug, :title, :description, :body, (SELECT id FROM author_subquery))
 RETURNING
     id,
@@ -68,15 +68,15 @@ RETURNING
     updated_at;
 
 
--- name: add-tags-to-article*!
-INSERT INTO articles_to_tags (article_id, tag)
-VALUES ((SELECT id FROM articles WHERE slug = :slug),
+-- name: add-tags-to-item*!
+INSERT INTO items_to_tags (item_id, tag)
+VALUES ((SELECT id FROM items WHERE slug = :slug),
         (SELECT tag FROM tags WHERE tag = :tag))
 ON CONFLICT DO NOTHING;
 
 
--- name: update-article<!
-UPDATE articles
+-- name: update-item<!
+UPDATE items
 SET slug        = :new_slug,
     title       = :new_title,
     body        = :new_body,
@@ -86,14 +86,14 @@ WHERE slug = :slug
 RETURNING updated_at;
 
 
--- name: delete-article!
+-- name: delete-item!
 DELETE
-FROM articles
+FROM items
 WHERE slug = :slug
   AND author_id = (SELECT id FROM users WHERE username = :author_username);
 
 
--- name: get-articles-for-feed
+-- name: get-items-for-feed
 SELECT a.id,
        a.slug,
        a.title,
@@ -106,7 +106,7 @@ SELECT a.id,
            FROM users
            WHERE id = a.author_id
        ) AS author_username
-FROM articles a
+FROM items a
          INNER JOIN followers_to_followings f ON
         f.following_id = a.author_id AND
         f.follower_id = (SELECT id FROM users WHERE username = :follower_username)

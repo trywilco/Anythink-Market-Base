@@ -35,8 +35,8 @@ class Users(TypedTable):
     username: str
 
 
-class Articles(TypedTable):
-    __table__ = "articles"
+class Items(TypedTable):
+    __table__ = "items"
 
     id: int
     slug: str
@@ -54,22 +54,22 @@ class Tags(TypedTable):
     tag: str
 
 
-class ArticlesToTags(TypedTable):
-    __table__ = "articles_to_tags"
+class ItemsToTags(TypedTable):
+    __table__ = "items_to_tags"
 
-    article_id: int
+    item_id: int
     tag: str
 
 
 class Favorites(TypedTable):
     __table__ = "favorites"
 
-    article_id: int
+    item_id: int
     user_id: int
 
 
 users = Users()
-articles = Articles()
+items = Items()
 tags = Tags()
-articles_to_tags = ArticlesToTags()
+items_to_tags = ItemsToTags()
 favorites = Favorites()

@@ -5,7 +5,7 @@ from app.models.domain.profiles import Profile
 from app.models.domain.rwmodel import RWModel
 
 
-class Article(IDModelMixin, DateTimeModelMixin, RWModel):
+class Item(IDModelMixin, DateTimeModelMixin, RWModel):
     slug: str
     title: str
     description: str
