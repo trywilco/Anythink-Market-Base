@@ -2,8 +2,11 @@ version: "3.8"
 services:
   anythink-backend:
     build: .
-    restart: on-failure
+    restart: always
+    command: sh -c "poetry run alembic upgrade head && poetry run uvicorn --host=0.0.0.0 --port=3000 --reload app.main:app"
     container_name: anythink-backend
+    volumes:
+      - ./:/app
     ports:
       - "3000:3000"
     env_file:

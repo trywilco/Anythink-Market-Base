@@ -11,10 +11,7 @@ RUN apt-get update && \
 
 COPY poetry.lock pyproject.toml ./
 RUN pip install poetry==1.1 && \
-    poetry config virtualenvs.in-project true && \
-    poetry install --no-dev
+    poetry config virtualenvs.in-project false && \
+    poetry install
 
 COPY . ./
-
-CMD poetry run alembic upgrade head && \
-    poetry run uvicorn --host=0.0.0.0 --port=3000 app.main:app
