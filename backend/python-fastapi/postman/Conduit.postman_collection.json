@@ -325,7 +325,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -367,7 +367,7 @@
 					"response": []
 				},
 				{
-					"name": "Items by Author",
+					"name": "Items by Seller",
 					"event": [
 						{
 							"listen": "test",
@@ -398,7 +398,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -428,7 +428,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{APIURL}}/items?author=johnjacob",
+							"raw": "{{APIURL}}/items?seller=johnjacob",
 							"host": [
 								"{{APIURL}}"
 							],
@@ -437,7 +437,7 @@
 							],
 							"query": [
 								{
-									"key": "author",
+									"key": "seller",
 									"value": "johnjacob"
 								}
 							]
@@ -477,7 +477,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -556,7 +556,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -635,7 +635,7 @@
 									"tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -708,7 +708,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -786,7 +786,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -863,7 +863,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -909,7 +909,7 @@
 					"response": []
 				},
 				{
-					"name": "Items by Author",
+					"name": "Items by Seller",
 					"event": [
 						{
 							"listen": "test",
@@ -940,7 +940,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -974,7 +974,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{APIURL}}/items?author={{USERNAME}}",
+							"raw": "{{APIURL}}/items?seller={{USERNAME}}",
 							"host": [
 								"{{APIURL}}"
 							],
@@ -983,7 +983,7 @@
 							],
 							"query": [
 								{
-									"key": "author",
+									"key": "seller",
 									"value": "{{USERNAME}}"
 								}
 							]
@@ -992,7 +992,7 @@
 					"response": []
 				},
 				{
-					"name": "Items by Author with auth",
+					"name": "Items by Seller with auth",
 					"event": [
 						{
 							"listen": "test",
@@ -1023,7 +1023,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1057,7 +1057,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{APIURL}}/items?author={{USERNAME}}",
+							"raw": "{{APIURL}}/items?seller={{USERNAME}}",
 							"host": [
 								"{{APIURL}}"
 							],
@@ -1066,7 +1066,7 @@
 							],
 							"query": [
 								{
-									"key": "author",
+									"key": "seller",
 									"value": "{{USERNAME}}"
 								}
 							]
@@ -1106,7 +1106,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1189,7 +1189,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1264,7 +1264,7 @@
 									"tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1338,7 +1338,7 @@
 									"        tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"        tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"        tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"        tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"        tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"        tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"        tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"        tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1414,7 +1414,7 @@
 									"tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1481,7 +1481,7 @@
 									"tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"tests[\"Item's 'favorited' property is true\"] = item.favorited === true;",
 									"tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
@@ -1550,7 +1550,7 @@
 									"tests['Item has \"description\" property'] = item.hasOwnProperty('description');",
 									"tests['Item has \"tagList\" property'] = item.hasOwnProperty('tagList');",
 									"tests['Item\\'s \"tagList\" property is an Array'] = Array.isArray(item.tagList);",
-									"tests['Item has \"author\" property'] = item.hasOwnProperty('author');",
+									"tests['Item has \"seller\" property'] = item.hasOwnProperty('seller');",
 									"tests['Item has \"favorited\" property'] = item.hasOwnProperty('favorited');",
 									"tests['Item has \"favoritesCount\" property'] = item.hasOwnProperty('favoritesCount');",
 									"tests['favoritesCount is an integer'] = Number.isInteger(item.favoritesCount);",
@@ -1617,7 +1617,7 @@
 									"tests['\"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(comment.createdAt);",
 									"tests['Comment has \"updatedAt\" property'] = comment.hasOwnProperty('updatedAt');",
 									"tests['\"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(comment.updatedAt);",
-									"tests['Comment has \"author\" property'] = comment.hasOwnProperty('author');",
+									"tests['Comment has \"seller\" property'] = comment.hasOwnProperty('seller');",
 									""
 								]
 							}
@@ -1683,7 +1683,7 @@
 									"        tests['\"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(comment.createdAt);",
 									"        tests['Comment has \"updatedAt\" property'] = comment.hasOwnProperty('updatedAt');",
 									"        tests['\"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(comment.updatedAt);",
-									"        tests['Comment has \"author\" property'] = comment.hasOwnProperty('author');",
+									"        tests['Comment has \"seller\" property'] = comment.hasOwnProperty('seller');",
 									"    }",
 									"}",
 									""

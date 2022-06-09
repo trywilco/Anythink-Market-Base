@@ -42,7 +42,7 @@ async def test_user_can_create_item(
     )
     item = ItemInResponse(**response.json())
     assert item.item.title == item_data["title"]
-    assert item.item.author.username == test_user.username
+    assert item.item.seller.username == test_user.username
 
 
 async def test_not_existing_tags_will_be_created_without_duplication(
@@ -128,7 +128,7 @@ async def test_user_can_update_item(
     "api_method, route_name",
     (("PUT", "items:update-item"), ("DELETE", "items:delete-item")),
 )
-async def test_user_can_not_modify_item_that_is_not_authored_by_him(
+async def test_user_can_not_modify_item_that_is_not_sold_by_him(
     app: FastAPI,
     authorized_client: AsyncClient,
     pool: Pool,
@@ -138,7 +138,7 @@ async def test_user_can_not_modify_item_that_is_not_authored_by_him(
     async with pool.acquire() as connection:
         users_repo = UsersRepository(connection)
         user = await users_repo.create_user(
-            username="test_author", email="author@email.com", password="password"
+            username="test_seller", email="seller@email.com", password="password"
         )
         items_repo = ItemsRepository(connection)
         await items_repo.create_item(
@@ -146,7 +146,7 @@ async def test_user_can_not_modify_item_that_is_not_authored_by_him(
             title="Test Slug",
             description="Slug for tests",
             body="Test " * 100,
-            author=user,
+            seller=user,
             tags=["tests", "testing", "pytest"],
         )
 
@@ -264,7 +264,7 @@ async def test_empty_feed_if_user_has_not_followings(
                     title="tmp",
                     description="tmp",
                     body="tmp",
-                    author=user,
+                    seller=user,
                     tags=[f"tag-{i}-{j}"],
                 )
 
@@ -283,7 +283,7 @@ async def test_user_will_receive_only_following_items(
     test_user: UserInDB,
     pool: Pool,
 ) -> None:
-    following_author_username = "user-2"
+    following_seller_username = "user-2"
     async with pool.acquire() as connection:
         users_repo = UsersRepository(connection)
         profiles_repo = ProfilesRepository(connection)
@@ -304,7 +304,7 @@ async def test_user_will_receive_only_following_items(
                     title="tmp",
                     description="tmp",
                     body="tmp",
-                    author=user,
+                    seller=user,
                     tags=[f"tag-{i}-{j}"],
                 )
 
@@ -316,7 +316,7 @@ async def test_user_will_receive_only_following_items(
     assert len(items_from_response.items) == 5
 
     all_from_following = (
-        item.author.username == following_author_username
+        item.seller.username == following_seller_username
         for item in items_from_response.items
     )
     assert all(all_from_following)
@@ -349,7 +349,7 @@ async def test_user_receiving_feed_with_limit_and_offset(
                     title="tmp",
                     description="tmp",
                     body="tmp",
-                    author=user,
+                    seller=user,
                     tags=[f"tag-{i}-{j}"],
                 )
 
@@ -380,7 +380,7 @@ async def test_item_will_contain_only_attached_tags(
             title="tmp",
             description="tmp",
             body="tmp",
-            author=test_user,
+            seller=test_user,
             tags=attached_tags,
         )
 
@@ -390,7 +390,7 @@ async def test_item_will_contain_only_attached_tags(
                 title="tmp",
                 description="tmp",
                 body="tmp",
-                author=test_user,
+                seller=test_user,
                 tags=[f"tag-{i}"],
             )
 
@@ -421,7 +421,7 @@ async def test_filtering_by_tags(
             title="tmp",
             description="tmp",
             body="tmp",
-            author=test_user,
+            seller=test_user,
             tags=["tag1", "tag2"],
         )
         await items_repo.create_item(
@@ -429,7 +429,7 @@ async def test_filtering_by_tags(
             title="tmp",
             description="tmp",
             body="tmp",
-            author=test_user,
+            seller=test_user,
             tags=["tag2"],
         )
 
@@ -439,7 +439,7 @@ async def test_filtering_by_tags(
                 title="tmp",
                 description="tmp",
                 body="tmp",
-                author=test_user,
+                seller=test_user,
                 tags=[f"tag-{i}"],
             )
 
@@ -451,35 +451,35 @@ async def test_filtering_by_tags(
 
 
 @pytest.mark.parametrize(
-    "author, result", (("", 8), ("author1", 1), ("author2", 2), ("wrong", 0))
+    "seller, result", (("", 8), ("seller1", 1), ("seller2", 2), ("wrong", 0))
 )
-async def test_filtering_by_authors(
+async def test_filtering_by_sellers(
     app: FastAPI,
     authorized_client: AsyncClient,
     test_user: UserInDB,
     pool: Pool,
-    author: str,
+    seller: str,
     result: int,
 ) -> None:
     async with pool.acquire() as connection:
         users_repo = UsersRepository(connection)
         items_repo = ItemsRepository(connection)
 
-        author1 = await users_repo.create_user(
-            username="author1", email="author1@email.com", password="password"
+        seller1 = await users_repo.create_user(
+            username="seller1", email="seller1@email.com", password="password"
         )
-        author2 = await users_repo.create_user(
-            username="author2", email="author2@email.com", password="password"
+        seller2 = await users_repo.create_user(
+            username="seller2", email="seller2@email.com", password="password"
         )
 
         await items_repo.create_item(
-            slug=f"slug-1", title="tmp", description="tmp", body="tmp", author=author1
+            slug=f"slug-1", title="tmp", description="tmp", body="tmp", seller=seller1
         )
         await items_repo.create_item(
-            slug=f"slug-2-1", title="tmp", description="tmp", body="tmp", author=author2
+            slug=f"slug-2-1", title="tmp", description="tmp", body="tmp", seller=seller2
         )
         await items_repo.create_item(
-            slug=f"slug-2-2", title="tmp", description="tmp", body="tmp", author=author2
+            slug=f"slug-2-2", title="tmp", description="tmp", body="tmp", seller=seller2
         )
 
         for i in range(5, 10):
@@ -488,11 +488,11 @@ async def test_filtering_by_authors(
                 title="tmp",
                 description="tmp",
                 body="tmp",
-                author=test_user,
+                seller=test_user,
             )
 
     response = await authorized_client.get(
-        app.url_path_for("items:list-items"), params={"author": author}
+        app.url_path_for("items:list-items"), params={"seller": seller}
     )
     items = ListOfItemsInResponse(**response.json())
     assert items.items_count == result
@@ -521,10 +521,10 @@ async def test_filtering_by_favorited(
         )
 
         item1 = await items_repo.create_item(
-            slug=f"slug-1", title="tmp", description="tmp", body="tmp", author=test_user
+            slug=f"slug-1", title="tmp", description="tmp", body="tmp", seller=test_user
         )
         item2 = await items_repo.create_item(
-            slug=f"slug-2", title="tmp", description="tmp", body="tmp", author=test_user
+            slug=f"slug-2", title="tmp", description="tmp", body="tmp", seller=test_user
         )
 
         await items_repo.add_item_into_favorites(item=item1, user=fan1)
@@ -537,7 +537,7 @@ async def test_filtering_by_favorited(
                 title="tmp",
                 description="tmp",
                 body="tmp",
-                author=test_user,
+                seller=test_user,
             )
 
     response = await authorized_client.get(
@@ -559,7 +559,7 @@ async def test_filtering_with_limit_and_offset(
                 title="tmp",
                 description="tmp",
                 body="tmp",
-                author=test_user,
+                seller=test_user,
             )
 
     full_response = await authorized_client.get(

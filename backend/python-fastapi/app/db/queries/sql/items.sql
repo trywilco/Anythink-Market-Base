@@ -42,28 +42,28 @@ SELECT id,
        body,
        created_at,
        updated_at,
-       (SELECT username FROM users WHERE id = author_id) AS author_username
+       (SELECT username FROM users WHERE id = seller_id) AS seller_username
 FROM items
 WHERE slug = :slug
 LIMIT 1;
 
 
 -- name: create-new-item<!
-WITH author_subquery AS (
+WITH seller_subquery AS (
     SELECT id, username
     FROM users
-    WHERE username = :author_username
+    WHERE username = :seller_username
 )
 INSERT
-INTO items (slug, title, description, body, author_id)
-VALUES (:slug, :title, :description, :body, (SELECT id FROM author_subquery))
+INTO items (slug, title, description, body, seller_id)
+VALUES (:slug, :title, :description, :body, (SELECT id FROM seller_subquery))
 RETURNING
     id,
     slug,
     title,
     description,
     body,
-        (SELECT username FROM author_subquery) as author_username,
+        (SELECT username FROM seller_subquery) as seller_username,
     created_at,
     updated_at;
 
@@ -82,7 +82,7 @@ SET slug        = :new_slug,
     body        = :new_body,
     description = :new_description
 WHERE slug = :slug
-  AND author_id = (SELECT id FROM users WHERE username = :author_username)
+  AND seller_id = (SELECT id FROM users WHERE username = :seller_username)
 RETURNING updated_at;
 
 
@@ -90,7 +90,7 @@ RETURNING updated_at;
 DELETE
 FROM items
 WHERE slug = :slug
-  AND author_id = (SELECT id FROM users WHERE username = :author_username);
+  AND seller_id = (SELECT id FROM users WHERE username = :seller_username);
 
 
 -- name: get-items-for-feed
@@ -104,11 +104,11 @@ SELECT a.id,
        (
            SELECT username
            FROM users
-           WHERE id = a.author_id
-       ) AS author_username
+           WHERE id = a.seller_id
+       ) AS seller_username
 FROM items a
          INNER JOIN followers_to_followings f ON
-        f.following_id = a.author_id AND
+        f.following_id = a.seller_id AND
         f.follower_id = (SELECT id FROM users WHERE username = :follower_username)
 ORDER BY a.created_at
 LIMIT :limit

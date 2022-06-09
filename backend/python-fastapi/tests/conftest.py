@@ -72,7 +72,7 @@ async def test_item(test_user: UserInDB, pool: Pool) -> Item:
             title="Test Slug",
             description="Slug for tests",
             body="Test " * 100,
-            author=test_user,
+            seller=test_user,
             tags=["tests", "testing", "pytest"],
         )
 

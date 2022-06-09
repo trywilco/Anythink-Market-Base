@@ -11,6 +11,6 @@ class Item(IDModelMixin, DateTimeModelMixin, RWModel):
     description: str
     body: str
     tags: List[str]
-    author: Profile
+    seller: Profile
     favorited: bool
     favorites_count: int

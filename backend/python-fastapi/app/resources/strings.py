@@ -3,7 +3,7 @@
 USER_DOES_NOT_EXIST_ERROR = "user does not exist"
 ITEM_DOES_NOT_EXIST_ERROR = "item does not exist"
 ITEM_ALREADY_EXISTS = "item already exists"
-USER_IS_NOT_AUTHOR_OF_ITEM = "you are not an author of this item"
+USER_IS_NOT_SELLER_OF_ITEM = "you are not an seller of this item"
 
 INCORRECT_LOGIN_INPUT = "incorrect email or password"
 USERNAME_TAKEN = "user with this username already exists"

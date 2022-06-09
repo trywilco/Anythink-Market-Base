@@ -31,7 +31,7 @@ class CommentsRepository(BaseRepository):
         if comment_row:
             return await self._get_comment_from_db_record(
                 comment_row=comment_row,
-                author_username=comment_row["author_username"],
+                seller_username=comment_row["seller_username"],
                 requested_user=user,
             )
 
@@ -52,7 +52,7 @@ class CommentsRepository(BaseRepository):
         return [
             await self._get_comment_from_db_record(
                 comment_row=comment_row,
-                author_username=comment_row["author_username"],
+                seller_username=comment_row["seller_username"],
                 requested_user=user,
             )
             for comment_row in comments_rows
@@ -69,11 +69,11 @@ class CommentsRepository(BaseRepository):
             self.connection,
             body=body,
             item_slug=item.slug,
-            author_username=user.username,
+            seller_username=user.username,
         )
         return await self._get_comment_from_db_record(
             comment_row=comment_row,
-            author_username=comment_row["author_username"],
+            seller_username=comment_row["seller_username"],
             requested_user=user,
         )
 
@@ -81,21 +81,21 @@ class CommentsRepository(BaseRepository):
         await queries.delete_comment_by_id(
             self.connection,
             comment_id=comment.id_,
-            author_username=comment.author.username,
+            seller_username=comment.seller.username,
         )
 
     async def _get_comment_from_db_record(
         self,
         *,
         comment_row: Record,
-        author_username: str,
+        seller_username: str,
         requested_user: Optional[User],
     ) -> Comment:
         return Comment(
             id_=comment_row["id"],
             body=comment_row["body"],
-            author=await self._profiles_repo.get_profile_by_username(
-                username=author_username,
+            seller=await self._profiles_repo.get_profile_by_username(
+                username=seller_username,
                 requested_user=requested_user,
             ),
             created_at=comment_row["created_at"],

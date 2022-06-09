@@ -105,7 +105,7 @@ def create_items_table() -> None:
         sa.Column("description", sa.Text, nullable=False),
         sa.Column("body", sa.Text, nullable=False),
         sa.Column(
-            "author_id", sa.Integer, sa.ForeignKey("users.id", ondelete="SET NULL")
+            "seller_id", sa.Integer, sa.ForeignKey("users.id", ondelete="SET NULL")
         ),
         *timestamps(),
     )
@@ -170,7 +170,7 @@ def create_commentaries_table() -> None:
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("body", sa.Text, nullable=False),
         sa.Column(
-            "author_id",
+            "seller_id",
             sa.Integer,
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=False,

@@ -20,14 +20,14 @@ from app.services.items import check_user_can_modify_item
 
 def get_items_filters(
     tag: Optional[str] = None,
-    author: Optional[str] = None,
+    seller: Optional[str] = None,
     favorited: Optional[str] = None,
     limit: int = Query(DEFAULT_ITEMS_LIMIT, ge=1),
     offset: int = Query(DEFAULT_ITEMS_OFFSET, ge=0),
 ) -> ItemsFilters:
     return ItemsFilters(
         tag=tag,
-        author=author,
+        seller=seller,
         favorited=favorited,
         limit=limit,
         offset=offset,
@@ -55,5 +55,5 @@ def check_item_modification_permissions(
     if not check_user_can_modify_item(current_item, user):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail=strings.USER_IS_NOT_AUTHOR_OF_ITEM,
+            detail=strings.USER_IS_NOT_SELLER_OF_ITEM,
         )

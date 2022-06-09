@@ -43,7 +43,7 @@ class Items(TypedTable):
     title: str
     description: str
     body: str
-    author_id: int
+    seller_id: int
     created_at: datetime
     updated_at: datetime
 

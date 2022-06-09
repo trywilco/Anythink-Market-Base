@@ -35,7 +35,7 @@ async def list_items(
 ) -> ListOfItemsInResponse:
     items = await items_repo.filter_items(
         tag=items_filters.tag,
-        author=items_filters.author,
+        seller=items_filters.seller,
         favorited=items_filters.favorited,
         limit=items_filters.limit,
         offset=items_filters.offset,
@@ -73,7 +73,7 @@ async def create_new_item(
         title=item_create.title,
         description=item_create.description,
         body=item_create.body,
-        author=user,
+        seller=user,
         tags=item_create.tags,
     )
     return ItemInResponse(item=ItemForResponse.from_orm(item))

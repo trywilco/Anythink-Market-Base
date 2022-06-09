@@ -20,4 +20,4 @@ def get_slug_for_item(title: str) -> str:
 
 
 def check_user_can_modify_item(item: Item, user: User) -> bool:
-    return item.author.username == user.username
+    return item.seller.username == user.username

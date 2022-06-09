@@ -64,7 +64,7 @@ async def test_user_can_not_delete_not_authored_comment(
     async with pool.acquire() as connection:
         users_repo = UsersRepository(connection)
         user = await users_repo.create_user(
-            username="test_author", email="author@email.com", password="password"
+            username="test_seller", email="seller@email.com", password="password"
         )
         comments_repo = CommentsRepository(connection)
         comment = await comments_repo.create_comment_for_item(

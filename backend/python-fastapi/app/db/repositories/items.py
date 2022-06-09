@@ -19,7 +19,7 @@ from app.db.repositories.tags import TagsRepository
 from app.models.domain.items import Item
 from app.models.domain.users import User
 
-AUTHOR_USERNAME_ALIAS = "author_username"
+SELLER_USERNAME_ALIAS = "seller_username"
 SLUG_ALIAS = "slug"
 
 CAMEL_OR_SNAKE_CASE_TO_WORDS = r"^[a-z\d_\-]+|[A-Z\d_\-][^A-Z\d_\-]*"
@@ -38,7 +38,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         title: str,
         description: str,
         body: str,
-        author: User,
+        seller: User,
         tags: Optional[Sequence[str]] = None,
     ) -> Item:
         async with self.connection.transaction():
@@ -48,7 +48,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
                 title=title,
                 description=description,
                 body=body,
-                author_username=author.username,
+                seller_username=seller.username,
             )
 
             if tags:
@@ -58,8 +58,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         return await self._get_item_from_db_record(
             item_row=item_row,
             slug=slug,
-            author_username=item_row[AUTHOR_USERNAME_ALIAS],
-            requested_user=author,
+            seller_username=item_row[SELLER_USERNAME_ALIAS],
+            requested_user=seller,
         )
 
     async def update_item(  # noqa: WPS211
@@ -81,7 +81,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             updated_item.updated_at = await queries.update_item(
                 self.connection,
                 slug=item.slug,
-                author_username=item.author.username,
+                seller_username=item.seller.username,
                 new_slug=updated_item.slug,
                 new_title=updated_item.title,
                 new_body=updated_item.body,
@@ -95,14 +95,14 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             await queries.delete_item(
                 self.connection,
                 slug=item.slug,
-                author_username=item.author.username,
+                seller_username=item.seller.username,
             )
 
     async def filter_items(  # noqa: WPS211
         self,
         *,
         tag: Optional[str] = None,
-        author: Optional[str] = None,
+        seller: Optional[str] = None,
         favorited: Optional[str] = None,
         limit: int = 20,
         offset: int = 0,
@@ -125,11 +125,11 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             Query.from_(
                 users,
             ).where(
-                users.id == items.author_id,
+                users.id == items.seller_id,
             ).select(
                 users.username,
             ).as_(
-                AUTHOR_USERNAME_ALIAS,
+                SELLER_USERNAME_ALIAS,
             ),
         )
         # fmt: on
@@ -154,15 +154,15 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             )
             # fmt: on
 
-        if author:
-            query_params.append(author)
+        if seller:
+            query_params.append(seller)
             query_params_count += 1
 
             # fmt: off
             query = query.join(
                 users,
             ).on(
-                (items.author_id == users.id) & (
+                (items.seller_id == users.id) & (
                     users.id == Query.from_(
                         users,
                     ).where(
@@ -205,7 +205,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             await self._get_item_from_db_record(
                 item_row=item_row,
                 slug=item_row[SLUG_ALIAS],
-                author_username=item_row[AUTHOR_USERNAME_ALIAS],
+                seller_username=item_row[SELLER_USERNAME_ALIAS],
                 requested_user=requested_user,
             )
             for item_row in items_rows
@@ -228,7 +228,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             await self._get_item_from_db_record(
                 item_row=item_row,
                 slug=item_row[SLUG_ALIAS],
-                author_username=item_row[AUTHOR_USERNAME_ALIAS],
+                seller_username=item_row[SELLER_USERNAME_ALIAS],
                 requested_user=user,
             )
             for item_row in items_rows
@@ -245,7 +245,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             return await self._get_item_from_db_record(
                 item_row=item_row,
                 slug=item_row[SLUG_ALIAS],
-                author_username=item_row[AUTHOR_USERNAME_ALIAS],
+                seller_username=item_row[SELLER_USERNAME_ALIAS],
                 requested_user=requested_user,
             )
 
@@ -296,7 +296,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         *,
         item_row: Record,
         slug: str,
-        author_username: str,
+        seller_username: str,
         requested_user: Optional[User],
     ) -> Item:
         return Item(
@@ -305,8 +305,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             title=item_row["title"],
             description=item_row["description"],
             body=item_row["body"],
-            author=await self._profiles_repo.get_profile_by_username(
-                username=author_username,
+            seller=await self._profiles_repo.get_profile_by_username(
+                username=seller_username,
                 requested_user=requested_user,
             ),
             tags=await self.get_tags_for_item_by_slug(slug=slug),
