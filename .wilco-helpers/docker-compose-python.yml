@@ -5,9 +5,7 @@ services:
     container_name: anythink-backend
     command: >
       sh -c "cd backend &&
-            pip install poetry==1.1 &&
-            poetry config virtualenvs.in-project true &&
-            poetry install
+            poetry install &&
             /wait-for-it.sh postgres:5432 -q -t 60 && 
             poetry run alembic upgrade head &&
             poetry run uvicorn --host=0.0.0.0 --port=3000 --reload app.main:app"
@@ -15,7 +13,6 @@ services:
     working_dir: /usr/src
     volumes:
       - ./:/usr/src
-      - /usr/src/backend/.venv
     ports:
       - "3000:3000"
     environment:
