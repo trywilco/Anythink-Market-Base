@@ -12,9 +12,10 @@ services:
             poetry run alembic upgrade head &&
             poetry run uvicorn --host=0.0.0.0 --port=3000 --reload app.main:app"
 
-    working_dir: /app
+    working_dir: /usr/src
     volumes:
-      - ./:/app
+      - ./:/usr/src
+      - /usr/src/backend/.venv
     ports:
       - "3000:3000"
     environment:
@@ -49,8 +50,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-    env_file:
-      - .env
     volumes:
       - ~/posgres/data:/data/db
     ports:
