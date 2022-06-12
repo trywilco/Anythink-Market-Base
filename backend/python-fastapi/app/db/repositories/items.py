@@ -37,8 +37,9 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         slug: str,
         title: str,
         description: str,
-        body: str,
         seller: User,
+        body: Optional[str] = None,
+        image: Optional[str] = None,
         tags: Optional[Sequence[str]] = None,
     ) -> Item:
         async with self.connection.transaction():
@@ -49,6 +50,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
                 description=description,
                 body=body,
                 seller_username=seller.username,
+                image=image
             )
 
             if tags:
@@ -120,6 +122,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             items.title,
             items.description,
             items.body,
+            items.image,
             items.created_at,
             items.updated_at,
             Query.from_(
@@ -305,6 +308,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             title=item_row["title"],
             description=item_row["description"],
             body=item_row["body"],
+            image=item_row["image"],
             seller=await self._profiles_repo.get_profile_by_username(
                 username=seller_username,
                 requested_user=requested_user,

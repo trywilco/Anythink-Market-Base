@@ -103,7 +103,8 @@ def create_items_table() -> None:
         sa.Column("slug", sa.Text, unique=True, nullable=False, index=True),
         sa.Column("title", sa.Text, nullable=False),
         sa.Column("description", sa.Text, nullable=False),
-        sa.Column("body", sa.Text, nullable=False),
+        sa.Column("body", sa.Text, nullable=True),
+        sa.Column("image", sa.Text, nullable=True),
         sa.Column(
             "seller_id", sa.Integer, sa.ForeignKey("users.id", ondelete="SET NULL")
         ),

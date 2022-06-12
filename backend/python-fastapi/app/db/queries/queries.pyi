@@ -87,7 +87,8 @@ class ItemsQueriesMixin:
         title: str,
         description: str,
         body: str,
-        seller_username: str
+        seller_username: str,
+        image: str
     ) -> Record: ...
     async def add_tags_to_item(
         self, conn: Connection, tags_slugs: Sequence[Dict[str, str]]

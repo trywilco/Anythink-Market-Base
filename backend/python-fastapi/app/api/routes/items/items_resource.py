@@ -67,7 +67,6 @@ async def create_new_item(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=strings.ITEM_ALREADY_EXISTS,
         )
-
     item = await items_repo.create_item(
         slug=slug,
         title=item_create.title,
@@ -75,6 +74,7 @@ async def create_new_item(
         body=item_create.body,
         seller=user,
         tags=item_create.tags,
+        image=item_create.image
     )
     return ItemInResponse(item=ItemForResponse.from_orm(item))
 

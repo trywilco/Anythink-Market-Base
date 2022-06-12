@@ -20,7 +20,8 @@ class ItemInResponse(RWSchema):
 class ItemInCreate(RWSchema):
     title: str
     description: str
-    body: str
+    body: Optional[str] = None
+    image: Optional[str] = None
     tags: List[str] = Field([], alias="tagList")
 
 

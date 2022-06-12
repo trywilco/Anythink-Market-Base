@@ -40,6 +40,7 @@ SELECT id,
        title,
        description,
        body,
+       image,
        created_at,
        updated_at,
        (SELECT username FROM users WHERE id = seller_id) AS seller_username
@@ -55,8 +56,8 @@ WITH seller_subquery AS (
     WHERE username = :seller_username
 )
 INSERT
-INTO items (slug, title, description, body, seller_id)
-VALUES (:slug, :title, :description, :body, (SELECT id FROM seller_subquery))
+INTO items (slug, title, description, body, seller_id, image)
+VALUES (:slug, :title, :description, :body, (SELECT id FROM seller_subquery), :image)
 RETURNING
     id,
     slug,
@@ -64,6 +65,7 @@ RETURNING
     description,
     body,
         (SELECT username FROM seller_subquery) as seller_username,
+    image,
     created_at,
     updated_at;
 
@@ -99,6 +101,7 @@ SELECT a.id,
        a.title,
        a.description,
        a.body,
+       a.image,
        a.created_at,
        a.updated_at,
        (
