@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "fastapi-realworld-example-app"
+name = "Anythink Market Backend"
 version = "0.0.0"
-description = "Backend logic implementation for https://github.com/gothinkster/realworld with awesome FastAPI"
-authors = ["Nik Sidnev <sidnev.nick@gmail.com>"]
+description = "Backend logic implementation for Anythink Market"
+authors=["Anythink"]
 license = "MIT"
 
 [tool.poetry.dependencies]
