@@ -15,6 +15,7 @@ from app.models.schemas.users import (
 from app.resources import strings
 from app.services import jwt
 from app.services.authentication import check_email_is_taken, check_username_is_taken
+from app.services.event import send_event
 
 router = APIRouter()
 
@@ -82,6 +83,9 @@ async def register(
         user,
         str(settings.secret_key.get_secret_value()),
     )
+
+    send_event('user_created', { 'username': user.username })
+
     return UserInResponse(
         user=UserWithToken(
             username=user.username,
