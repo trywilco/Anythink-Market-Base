@@ -32,4 +32,4 @@ Application parts are:
 Project structure
 -----------------
 
-Project dependencies are managed by poetry <https://python-poetry.org/>`_ , using venv.
+Project dependencies are managed by poetry `(https://python-poetry.org)`, using venv `(https://docs.python.org/3/library/venv.html)`.
