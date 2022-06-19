@@ -165,9 +165,9 @@ def create_favorites_table() -> None:
     op.create_primary_key("pk_favorites", "favorites", ["user_id", "item_id"])
 
 
-def create_commentaries_table() -> None:
+def create_comments_table() -> None:
     op.create_table(
-        "commentaries",
+        "comments",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("body", sa.Text, nullable=False),
         sa.Column(
@@ -188,7 +188,7 @@ def create_commentaries_table() -> None:
         """
         CREATE TRIGGER update_comment_modtime
             BEFORE UPDATE
-            ON commentaries
+            ON comments
             FOR EACH ROW
         EXECUTE PROCEDURE update_updated_at_column();
         """
@@ -203,11 +203,11 @@ def upgrade() -> None:
     create_tags_table()
     create_items_to_tags_table()
     create_favorites_table()
-    create_commentaries_table()
+    create_comments_table()
 
 
 def downgrade() -> None:
-    op.drop_table("commentaries")
+    op.drop_table("comments")
     op.drop_table("favorites")
     op.drop_table("items_to_tags")
     op.drop_table("tags")
