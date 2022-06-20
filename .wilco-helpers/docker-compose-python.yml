@@ -6,6 +6,7 @@ services:
     command: >
       sh -c "cd backend &&
             poetry install &&
+            poetry export -f "requirements.txt" --without-hashes --with-credentials > "requirements.txt"
             /wait-for-it.sh postgres:5432 -q -t 60 && 
             poetry run alembic upgrade head &&
             poetry run uvicorn --host=0.0.0.0 --port=3000 --reload app.main:app"
