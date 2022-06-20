@@ -1272,8 +1272,8 @@ dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.9"
-content-hash = "f282e00976451d2a053b09ebc9861143388d1e8237ec675fdd0ba5eebaad8a13"
+python-versions = "3.9.10"
+content-hash = "90adac6cd490c9975af7c8e3222c194c0b0d88b1218b789bab9669e5ac4d5764"
 
 [metadata.files]
 aiosql = [

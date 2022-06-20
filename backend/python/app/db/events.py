@@ -8,8 +8,10 @@ from app.core.settings.app import AppSettings
 async def connect_to_db(app: FastAPI, settings: AppSettings) -> None:
     logger.info("Connecting to PostgreSQL")
 
+    database_url = settings.database_url.replace("postgres://", "postgresql://")
+
     app.state.pool = await asyncpg.create_pool(
-        str(settings.database_url),
+        str(database_url),
         min_size=settings.min_connection_count,
         max_size=settings.max_connection_count,
     )
