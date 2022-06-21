@@ -19,10 +19,10 @@ class AppSettings(BaseAppSettings):
     version: str = "0.0.0"
 
     database_url: PostgresDsn
-    max_connection_count: int = 10
-    min_connection_count: int = 10
+    max_connection_count: int = 5
+    min_connection_count: int = 5
 
-    secret_key: SecretStr
+    secret_key: SecretStr = SecretStr("secret")
 
     api_prefix: str = "/api"
 
