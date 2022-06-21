@@ -13,16 +13,9 @@ item_statement = text("""INSERT INTO items(slug, title, description, seller_id) 
 select_last_item_id = text("""SELECT * FROM items ORDER BY id DESC LIMIT 1""")
 comment_statement = text("""INSERT INTO comments(body, seller_id, item_id) VALUES(:body, :seller_id, :item_id)""")
 
-clear_users = text("""DELETE FROM users""")
-clear_items = text("""DELETE FROM items""")
-clear_comments = text("""DELETE FROM comments""")
 letters = string.ascii_lowercase
 
 with engine.connect() as con:
-    con.execute(clear_users)
-    con.execute(clear_items)
-    con.execute(clear_comments)
-
     for i in range(100):
 
         random_username = ''.join(random.choice(letters) for i in range(10))
@@ -33,7 +26,7 @@ with engine.connect() as con:
         for row in result:
             generated_user_id = row['id']
 
-        item = {'slug':f'slug{i}', 'title':f'title{i}','description':f'desc{i}', 'seller_id':generated_user_id}
+        item = {'slug':f'slug-{random_username}', 'title':f'title{i}','description':f'desc{i}', 'seller_id':generated_user_id}
         con.execute(item_statement, **item)
 
         item_result = con.execute(select_last_item_id)
