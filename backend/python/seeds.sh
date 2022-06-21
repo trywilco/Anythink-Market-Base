@@ -1,3 +1,3 @@
 #!/bin/sh
 
-poetry run python app/db/seed.py
+python3 app/db/seed.py
