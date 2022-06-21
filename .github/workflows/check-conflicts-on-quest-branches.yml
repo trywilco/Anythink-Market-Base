@@ -4,6 +4,10 @@ on:
     branches:
       - main
       - 'quest_solution/**'
+  push:
+    branches:
+      - main
+      - 'quest_solution/**'
 jobs:
   check-quest-solution-branches:
     name: Check quest solution branches
