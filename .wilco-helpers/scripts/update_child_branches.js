@@ -3,7 +3,7 @@ const exec = util.promisify(require("child_process").exec);
 const args = require("yargs").argv;
 const axios = require("axios");
 
-const ENGINE_URL = 'https://wilco-engine.herokuapp.com';
+const ENGINE_URL = 'https://engine.wilco.gg';
 
 let git;
 let BRANCH;
