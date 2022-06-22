@@ -12,5 +12,5 @@ set -euo pipefail
 printf "\n⏳${YELLOW}   [Release Phase]: Running schema migrations.${NO_COLOR}\n"
 alembic upgrade head
 printf "\n⏳${YELLOW}   [Release Phase]: Seeding.${NO_COLOR}\n"
-# seed script
+./seeds.sh
 printf "\n🎉${GREEN}   [Release Phase]: Database is up to date.${NO_COLOR}\n"
