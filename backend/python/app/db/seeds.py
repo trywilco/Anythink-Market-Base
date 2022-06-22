@@ -5,7 +5,11 @@ import string
 import os
 env_var = os.environ
 
-engine = create_engine(env_var['DATABASE_URL'].replace("postgres://", "postgresql://"), echo=True)
+# SQLAlchemy >= 1.4 deprecated the use of `postgres://` in favor of `postgresql://`
+# for the database connection url
+database_url = env_var['DATABASE_URL'].replace("postgres://", "postgresql://")
+
+engine = create_engine(database_url, echo=True)
 
 user_insert_statement = text("""INSERT INTO users(username, email, salt, bio, hashed_password) VALUES(:username, :email, :salt, :bio, :hashed_password)""")
 select_last_user_id = text("""SELECT * FROM users ORDER BY id DESC LIMIT 1""")
