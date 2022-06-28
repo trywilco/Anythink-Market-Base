@@ -7,6 +7,13 @@ from app.models.domain.users import User, UserInDB
 
 
 class UsersRepository(BaseRepository):
+    async def get_user_by_id(self, *, id: int) -> UserInDB:
+        user_row = await queries.get_user_by_id(self.connection, id=id)
+        if user_row:
+            return UserInDB(**user_row)
+
+        raise EntityDoesNotExist("user with id {0} does not exist".format(id))
+
     async def get_user_by_email(self, *, email: str) -> UserInDB:
         user_row = await queries.get_user_by_email(self.connection, email=email)
         if user_row:

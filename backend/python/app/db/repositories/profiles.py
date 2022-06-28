@@ -16,6 +16,23 @@ class ProfilesRepository(BaseRepository):
         super().__init__(conn)
         self._users_repo = UsersRepository(conn)
 
+    async def get_profile_by_id(
+        self,
+        *,
+        id: int,
+        requested_user: Optional[UserLike],
+    ) -> Profile:
+        user = await self._users_repo.get_user_by_id(id=id)
+
+        profile = Profile(username=user.username, bio=user.bio, image=user.image)
+        if requested_user:
+            profile.following = await self.is_user_following_for_another_user(
+                target_user=user,
+                requested_user=requested_user,
+            )
+
+        return profile
+
     async def get_profile_by_username(
         self,
         *,
