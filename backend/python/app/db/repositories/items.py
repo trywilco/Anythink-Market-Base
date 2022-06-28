@@ -18,6 +18,7 @@ from app.db.repositories.profiles import ProfilesRepository
 from app.db.repositories.tags import TagsRepository
 from app.models.domain.items import Item
 from app.models.domain.users import User
+from app.models.domain.profiles import Profile
 
 SELLER_USERNAME_ALIAS = "seller_username"
 SLUG_ALIAS = "slug"
@@ -125,16 +126,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             items.image,
             items.created_at,
             items.updated_at,
-            Query.from_(
-                users,
-            ).where(
-                users.id == items.seller_id,
-            ).select(
-                users.username,
-            ).as_(
-                SELLER_USERNAME_ALIAS,
-            ),
-        )
+            users.star,
+        ).inner_join(users).on(users.id == items.seller_id)
         # fmt: on
 
         if tag:
@@ -208,7 +201,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             await self._get_item_from_db_record(
                 item_row=item_row,
                 slug=item_row[SLUG_ALIAS],
-                seller_username=item_row[SELLER_USERNAME_ALIAS],
+                seller=Profile(username=item_row['username'], bio=item_row['bio'], image=item_row['image']),
+                # seller_username=item_row['username'],
                 requested_user=requested_user,
             )
             for item_row in items_rows
@@ -299,7 +293,8 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         *,
         item_row: Record,
         slug: str,
-        seller_username: str,
+        seller_username: Optional[str] = None,
+        seller: Optional[User] = None,
         requested_user: Optional[User],
     ) -> Item:
         return Item(
@@ -312,7 +307,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
             seller=await self._profiles_repo.get_profile_by_username(
                 username=seller_username,
                 requested_user=requested_user,
-            ),
+            ) if seller_username else seller,
             tags=await self.get_tags_for_item_by_slug(slug=slug),
             favorites_count=await self.get_favorites_count_for_item_by_slug(
                 slug=slug,
