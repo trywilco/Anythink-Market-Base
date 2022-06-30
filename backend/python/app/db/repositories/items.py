@@ -205,12 +205,7 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         items_rows = await self.connection.fetch(query.get_sql(), *query_params)
 
         return [
-            await self._get_item_from_db_record(
-                item_row=item_row,
-                slug=item_row[SLUG_ALIAS],
-                seller_username=item_row[SELLER_USERNAME_ALIAS],
-                requested_user=requested_user,
-            )
+            await self.get_item_by_slug(slug=item_row['slug'], requested_user=requested_user)
             for item_row in items_rows
         ]
 
@@ -302,10 +297,16 @@ class ItemsRepository(BaseRepository):  # noqa: WPS214
         seller_username: str,
         requested_user: Optional[User],
     ) -> Item:
+        title_query = Query.from_(items).select(items.title).where(items.slug == slug)
+        result_rows = await self.connection.fetch(title_query.get_sql())
+        if not len(result_rows):
+            raise Exception(f'No item with slug {slug}')
+        title = result_rows[0]['title']
+
         return Item(
             id_=item_row["id"],
             slug=slug,
-            title=item_row["title"],
+            title=title,
             description=item_row["description"],
             body=item_row["body"],
             image=item_row["image"],
