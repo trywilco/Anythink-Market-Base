@@ -40,7 +40,7 @@ async function main() {
     map[quest._id] = quest;
     return map;
   }, {});
-  branchHierarchyMap.main = ['quest_solution/tutorial'];
+  branchHierarchyMap.main = ['quest_solution/onboarding'];
   for (const quest of data.quests) {
     if (quest.questDependency) {
       const questDependency = questsMap[quest.questDependency];
@@ -63,7 +63,7 @@ async function main() {
   console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
   console.log("Tree of quests:");
   console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
-  printTreeView('tutorial', questHierarchyMap);
+  printTreeView('onboarding', questHierarchyMap);
 
   if (args.onlyPrintTree) {
     return;
