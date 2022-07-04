@@ -9,7 +9,7 @@ const Item = mongoose.model("Item");
 const Comment = mongoose.model("Comment");
 
 const connectedToDatabase = () => {
-  const connection = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+  const connection = process.env.MONGODB_URI || "mongodb://localhost:27017";
   mongoose.connect(connection);
   mongoose.set("debug", true);
 };
