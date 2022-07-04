@@ -118,8 +118,8 @@ async function rebaseTree(branch, branchHierarchyMap) {
       const report = { branch: childBranch };
       process.stdout.write(`* Rebasing "${childBranch}" onto "${branch}"...`);
       try {
-        await git(`checkout ${childBranch}`)
-        await git(`rebase ${branch}`);
+        await git(`checkout ${childBranch}`);
+        await git(`rebase -X theirs ${branch}`);
         console.log(` DONE.`);
         await rebaseTree(childBranch, branchHierarchyMap);
       } catch (e) {
