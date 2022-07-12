@@ -33,7 +33,7 @@ services:
 
   postgres:
     container_name: postgres
-    restart: always
+    restart: on-failure
     image: postgres
     logging:
       driver: none
