@@ -1,2 +1,2 @@
-web: uvicorn --host=0.0.0.0 --port=${PORT} app.main:app
+web: gunicorn app.main:app --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:${PORT}
 release: scripts/heroku_release.sh
