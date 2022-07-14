@@ -3,9 +3,13 @@ import _superagent from "superagent";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
+const DEV_HOST = `https://${
+  process.env.REACT_APP_BACKEND_HOST || "localhost:3000"
+}/api`;
+
 const API_ROOT =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000/api"
+    ? DEV_HOST
     : "https://api.anythink.market/api";
 
 const encode = encodeURIComponent;
