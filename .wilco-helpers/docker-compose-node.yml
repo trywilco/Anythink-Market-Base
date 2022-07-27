@@ -3,12 +3,12 @@ services:
   anythink-backend-node:
     build: ./backend
     container_name: anythink-backend-node
-    command: sh -c "cd backend && yarn install && /wait-for-it.sh mongodb:27017 -q -t 60 && yarn dev"
+    command: sh -c "cd backend && yarn install && /wait-for-it.sh mongodb-node:27017 -q -t 60 && yarn dev"
 
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_URI=mongodb://mongodb-node:27017
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/
@@ -16,11 +16,11 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - "mongodb"
+      - "mongodb-node"
 
-  anythink-frontend:
+  anythink-frontend-react:
     build: ./frontend
-    container_name: anythink-frontend
+    container_name: anythink-frontend-react
     command: sh -c "cd frontend && yarn install && yarn start"
     environment:
       - NODE_ENV=development
@@ -32,7 +32,7 @@ services:
     ports:
       - "3001:3001"
 
-  mongodb:
+  mongodb-node:
     container_name: mongodb
     restart: always
     image: mongo

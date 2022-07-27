@@ -3,8 +3,8 @@ services:
   anythink-backend-rails:
     build: ./backend
     container_name: anythink-backend-rails
-    command: sh -c "cd backend && bundle install && /wait-for-it.sh postgres:5432 -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
-    
+    command: sh -c "cd backend && bundle install && /wait-for-it.sh postgres-rails:5432 -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/
@@ -13,13 +13,13 @@ services:
     environment:
       - RAILS_ENV=development
       - PORT=3000
-      - DATABASE_URL=postgres://user:@postgres:5432
+      - DATABASE_URL=postgres://user:@postgres-rails:5432
     depends_on:
       - "postgres"
 
-  anythink-frontend:
+  anythink-frontend-react:
     build: ./frontend
-    container_name: anythink-frontend
+    container_name: anythink-frontend-react
     command: sh -c "cd frontend && yarn install && yarn start"
     environment:
       - NODE_ENV=development
@@ -31,8 +31,8 @@ services:
     ports:
       - "3001:3001"
 
-  postgres:
-    container_name: postgres
+  postgres-rails:
+    container_name: postgres-rails
     restart: on-failure
     image: postgres
     logging:
