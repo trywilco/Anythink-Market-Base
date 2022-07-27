@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  anythink-backend:
+  anythink-backend-python:
     build: ./backend
-    container_name: anythink-backend
+    container_name: anythink-backend-python
     command: >
       sh -c "cd backend &&
             poetry install &&

@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  anythink-backend:
+  anythink-backend-rails:
     build: ./backend
-    container_name: anythink-backend
+    container_name: anythink-backend-rails
     command: sh -c "cd backend && bundle install && /wait-for-it.sh postgres:5432 -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
     
     working_dir: /usr/src
