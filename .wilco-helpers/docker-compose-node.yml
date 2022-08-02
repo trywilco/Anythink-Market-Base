@@ -33,7 +33,7 @@ services:
       - "3001:3001"
 
   mongodb-node:
-    container_name: mongodb
+    container_name: mongodb-node
     restart: always
     image: mongo
     logging:
