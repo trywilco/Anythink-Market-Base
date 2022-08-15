@@ -4,7 +4,8 @@ API_BASE_URL="${API_BASE_URL:="https://engine.wilco.gg"}"
 WILCO_ID="`cat .wilco 2> /dev/null`"
 
 sendEvent() {
-  body='{"event":"start_quest_script_ran", "metadata": {"success": '$1', "remote": false, "error": "'$2'"}}'
+  error=${2//$'\n'/\\n}
+  body='{"event":"start_quest_script_ran", "metadata": {"success": '$1', "remote": false, "error": "'"$error"'"}}'
   curl -m 5 -X POST $API_BASE_URL/users/$WILCO_ID/event -d "$body" -H 'Content-Type: application/json' &> /dev/null
 }
 
