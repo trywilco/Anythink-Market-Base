@@ -1,4 +1,5 @@
 import json
+import logging
 
 from fastapi import APIRouter, Depends, HTTPException
 from app.services.event import send_event
@@ -12,5 +13,5 @@ async def check_ping():
         return res.json()
 
     except Exception as e:
-        print(e)
+        logging.error(e)
         raise HTTPException(status_code=500, detail="Error")
