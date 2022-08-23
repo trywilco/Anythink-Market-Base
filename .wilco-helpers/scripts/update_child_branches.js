@@ -37,7 +37,7 @@ async function main() {
     headers: { Authorization: `ServerToken ${process.env.API_SERVER_TOKEN}` }
   });
   const questsMap = data.quests.reduce((map, quest) => {
-    map[quest._id] = quest;
+    map[quest.primaryId] = quest;
     return map;
   }, {});
   branchHierarchyMap.main = ['quest_solution/onboarding'];
@@ -48,8 +48,8 @@ async function main() {
         branchHierarchyMap[questDependency.solutionBranch] = branchHierarchyMap[questDependency.solutionBranch] || [];
         branchHierarchyMap[questDependency.solutionBranch].push(quest.solutionBranch);
       }
-      questHierarchyMap[questDependency._id] = questHierarchyMap[questDependency._id] || [];
-      questHierarchyMap[questDependency._id].push(quest._id);
+      questHierarchyMap[questDependency.primaryId] = questHierarchyMap[questDependency.primaryId] || [];
+      questHierarchyMap[questDependency.primaryId].push(quest.primaryId);
     }
   }
   git = initGit(args.repoPath);
