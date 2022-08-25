@@ -4,6 +4,7 @@ include Event
 
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_admin!, only: [:create]
 
   def index
     @items = Item.includes(:tags)
