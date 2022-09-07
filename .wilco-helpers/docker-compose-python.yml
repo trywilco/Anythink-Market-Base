@@ -29,6 +29,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3001
+      - REACT_APP_BACKEND_URL=${CODESPACE_BACKEND_URL:-http://localhost:3000}
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/
