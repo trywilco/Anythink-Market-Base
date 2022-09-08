@@ -1,6 +1,6 @@
 # Update engine that codespace started for user
 WILCO_ID="`cat .wilco`"
-ENGINE_EVENT_ENDPOINT="https://engine.wilco.gg/users/$WILCO_ID/event"
+ENGINE_EVENT_ENDPOINT="${ENGINE_BASE_URL}/users/${WILCO_ID}/event"
 
 curl -L -X POST "$ENGINE_EVENT_ENDPOINT" -H "Content-Type: application/json" --data-raw "{ \"event\": \"github_codespace_started\" }"
 
