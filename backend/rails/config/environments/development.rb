@@ -9,6 +9,9 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # Allow codespace host
+  config.hosts << ENV['CODESPACE_BACKEND_HOST']
+
   # Show full error reports.
   config.consider_all_requests_local = true
 

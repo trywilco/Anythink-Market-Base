@@ -13,6 +13,7 @@ services:
     environment:
       - RAILS_ENV=development
       - PORT=3000
+      - CODESPACE_BACKEND_HOST=${CODESPACE_BACKEND_HOST}
       - DATABASE_URL=postgres://user:@postgres-rails:5432
     depends_on:
       - "postgres-rails"
