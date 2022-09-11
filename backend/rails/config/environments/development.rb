@@ -10,7 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Allow codespace host
-  config.hosts << ENV['CODESPACE_BACKEND_HOST']
+  config.hosts << /[A-Za-z0-9-]+\.githubpreview\.dev/
 
   # Show full error reports.
   config.consider_all_requests_local = true
