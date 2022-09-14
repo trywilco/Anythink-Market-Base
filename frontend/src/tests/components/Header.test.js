@@ -1,7 +1,7 @@
 import { create } from "react-test-renderer";
 import { mount } from "enzyme";
 import { BrowserRouter as Router } from "react-router-dom";
-import Header from "../Header";
+import Header from "../../components/Header";
 
 describe("Header component", () => {
   it("Snapshot testing with no user", () => {
