@@ -20,11 +20,12 @@ class CommentInput extends React.Component {
 
     this.createComment = async (ev) => {
       ev.preventDefault();
-      const payload = await agent.Comments.create(this.props.slug, {
+      agent.Comments.create(this.props.slug, {
         body: this.state.body,
+      }).then((payload) => {
+        this.props.onSubmit(payload);
       });
       this.setState({ body: "" });
-      this.props.onSubmit(payload);
     };
   }
 
