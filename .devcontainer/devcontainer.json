@@ -34,7 +34,12 @@
     "docker-in-docker": "latest",
     "github-cli": "latest",
     "ghcr.io/devcontainers/features/sshd:1": {
-        "version": "latest"
+      "version": "latest"
     }
+  },
+
+  "settings": {
+    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorCustomizations": {}
   }
 }
