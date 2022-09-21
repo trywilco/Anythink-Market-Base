@@ -10,5 +10,13 @@ curl -L -X POST "${ENGINE_EVENT_ENDPOINT}" -H "Content-Type: application/json" -
 echo "export CODESPACE_BACKEND_HOST=\"${CODESPACE_BACKEND_HOST}\"" >> ~/.bashrc
 echo "export CODESPACE_BACKEND_URL=\"${CODESPACE_BACKEND_URL}\"" >> ~/.bashrc
 
+# Export welcome prompt in bash:
+echo "printf \"\n\n☁️☁️☁️️ Anythink: Develop in the Cloud ☁️☁️☁️\n\"" >> ~/.bashrc
+echo "printf \"\n=============================================\n\"" >> ~/.bashrc
+echo "gh codespace ports -c $CODESPACE_NAME" >> ~/.bashrc
+echo "printf \"=============================================\n\"" >> ~/.bashrc
+echo "printf \"(Once docker-compose is up and running, you can access the frontend and backend using the above urls)\n\"" >> ~/.bashrc
+echo "printf \"\n👉 Type: \\\`docker-compose up\\\` to run the project. 👈\n\n\"" >> ~/.bashrc
+
 # Change backend port visibility to public
 echo "(&>/dev/null .devcontainer/open_port.sh &)" >> ~/.bashrc
