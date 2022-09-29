@@ -10,22 +10,26 @@
     "3000": {
       "label": "Backend",
       "elevateIfNeeded": true,
-      "requireLocalPort": true
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
     },
     "3001": {
       "label": "Frontend",
       "elevateIfNeeded": true,
-      "requireLocalPort": true
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
     },
     "5433": {
       "label": "Database",
       "elevateIfNeeded": true,
-      "requireLocalPort": true
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
     },
     "27017": {
       "label": "Database",
       "elevateIfNeeded": true,
-      "requireLocalPort": true
+      "requireLocalPort": true,
+      "onAutoForward": "silent"
     }
   },
   "postAttachCommand": "/bin/bash .devcontainer/setup.sh",
