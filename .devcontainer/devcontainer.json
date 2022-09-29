@@ -43,8 +43,12 @@
   },
 
   "settings": {
+    "extensions.ignoreRecommendations": true,
     "workbench.startupEditor": "none",
     "workbench.colorTheme": "Visual Studio Dark",
-    "workbench.colorCustomizations": {}
+    "workbench.colorCustomizations": {},
+    "workbench.welcomePage.walkthroughs.openOnInstall": false,
+    "workbench.welcomePage.experimental.videoTutorials": "off",
+    "github.codespaces.defaultExtensions": []
   }
 }
