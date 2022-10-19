@@ -1,0 +1,23 @@
+on: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v2
+      - name: Lint code
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn lint
