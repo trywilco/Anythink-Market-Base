@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: anythink-backend-node
+  name: anythink-backend-node
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: anythink-backend-node
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: anythink-backend-node
+    spec:
+      containers:
+        - args:
+            - sh
+            - -c
+            - cd backend && yarn install && /wait-for-it.sh mongodb-node:27017 -q -t 60 && yarn dev
+          env:
+            - name: MONGODB_URI
+              value: mongodb://mongodb-node:27017/anythink-market
+            - name: NODE_ENV
+              value: development
+            - name: PORT
+              value: "3000"
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          name: anythink-backend-node
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+      restartPolicy: Always
