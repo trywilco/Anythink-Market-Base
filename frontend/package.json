@@ -48,7 +48,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "format": "yarn prettier --write .",
-    "lint": "yarn eslint . && yarn prettier --check ."
+    "lint": "yarn eslint . && yarn prettier --check .",
+    "lint-ci": "yarn global add eslint-config-react-app && yarn global add eslint-plugin-react && yarn global add eslint-config-prettier && npx eslint . && npx prettier --check ."
   },
   "eslintConfig": {
     "extends": [

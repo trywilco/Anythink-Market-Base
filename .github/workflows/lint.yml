@@ -1,4 +1,4 @@
-on: 
+on:
   pull_request:
     branches:
       - main
@@ -20,5 +20,4 @@ jobs:
           node-version: '16'
           cache: 'yarn'
           cache-dependency-path: frontend/yarn.lock
-      - run: yarn add lint
-      - run: yarn lint
+      - run: yarn lint-ci
