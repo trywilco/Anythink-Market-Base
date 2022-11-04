@@ -32,7 +32,7 @@
       "onAutoForward": "silent"
     }
   },
-  "postAttachCommand": "/bin/bash .devcontainer/setup.sh",
+  "postCreateCommand": "/bin/bash .devcontainer/setup.sh",
 
   "features": {
     "docker-in-docker": "latest",
