@@ -20,6 +20,7 @@ services:
       - SECRET_KEY=secret
       - DEBUG=True
       - DATABASE_URL=postgresql://postgres:@postgres-python:5432/anythink-market
+      - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
     depends_on:
       - "postgres-python"
   anythink-frontend-react:
