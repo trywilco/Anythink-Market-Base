@@ -9,6 +9,9 @@ process.env['WILCO_ID'] = 'fake-wilco-id';
 
 let git;
 
+// Skip unstable quest tests
+const SKIPPED_QUESTS = ['newrelic_performance'];
+
 const initGit = (path) => async (args) => {
   return await exec(`git ${args}`, { cwd: path });
 };
@@ -37,6 +40,10 @@ async function main() {
 
   const allQuests = data.quests;
   for (const quest of allQuests) {
+    if (SKIPPED_QUESTS.includes(quest.primaryId)) {
+      console.log(`Quest ${quest.primaryId} is marked as skipped, skipping...`)
+      continue;
+    }
     await testQuest(quest, allQuests, args.backend);
   }
 }
@@ -80,17 +87,48 @@ function getGithubActionsCommands(githubActions, backend) {
   return actions;
 }
 
+async function testQuestDependencyBranch({
+                                           quest,
+                                           questDependencyBranch,
+                                           simulationPrimaryId,
+                                           simulationId,
+                                           githubActions,
+                                           backend
+                                         }) {
+  let hasErrors = false;
+  await git(`checkout -f ${questDependencyBranch}`);
+  console.log(`\nRunning Github actions from quest: "${quest.primaryId}", making sure they are failing on quest dependency solution branch: "${questDependencyBranch}"`);
+  const commands = getGithubActionsCommands(githubActions, backend);
+  try {
+    await runCommands(commands);
+    console.error("=============================================================");
+    console.error(`Git actions should not pass for solution branch: "${questDependencyBranch}"`);
+    console.error("=============================================================");
+    console.log({
+      simulationPrimaryId,
+      simulationId,
+      githubActionCommands: commands,
+    })
+    hasErrors = true;
+  } catch (error) {
+    console.log('Git action failed as expected');
+  }
+  if (hasErrors) {
+    throw new Error(`Github actions should pass for solution branch: "${questDependencyBranch}"`)
+  }
+}
+
 async function testSolutionBranch({ quest, simulationPrimaryId, simulationId, githubActions, backend }) {
   await git(`checkout -f ${quest.solutionBranch}`);
   console.log(`\nRunning Github actions for quest: "${quest.primaryId}", should pass`)
   const commands = getGithubActionsCommands(githubActions, backend);
   try {
     await runCommands(commands);
-    console.log('-----------------------------------------------------');
+    console.log('=============================================================');
     console.log(`Github actions passed for quest: "${quest.primaryId}"`);
-    console.log('-----------------------------------------------------');
+    console.log('=============================================================');
   } catch (error) {
-    console.log('-----------------------------------------------------');
+    console.log('=============================================================');
     console.log(`Failed running Github actions for quest: "${quest.primaryId}"`)
     console.log({
       simulationPrimaryId,
@@ -98,7 +136,7 @@ async function testSolutionBranch({ quest, simulationPrimaryId, simulationId, gi
       githubActionCommands: commands,
     })
     console.error(error);
-    console.log('-----------------------------------------------------');
+    console.log('=============================================================');
     throw error;
   }
 }
@@ -114,6 +152,16 @@ async function testQuest(quest, allQuests, backend) {
     return;
   }
   const githubActions = githubActionsByFramework[backend];
+  const questDependency = allQuests.find(q => q.primaryId === quest.questDependency);
+  const questDependencyBranch = questDependency.solutionBranch || 'main';
+  await testQuestDependencyBranch({
+    quest,
+    questDependencyBranch,
+    simulationPrimaryId,
+    simulationId,
+    githubActions,
+    backend
+  });
   await testSolutionBranch({ quest, simulationPrimaryId, simulationId, githubActions, backend });
 }
 
