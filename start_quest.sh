@@ -36,7 +36,7 @@ docker_compose_code=$?
 
 if ! test "$docker_compose_code" -eq 0
 then
-   printf "[==X] ERROR: Could not reset local 'main' branch. Aborting.\n"
+   printf "[==X] ERROR: Could not run docker-compose up. Aborting.\n"
    sendEvent false "$docker_compose_code"
    echo "[==X] DOCKER-COMPOSE UP ERROR: $docker_compose_code"
    exit 1
