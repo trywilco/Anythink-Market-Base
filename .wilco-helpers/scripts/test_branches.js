@@ -87,14 +87,14 @@ function getGithubActionsCommands(githubActions, backend) {
   return actions;
 }
 
-async function testQuestDependencyBranch({
-                                           quest,
-                                           questDependencyBranch,
-                                           simulationPrimaryId,
-                                           simulationId,
-                                           githubActions,
-                                           backend
-                                         }) {
+async function testFailOnQuestDependencyBranch({
+                                                 quest,
+                                                 questDependencyBranch,
+                                                 simulationPrimaryId,
+                                                 simulationId,
+                                                 githubActions,
+                                                 backend
+                                               }) {
   let hasErrors = false;
   await git(`checkout -f ${questDependencyBranch}`);
   console.log(`\nRunning Github actions from quest: "${quest.primaryId}", making sure they are failing on quest dependency solution branch: "${questDependencyBranch}"`);
@@ -153,8 +153,13 @@ async function testQuest(quest, allQuests, backend) {
   }
   const githubActions = githubActionsByFramework[backend];
   const questDependency = allQuests.find(q => q.primaryId === quest.questDependency);
-  const questDependencyBranch = questDependency.solutionBranch || 'main';
-  await testQuestDependencyBranch({
+  if (!questDependency) {
+    console.log(`No quest dependency for quest "${quest.primaryId}", Skipping...`);
+    return;
+  }
+
+  const questDependencyBranch = questDependency?.solutionBranch || 'main';
+  await testFailOnQuestDependencyBranch({
     quest,
     questDependencyBranch,
     simulationPrimaryId,
