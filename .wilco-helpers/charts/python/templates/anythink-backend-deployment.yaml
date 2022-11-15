@@ -20,10 +20,16 @@ spec:
         - args:
             - sh
             - -c
-            - "/wait-for-it.sh {{ .Values.database.serviceName }}:{{ .Values.database.servicePort }} -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+            - "/wait-for-it.sh {{ .Values.database.serviceName }}:{{ .Values.database.servicePort }} -q -t 60 && poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }} --reload app.main:app"
           env:
+            - name: APP_ENV
+              value: dev
+            - name: SECRET_KEY
+              value: secret
+            - name: DEBUG
+              value: True
             - name: DATABASE_URL
-              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
+              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.password}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: RAILS_ENV
               value: development
             - name: PORT
@@ -55,10 +61,16 @@ spec:
         - command:
             - sh
             - -c
-            - "exec rails db:migrate"
+            - "poetry run alembic upgrade head"
           env:
+            - name: APP_ENV
+              value: dev
+            - name: SECRET_KEY
+              value: secret
+            - name: DEBUG
+              value: True
             - name: DATABASE_URL
-              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
+              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.password}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: RAILS_ENV
               value: development
             - name: PORT

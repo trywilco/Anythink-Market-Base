@@ -1,0 +1,23 @@
+FROM python:3.9.13
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN pip install poetry==1.2.0
+
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
+
+RUN chmod +x /wait-for-it.sh
+
+# Pre-install gems
+WORKDIR /usr/src
+COPY backend ./backend
+COPY .wilco ./.wilco
+WORKDIR /usr/src/backend
+RUN poetry install
+RUN poetry export -f "requirements.txt" --without-hashes --with-credentials > "requirements.txt"
+
+
+
+
