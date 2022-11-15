@@ -19,13 +19,6 @@ spec:
       containers:
         - image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
           name: {{ .Values.database.serviceName }}
-          env:
-            - name: POSTGRES_HOST_AUTH_METHOD
-              value: trust
-            - name: POSTGRES_USER
-              value: {{ .Values.database.env.userName }}
-            - name: POSTGRES_PASSWORD
-              value: {{ .Values.database.env.password }}
           imagePullPolicy: {{ .Values.database.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.database.containerPort }}

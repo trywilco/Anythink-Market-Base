@@ -20,11 +20,11 @@ spec:
         - args:
             - sh
             - -c
-            - "/wait-for-it.sh {{ .Values.database.serviceName }}:{{ .Values.database.servicePort }} -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+            - "/wait-for-it.sh {{ .Values.database.serviceName }}:{{ .Values.database.servicePort }} -q -t 60 && yarn dev"
           env:
             - name: DATABASE_URL
-              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
-            - name: RAILS_ENV
+              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.serviceName}}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName}}"
+            - name: NODE_ENV
               value: development
             - name: PORT
               value: "{{ .Values.backend.containerPort }}"
@@ -51,19 +51,4 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
-      initContainers:
-        - command:
-            - sh
-            - -c
-            - "exec rails db:migrate"
-          env:
-            - name: DATABASE_URL
-              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
-            - name: RAILS_ENV
-              value: development
-            - name: PORT
-              value: "{{ .Values.backend.containerPort }}"
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
-          name: db-migrations
       restartPolicy: Always
