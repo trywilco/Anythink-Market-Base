@@ -1,0 +1,108 @@
+name: build and deploy app
+on:
+  push:
+    branches:
+      - k8s
+      - aws-poc
+
+jobs:
+  build-backend:
+    name: Build backend images
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Set branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')"
+        id: set_branch
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push backend image to Amazon ECR
+        id: build-image-backend
+        run: |
+          docker build \
+            -t ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }} \
+            -f backend/Dockerfile.aws \
+            .
+          docker push ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+  build-frontend:
+    name: Build frontend images
+    runs-on: ubuntu-20.04
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Set branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')"
+        id: set_branch
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push frontend image to Amazon ECR
+        id: build-image-frontend
+        run: |
+          docker build \
+            -t ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }} \
+            -f frontend/Dockerfile.aws \
+            .
+          docker push ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+  deploy:
+    name: Deploy latest tag using helm
+    runs-on: ubuntu-20.04
+    environment: production
+    needs:
+      - build-frontend
+      - build-backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')"
+        id: set_branch
+
+      - name: Create kube config
+        run: |
+          mkdir -p $HOME/.kube/
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+      - name: Install helm
+        run: |
+          curl -LO https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
+          tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
+          mv linux-amd64/helm /usr/local/bin/helm
+          helm version
+      - name: Lint helm charts
+        run: helm lint ./charts/app/
+
+      - name: Deploy
+        run: |
+          helm upgrade --install --timeout 10m app ./charts/app/ \
+              --set frontend.image.tag=${{ steps.set_branch.outputs.branch }}-${{ github.sha }} \
+              --set backend.image.tag=${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
