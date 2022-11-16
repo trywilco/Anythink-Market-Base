@@ -1,0 +1,33 @@
+name: Test solution branch - Node
+
+on:
+  workflow_call:
+
+jobs:
+  test-solution-branches-node:
+    name: Test solution branches - Node
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Restore git folder
+        uses: actions/cache@v3
+        with:
+          path: .git/
+          key: git_folder-${{ github.run_id }}
+      - run: git show
+      - name: Checkout main
+        run: git reset --hard
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.6.0
+        with:
+          mongodb-version: "4.4"
+      - name: Test solution branches
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Install deps
+        working-directory: .wilco-helpers
+        run: yarn install
+      - name: Test quests
+        working-directory: .wilco-helpers
+        run: API_SERVER_TOKEN=${{ secrets.API_SERVER_TOKEN }} node scripts/test_branches.js --backend=node
