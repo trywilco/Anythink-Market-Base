@@ -1,15 +1,26 @@
-name: build and deploy app
+name: Build and deploy to Kubernetes
 on:
   push:
     branches:
+      - main
       - k8s
-      - aws-poc
-
 jobs:
+  check-secret:
+    environment: Production
+    runs-on: ubuntu-latest
+    outputs:
+      creds-defined: ${{ steps.creds-defined.outputs.defined }}
+    steps:
+      - id: creds-defined
+        if: "${{ secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}"
+        run: echo "::set-output name=defined::true"
+
   build-backend:
-    name: Build backend images
+    name: Build backend image
     runs-on: ubuntu-20.04
-    environment: production
+    needs: [check-secret]
+    if: needs.check-secret.outputs.creds-defined == 'true'
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,11 +49,13 @@ jobs:
             -f backend/Dockerfile.aws \
             .
           docker push ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+
   build-frontend:
     name: Build frontend images
     runs-on: ubuntu-20.04
-    environment: production
-
+    needs: [check-secret]
+    if: needs.check-secret.outputs.creds-defined == 'true'
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -71,10 +84,11 @@ jobs:
             -f frontend/Dockerfile.aws \
             .
           docker push ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+
   deploy:
     name: Deploy latest tag using helm
     runs-on: ubuntu-20.04
-    environment: production
+    environment: Production
     needs:
       - build-frontend
       - build-backend
