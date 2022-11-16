@@ -10,6 +10,7 @@ process.env['WILCO_ID'] = 'fake-wilco-id';
 let git;
 
 // Skip unstable quest tests
+// TODO fix the quest tests: https://app.clickup.com/t/3aybyvq
 const SKIPPED_QUESTS = ['newrelic_performance'];
 
 const initGit = (path) => async (args) => {
