@@ -4,16 +4,21 @@ on:
     branches:
       - main
       - k8s
+      - aws-poc
 jobs:
   check-secret:
     environment: Production
     runs-on: ubuntu-latest
     outputs:
-      creds-defined: ${{ steps.creds-defined.outputs.defined }}
+      creds-defined: ${{ steps.creds-defined.outputs.DEFINED }}
     steps:
       - id: creds-defined
-        if: "${{ secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}"
-        run: echo "::set-output name=defined::true"
+        if: "${{ env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != '' && env.KUBECONFIG != '' }}"
+        run: echo "DEFINED=true" >> $GITHUB_OUTPUT
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
   build-backend:
     name: Build backend image
@@ -34,7 +39,7 @@ jobs:
 
       - name: Set branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')"
+        run: echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')" >> $GITHUB_OUTPUT
         id: set_branch
 
       - name: Login to Amazon ECR
@@ -45,10 +50,10 @@ jobs:
         id: build-image-backend
         run: |
           docker build \
-            -t ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.BRANCH }}-${{ github.sha }} \
             -f backend/Dockerfile.aws \
             .
-          docker push ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/wilco-backend:${{ steps.set_branch.outputs.BRANCH }}-${{ github.sha }}
 
   build-frontend:
     name: Build frontend images
@@ -69,7 +74,7 @@ jobs:
 
       - name: Set branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')"
+        run: echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')" >> $GITHUB_OUTPUT
         id: set_branch
 
       - name: Login to Amazon ECR
@@ -80,10 +85,10 @@ jobs:
         id: build-image-frontend
         run: |
           docker build \
-            -t ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.BRANCH }}-${{ github.sha }} \
             -f frontend/Dockerfile.aws \
             .
-          docker push ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/wilco-frontend:${{ steps.set_branch.outputs.BRANCH }}-${{ github.sha }}
 
   deploy:
     name: Deploy latest tag using helm
@@ -98,7 +103,7 @@ jobs:
 
       - name: Set branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')"
+        run: echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed  -e 's#/#-#g')" >> $GITHUB_OUTPUT
         id: set_branch
 
       - name: Create kube config
@@ -118,5 +123,5 @@ jobs:
       - name: Deploy
         run: |
           helm upgrade --install --timeout 10m app ./charts/app/ \
-              --set frontend.image.tag=${{ steps.set_branch.outputs.branch }}-${{ github.sha }} \
-              --set backend.image.tag=${{ steps.set_branch.outputs.branch }}-${{ github.sha }}
+              --set frontend.image.tag=${{ steps.set_branch.outputs.BRANCH }}-${{ github.sha }} \
+              --set backend.image.tag=${{ steps.set_branch.outputs.BRANCH }}-${{ github.sha }}
