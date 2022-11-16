@@ -1,0 +1,43 @@
+name: Test solution branch - Python
+
+on:
+  workflow_call:
+
+jobs:
+  python:
+    name: Test solution branches - Python
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+          SECRET_KEY: secret
+          POSTGRES_DB: anythink-market
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Restore git folder
+        uses: actions/cache@v3
+        with:
+          path: .git/
+          key: git_folder-${{ github.run_id }}
+      - run: git show
+      - name: Checkout main
+        run: git reset --hard
+      - name: Use Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: Install deps
+        working-directory: .wilco-helpers
+        run: yarn install
+      - name: Test quests
+        working-directory: .wilco-helpers
+        run: API_SERVER_TOKEN=${{ secrets.API_SERVER_TOKEN }} node scripts/test_branches.js --backend=python

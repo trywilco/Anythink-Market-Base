@@ -5,6 +5,7 @@
     "update-child-branches": "node scripts/update_child_branches.js --repoPath=. --branch=$BRANCH"
   },
   "dependencies": {
+    "@actions/exec": "^1.1.1",
     "axios": "^0.26.1",
     "yargs": "^17.4.0"
   }

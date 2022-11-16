@@ -20,12 +20,13 @@ services:
       - SECRET_KEY=secret
       - DEBUG=True
       - DATABASE_URL=postgresql://postgres:@postgres-python:5432/anythink-market
+      - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
     depends_on:
       - "postgres-python"
   anythink-frontend-react:
     build: ./frontend
     container_name: anythink-frontend-react
-    command: sh -c "cd frontend && yarn install && yarn start"
+    command: sh -c "cd frontend && yarn install && /wait-for-it.sh anythink-backend-python:3000 --strict -- curl --head -X GET --retry 30 --retry-connrefused --retry-delay 1 anythink-backend-python:3000/api/ping && yarn start"
     environment:
       - NODE_ENV=development
       - PORT=3001
@@ -37,6 +38,8 @@ services:
       - /usr/src/frontend/node_modules
     ports:
       - "3001:3001"
+   depends_on:
+      - "anythink-backend-python"
   postgres-python:
     container_name: postgres-python
     restart: on-failure
