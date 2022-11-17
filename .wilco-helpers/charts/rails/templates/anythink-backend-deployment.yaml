@@ -20,7 +20,7 @@ spec:
         - args:
             - sh
             - -c
-            - "/wait-for-it.sh {{ .Values.database.serviceName }}:{{ .Values.database.servicePort }} -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+            - "rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
           env:
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"

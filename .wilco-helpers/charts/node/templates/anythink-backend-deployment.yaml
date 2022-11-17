@@ -20,7 +20,7 @@ spec:
         - args:
             - sh
             - -c
-            - "/wait-for-it.sh {{ .Values.database.serviceName }}:{{ .Values.database.servicePort }} -q -t 60 && yarn dev"
+            - yarn start
           env:
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.serviceName}}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName}}"
