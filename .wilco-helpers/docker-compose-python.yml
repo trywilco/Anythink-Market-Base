@@ -38,7 +38,7 @@ services:
       - /usr/src/frontend/node_modules
     ports:
       - "3001:3001"
-   depends_on:
+    depends_on:
       - "anythink-backend-python"
   postgres-python:
     container_name: postgres-python
