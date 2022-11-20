@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:16.18
 
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
 
