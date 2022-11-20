@@ -16,6 +16,24 @@ services:
       - DATABASE_URL=postgres://user:@postgres-rails:5432
       - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
     depends_on:
+      "anythink-backend-rails-migrations":
+        condition: "service_completed_successfully"
+
+  anythink-backend-rails-migrations:
+    build: ./backend
+    container_name: anythink-backend-rails-migrations
+    command: sh -c "cd backend && bundle install && /wait-for-it.sh postgres-rails:5432 -q -t 60 && exec rails db:migrate"
+    working_dir: /usr/src
+    volumes:
+      - ./:/usr/src/
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgres://user:@postgres-rails:5432
+      - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
+    depends_on:
       - "postgres-rails"
 
   anythink-frontend-react:
