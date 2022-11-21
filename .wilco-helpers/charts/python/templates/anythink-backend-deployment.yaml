@@ -43,17 +43,17 @@ spec:
               protocol: TCP
           startupProbe:
             httpGet:
-              path: /api/ping
+              path: /
               port: http
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /api/ping
+              path: /
               port: http
           readinessProbe:
             httpGet:
-              path: /api/ping
+              path: /
               port: http
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
