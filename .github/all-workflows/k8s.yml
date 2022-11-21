@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-      - k8s
-      - aws-poc
 jobs:
   check-secret:
     environment: Production
