@@ -23,7 +23,7 @@ spec:
             - yarn start
           env:
             - name: DATABASE_URL
-              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.serviceName}}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName}}"
+              value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: NODE_ENV
               value: development
             - name: PORT

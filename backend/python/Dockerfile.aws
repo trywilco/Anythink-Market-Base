@@ -13,7 +13,3 @@ COPY .wilco ./.wilco
 WORKDIR /usr/src/backend
 RUN poetry install
 RUN poetry export -f "requirements.txt" --without-hashes --with-credentials > "requirements.txt"
-
-
-
-

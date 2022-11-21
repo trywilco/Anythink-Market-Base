@@ -29,7 +29,7 @@ spec:
             - name: DEBUG
               value: True
             - name: DATABASE_URL
-              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.password}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
+              value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.env.password }}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: RAILS_ENV
               value: development
             - name: PORT
