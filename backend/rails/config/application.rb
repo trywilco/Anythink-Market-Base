@@ -12,6 +12,8 @@ module AnythinkMarket
     config.load_defaults 5.2
     config.api_only = true
 
+     # Allow all hosts
+    config.hosts = nil
 
     config.to_prepare do
       DeviseController.respond_to :html, :json
