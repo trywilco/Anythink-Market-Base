@@ -6,8 +6,8 @@ backend:
     type: ClusterIP
     port: 80
   image:
-    repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/wilco-backend
-    pullPolicy: IfNotPresent
+    repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/anythink-backend
+    pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
   resources:
@@ -26,8 +26,8 @@ frontend:
     type: ClusterIP
     port: 80
   image:
-    repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/wilco-frontend
-    pullPolicy: IfNotPresent
+    repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/anythink-frontend
+    pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
   resources:
