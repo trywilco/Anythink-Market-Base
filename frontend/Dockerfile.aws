@@ -4,6 +4,6 @@ WORKDIR /usr/src
 COPY frontend ./frontend
 COPY .wilco ./.wilco
 
-# Pre-install gems
+# Pre-install npm packages
 WORKDIR /usr/src/frontend
 RUN yarn install

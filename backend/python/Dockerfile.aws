@@ -6,7 +6,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN pip install poetry==1.2.0
 
-# Pre-install gems
+# Pre-install poetry packages
 WORKDIR /usr/src
 COPY backend ./backend
 COPY .wilco ./.wilco
