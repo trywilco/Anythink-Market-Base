@@ -60,6 +60,6 @@ jobs:
       - name: Update quest solution branches
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "16"
       - run: yarn install
       - run: API_SERVER_TOKEN=${{ secrets.API_SERVER_TOKEN }} node scripts/update_child_branches.js --repoPath=. --branch=main --forcePush=true
