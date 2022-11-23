@@ -22,6 +22,10 @@ jobs:
         uses: supercharge/mongodb-github-action@1.6.0
         with:
           mongodb-version: "4.4"
+    
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+        secrets: ${{ toJSON(secrets) }}
 
       - name: Wilco checks
         id: Wilco
