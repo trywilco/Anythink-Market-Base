@@ -2161,10 +2161,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose-unique-validator@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-3.0.0.tgz#cc65a7237573cfc82d848f2fb9fade8627575760"
-  integrity sha512-WwC09CN2OQ39ONCEN2quR2L5CLHau3p2VYegRMitoVwdKA738uuJRlrTHXt5J6WyJBSloCILxwDZ5qbu4yEXcA==
+mongoose-unique-validator@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/mongoose-unique-validator/-/mongoose-unique-validator-3.1.0.tgz#10d6fa10ccf5515461e3b5693f193d227546d60b"
+  integrity sha512-UsBBlFapip8gc8x1h+nLWnkOy+GTy9Z+zmTyZ35icLV3EoLIVz180vJzepfMM9yBy2AJh+maeuoM8CWtqejGUg==
   dependencies:
     lodash.foreach "^4.1.0"
     lodash.get "^4.0.2"
