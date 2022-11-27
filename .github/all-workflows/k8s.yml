@@ -115,5 +115,6 @@ jobs:
       - name: Deploy
         run: |
           helm upgrade --install --timeout 10m anythink-market ./charts/ \
+              --set clusterEnv=${{ secrets.CLUSTER_ENV }}
               --set frontend.image.tag=${{ env.IMAGE_TAG }} \
               --set backend.image.tag=${{ env.IMAGE_TAG }}
