@@ -22,7 +22,7 @@ spec:
             - -c
             - yarn start
           env:
-            - name: DATABASE_URL
+            - name: MONGODB_URI
               value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: NODE_ENV
               value: development
