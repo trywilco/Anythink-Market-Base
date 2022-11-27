@@ -1,7 +1,5 @@
 FROM node:16
 
-RUN apt-get update -qq && apt-get install -y build-essential nodejs
-
 WORKDIR /usr/src
 COPY backend ./backend
 COPY .wilco ./.wilco
