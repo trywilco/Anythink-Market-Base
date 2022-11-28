@@ -60,7 +60,7 @@ services:
   anythink-ack:
     build: ./frontend
     container_name: anythink-ack
-    command: sh -c "/wait-for-it.sh anythink-frontend-react:3001 -q -t 1000 && ./anythink-ack.sh"
+    command: sh -c "/wait-for-it.sh anythink-frontend-react:3001 -q -t 1000 && ./anythink_ack.sh"
     environment:
       - NODE_ENV=development
       - PORT=5555
