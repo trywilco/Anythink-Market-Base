@@ -1,3 +1,7 @@
+clusterEnv: ""
+productionBackendHost: "prod.anythink.market"
+stagingBackendHost: "staging.anythink.market"
+
 backend:
   serviceName: anythink-backend
   containerPort: 3000
