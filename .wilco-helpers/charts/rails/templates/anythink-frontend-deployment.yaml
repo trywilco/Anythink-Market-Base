@@ -27,7 +27,7 @@ spec:
             - name: PORT
               value: "{{ .Values.frontend.containerPort }}"
             - name: REACT_APP_BACKEND_URL
-              value: https://{{ .Release.Namespace }}-api{{ if eq .Values.clusterEnv "staging" }}.staging{{ end }}.anythink.market
+              value: {{ include "anythink-tenant.backendHost" }}
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           name: {{ .Values.frontend.serviceName }}
