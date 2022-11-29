@@ -7,21 +7,27 @@ jobs:
   check-secret:
     runs-on: ubuntu-latest
     outputs:
-      creds-defined: ${{ steps.creds-defined.outputs.DEFINED }}
+      aws-creds-defined: ${{ steps.aws-creds-defined.outputs.DEFINED }}
+      kubeconfig-defined: ${{ steps.kubeconfig-defined.outputs.DEFINED }}
     steps:
-      - id: creds-defined
-        if: "${{ env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != '' && env.KUBECONFIG != '' }}"
+      - id: aws-creds-defined
+        if: "${{ env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != '' }}"
         run: echo "DEFINED=true" >> $GITHUB_OUTPUT
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - id: kubeconfig-defined
+        if: "${{ env.KUBECONFIG != '' }}"
+        run: echo "DEFINED=true" >> $GITHUB_OUTPUT
+        env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
   build-backend:
     name: Build backend image
     runs-on: ubuntu-20.04
     needs: [check-secret]
-    if: needs.check-secret.outputs.creds-defined == 'true'
+    if: needs.check-secret.outputs.aws-creds-defined == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,7 +59,7 @@ jobs:
     name: Build frontend images
     runs-on: ubuntu-20.04
     needs: [check-secret]
-    if: needs.check-secret.outputs.creds-defined == 'true'
+    if: needs.check-secret.outputs.aws-creds-defined == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -84,6 +90,7 @@ jobs:
   deploy:
     name: Deploy latest tag using helm
     runs-on: ubuntu-20.04
+    if: needs.check-secret.outputs.kubeconfig-defined == 'true'
     needs:
       - build-frontend
       - build-backend
