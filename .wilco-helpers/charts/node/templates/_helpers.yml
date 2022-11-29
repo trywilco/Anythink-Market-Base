@@ -1,5 +1,5 @@
 {{- define "anythink-tenant.backendHost" -}}
-  {{- .Release.Namespace .}}-api.
+  https://{{- .Release.Namespace }}-api.
   {{- if eq .Values.clusterEnv "production" }}
     {{- .Values.productionBackendHost }}
   {{- else }}
