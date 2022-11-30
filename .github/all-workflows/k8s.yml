@@ -48,10 +48,10 @@ jobs:
 
       - name: Set repository name
         run: |
-          if ${{ secrets.CLUSTER_ENV }} == 'staging'
-            echo REPO_NAME=staging-anythink-backend >> $GITHUB_ENV
+          if [ ${{ secrets.CLUSTER_ENV }} == 'staging' ]; then
+            echo "REPO_NAME=staging-anythink-backend" >> $GITHUB_ENV
           else
-            echo REPO_NAME=anythink-backend >> $GITHUB_ENV
+            echo "REPO_NAME=anythink-backend" >> $GITHUB_ENV
           fi
 
       - name: Build, tag, and push backend image to Amazon ECR
@@ -88,10 +88,10 @@ jobs:
 
       - name: Set repository name
         run: |
-            if ${{ secrets.CLUSTER_ENV }} == 'staging'
-              echo REPO_NAME=staging-anythink-frontend >> $GITHUB_ENV
+            if [ ${{ secrets.CLUSTER_ENV }} == 'staging' ]; then
+              echo "REPO_NAME=staging-anythink-frontend" >> $GITHUB_ENV
             else
-              echo REPO_NAME=anythink-frontend >> $GITHUB_ENV
+              echo "REPO_NAME=anythink-frontend" >> $GITHUB_ENV
             fi
 
       - name: Build, tag, and push frontend image to Amazon ECR
