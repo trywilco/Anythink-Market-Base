@@ -28,7 +28,7 @@ spec:
               value: development
             - name: PORT
               value: "{{ .Values.backend.containerPort }}"
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          image: "{{ include "anythink-tenant.backendRepository" .}}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Values.backend.serviceName }}
           ports:
@@ -63,7 +63,7 @@ spec:
               value: development
             - name: PORT
               value: "{{ .Values.backend.containerPort }}"
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          image: "{{ include "anythink-tenant.backendRepository" .}}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: db-migrations
       restartPolicy: Always

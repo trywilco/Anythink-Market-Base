@@ -11,6 +11,7 @@ backend:
     port: 80
   image:
     repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/anythink-backend
+    stagingRepository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/staging-anythink-backend
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
@@ -31,6 +32,7 @@ frontend:
     port: 80
   image:
     repository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/anythink-frontend
+    stagingRepository: 498915426792.dkr.ecr.us-east-2.amazonaws.com/staging-anythink-frontend
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
