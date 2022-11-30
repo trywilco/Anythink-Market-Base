@@ -20,20 +20,16 @@ spec:
         - args:
             - sh
             - -c
-            - "poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }}"
+            - "poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }} app.main:app"
           env:
             - name: APP_ENV
               value: dev
             - name: SECRET_KEY
               value: secret
             - name: DEBUG
-              value: True
+              value: "True"
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.env.password }}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
-            - name: RAILS_ENV
-              value: development
-            - name: PORT
-              value: "{{ .Values.backend.containerPort }}"
           image: "{{ include "anythink-tenant.backendRepository" .}}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Values.backend.serviceName }}
@@ -68,13 +64,9 @@ spec:
             - name: SECRET_KEY
               value: secret
             - name: DEBUG
-              value: True
+              value: "True"
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.password}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
-            - name: RAILS_ENV
-              value: development
-            - name: PORT
-              value: "{{ .Values.backend.containerPort }}"
           image: "{{ include "anythink-tenant.backendRepository" .}}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: db-migrations
