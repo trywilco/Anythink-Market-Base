@@ -46,14 +46,22 @@ jobs:
       - name: Set the image tag
         run: echo IMAGE_TAG=${GITHUB_REPOSITORY/\//-}-latest >> $GITHUB_ENV
 
+      - name: Set repository name
+        run: |
+          if ${{ secrets.CLUSTER_ENV }} == 'staging'
+            echo REPO_NAME=staging-anythink-backend >> $GITHUB_ENV
+          else
+            echo REPO_NAME=anythink-backend >> $GITHUB_ENV
+          fi
+
       - name: Build, tag, and push backend image to Amazon ECR
         id: build-image-backend
         run: |
           docker build \
-            -t ${{ steps.login-ecr.outputs.registry }}/anythink-backend:${{ env.IMAGE_TAG }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }} \
             -f backend/Dockerfile.aws \
             .
-          docker push ${{ steps.login-ecr.outputs.registry }}/anythink-backend:${{ env.IMAGE_TAG }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
 
   build-frontend:
     name: Build frontend images
@@ -78,14 +86,22 @@ jobs:
       - name: Set the image tag
         run: echo IMAGE_TAG=${GITHUB_REPOSITORY/\//-}-latest >> $GITHUB_ENV
 
+      - name: Set repository name
+        run: |
+            if ${{ secrets.CLUSTER_ENV }} == 'staging'
+              echo REPO_NAME=staging-anythink-frontend >> $GITHUB_ENV
+            else
+              echo REPO_NAME=anythink-frontend >> $GITHUB_ENV
+            fi
+
       - name: Build, tag, and push frontend image to Amazon ECR
         id: build-image-frontend
         run: |
           docker build \
-            -t ${{ steps.login-ecr.outputs.registry }}/anythink-frontend:${{ env.IMAGE_TAG }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }} \
             -f frontend/Dockerfile.aws \
             .
-          docker push ${{ steps.login-ecr.outputs.registry }}/anythink-frontend:${{ env.IMAGE_TAG }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
 
   deploy:
     name: Deploy latest tag using helm
