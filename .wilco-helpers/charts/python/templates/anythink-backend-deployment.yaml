@@ -20,7 +20,7 @@ spec:
         - args:
             - sh
             - -c
-            - "poetry run uvicorn --host=0.0.0.0 --port=3000 app.main:app"
+            - "poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }} app.main:app"
           env:
             - name: APP_ENV
               value: dev
