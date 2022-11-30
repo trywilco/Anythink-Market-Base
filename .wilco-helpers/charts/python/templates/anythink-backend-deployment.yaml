@@ -27,7 +27,7 @@ spec:
             - name: SECRET_KEY
               value: secret
             - name: DEBUG
-              value: True
+              value: "True"
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.env.password }}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: RAILS_ENV
@@ -68,7 +68,7 @@ spec:
             - name: SECRET_KEY
               value: secret
             - name: DEBUG
-              value: True
+              value: "True"
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.password}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
             - name: RAILS_ENV
