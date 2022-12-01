@@ -1,0 +1,24 @@
+{{- define "anythink-tenant.backendHost" -}}
+  https://{{- .Release.Namespace }}-api.
+  {{- if eq .Values.clusterEnv "production" }}
+    {{- .Values.productionBackendHost }}
+  {{- else }}
+    {{- .Values.stagingBackendHost }}
+  {{- end }}
+{{- end }}
+
+{{- define "anythink-tenant.backendRepository" -}}
+  {{- if eq .Values.clusterEnv "production" }}
+    {{- .Values.backend.image.repository }}
+  {{- else }}
+    {{- .Values.backend.image.stagingRepository }}
+  {{- end }}
+{{- end }}
+
+{{- define "anythink-tenant.frontendRepository" -}}
+  {{- if eq .Values.clusterEnv "production" }}
+    {{- .Values.frontend.image.repository }}
+  {{- else }}
+    {{- .Values.frontend.image.stagingRepository }}
+  {{- end }}
+{{- end }}
