@@ -28,7 +28,7 @@ spec:
               value: "{{ .Values.frontend.containerPort }}"
             - name: REACT_APP_BACKEND_URL
               value: {{ include "anythink-tenant.backendHost" .}}
-          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+          image: "{{ include "anythink-tenant.frontendRepository" .}}:{{ .Values.frontend.image.tag }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           name: {{ .Values.frontend.serviceName }}
           ports:
