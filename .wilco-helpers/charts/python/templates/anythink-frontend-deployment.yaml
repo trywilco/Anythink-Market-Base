@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.frontend.serviceName }}
+        date: {{ now | unixEpoch | quote }}
     spec:
       containers:
         - args:
