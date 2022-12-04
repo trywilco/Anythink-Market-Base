@@ -48,7 +48,7 @@ services:
     ports:
       - '27017:27017'
 
-anythink-ack:
+  anythink-ack:
     build: ./frontend
     container_name: anythink-ack
     command: sh -c "/wait-for-it.sh anythink-frontend-react:3001 -q -t 1000 && ./anythink_ack.sh"
