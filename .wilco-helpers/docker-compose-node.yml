@@ -47,3 +47,15 @@ services:
       - ~/mongo/data:/data/db
     ports:
       - '27017:27017'
+
+anythink-ack:
+    build: ./frontend
+    container_name: anythink-ack
+    command: sh -c "/wait-for-it.sh anythink-frontend-react:3001 -q -t 1000 && ./anythink_ack.sh"
+    working_dir: /usr/src
+    volumes:
+      - ./:/usr/src/
+    ports:
+      - "5555:5555"
+    depends_on:
+      - "anythink-frontend-react" 
