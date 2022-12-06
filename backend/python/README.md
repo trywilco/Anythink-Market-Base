@@ -29,6 +29,4 @@ Application parts are:
 Project structure
 =================
 
-Project dependencies are managed by poetry
-[(https://python-poetry.org)]{.title-ref}, using venv
-[(https://docs.python.org/3/library/venv.html)]{.title-ref}.
+Project dependencies are managed by poetry [(https://python-poetry.org)]{.title-ref}, using venv [(https://docs.python.org/3/library/venv.html)]{.title-ref}.
