@@ -55,7 +55,5 @@ services:
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/
-    ports:
-      - "5555:5555"
     depends_on:
       - "anythink-frontend-react" 
