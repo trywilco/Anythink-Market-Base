@@ -30,12 +30,18 @@ async function main() {
     });
     await item.save();
 
-    const comment = new Comment({
-      body: `body ${i}`,
-      seller: user,
-      item: item,
-    });
-    await comment.save();
+    let commentIds = [];
+    for (let j = 0; j < 100; j++) {
+      const comment = new Comment({
+        body: `body ${j}`,
+        seller: user,
+        item: item,
+      });
+      await comment.save();
+      commentIds.push(comment._id);
+    }
+    item.comments = commentIds;
+    await item.save();
   }
 }
 
