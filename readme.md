@@ -1,4 +1,4 @@
-# Welcome to the Anythink Market repo
+# Welcome to the Anythink Market repo (powered by [Wilco](https://www.trywilco.com))
 
 To start the app use Docker. It will start both frontend and backend, including all the relevant dependencies, and the db.
 

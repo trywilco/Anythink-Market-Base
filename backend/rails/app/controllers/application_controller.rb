@@ -10,6 +10,10 @@ class ApplicationController < ActionController::API
     render plain: "API server is up and running, please use the frontend app to interact with the system"
   end
 
+  def health
+    render plain: 'OK'
+  end
+
   private
 
   def configure_permitted_parameters

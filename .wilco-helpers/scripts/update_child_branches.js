@@ -3,7 +3,7 @@ const exec = util.promisify(require("child_process").exec);
 const args = require("yargs").argv;
 const axios = require("axios");
 
-const ENGINE_URL = 'https://wilco-engine.herokuapp.com';
+const ENGINE_URL = "https://engine.wilco.gg";
 
 let git;
 let BRANCH;
@@ -34,22 +34,26 @@ async function main() {
   }
 
   const { data } = await axios.get(`${ENGINE_URL}/api/v1/quests`, {
-    headers: { Authorization: `ServerToken ${process.env.API_SERVER_TOKEN}` }
+    headers: { Authorization: `ServerToken ${process.env.API_SERVER_TOKEN}` },
   });
   const questsMap = data.quests.reduce((map, quest) => {
-    map[quest._id] = quest;
+    map[quest.primaryId] = quest;
     return map;
   }, {});
-  branchHierarchyMap.main = ['quest_solution/tutorial'];
+  branchHierarchyMap.main = ["quest_solution/onboarding"];
   for (const quest of data.quests) {
     if (quest.questDependency) {
       const questDependency = questsMap[quest.questDependency];
       if (quest.solutionBranch) {
-        branchHierarchyMap[questDependency.solutionBranch] = branchHierarchyMap[questDependency.solutionBranch] || [];
-        branchHierarchyMap[questDependency.solutionBranch].push(quest.solutionBranch);
+        branchHierarchyMap[questDependency.solutionBranch] =
+          branchHierarchyMap[questDependency.solutionBranch] || [];
+        branchHierarchyMap[questDependency.solutionBranch].push(
+          quest.solutionBranch
+        );
       }
-      questHierarchyMap[questDependency._id] = questHierarchyMap[questDependency._id] || [];
-      questHierarchyMap[questDependency._id].push(quest._id);
+      questHierarchyMap[questDependency.primaryId] =
+        questHierarchyMap[questDependency.primaryId] || [];
+      questHierarchyMap[questDependency.primaryId].push(quest.primaryId);
     }
   }
   git = initGit(args.repoPath);
@@ -63,7 +67,7 @@ async function main() {
   console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
   console.log("Tree of quests:");
   console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
-  printTreeView('tutorial', questHierarchyMap);
+  printTreeView("onboarding", questHierarchyMap);
 
   if (args.onlyPrintTree) {
     return;

@@ -1,4 +1,7 @@
-on: [pull_request]
+on: 
+  pull_request:
+    branches:
+      - main
 
 jobs:
   wilco:
@@ -26,12 +29,16 @@ jobs:
         with:
           working-directory: backend
           bundler-cache: true
+          
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
 
       - name: Wilco checks
         id: Wilco
         uses: trywilco/actions@main
         with:
-          owner: ${{ github.repository_owner }}
+          engine: ${{ secrets.WILCO_ENGINE_URL }}
   Lint:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -43,9 +50,10 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v2
       - name: Lint code
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'yarn'
-      - run: yarn install
+          cache-dependency-path: frontend/yarn.lock
+      - run: yarn add lint
       - run: yarn lint

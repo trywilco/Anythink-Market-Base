@@ -1,4 +1,7 @@
-on: [pull_request]
+on: 
+  pull_request:
+    branches:
+      - main
 
 jobs:
   wilco:
@@ -12,6 +15,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
           SECRET_KEY: secret
+          POSTGRES_DB: anythink-market
         ports:
           - 5432:5432
         options: >-
@@ -26,13 +30,17 @@ jobs:
       - name: Use Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9"
+          python-version: "3.9.13"
+    
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
 
       - name: Wilco checks
         id: Wilco
         uses: trywilco/actions@main
         with:
-          owner: ${{ github.repository_owner }}
+          engine: ${{ secrets.WILCO_ENGINE_URL }}
   Lint:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -44,9 +52,10 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v2
       - name: Lint code
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'yarn'
-      - run: yarn install
+          cache-dependency-path: frontend/yarn.lock
+      - run: yarn add lint
       - run: yarn lint

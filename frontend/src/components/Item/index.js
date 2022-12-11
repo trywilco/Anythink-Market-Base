@@ -20,13 +20,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Item extends React.Component {
-  componentWillMount() {
-    this.props.onLoad(
-      Promise.all([
-        agent.Items.get(this.props.match.params.id),
-        agent.Comments.forItem(this.props.match.params.id),
-      ])
-    );
+  async componentDidMount() {
+    const item = await agent.Items.get(this.props.match.params.id);
+    const comments = await agent.Comments.forItem(this.props.match.params.id);
+    this.props.onLoad([item, comments]);
   }
 
   componentWillUnmount() {
@@ -45,7 +42,7 @@ class Item extends React.Component {
       this.props.currentUser &&
       this.props.currentUser.username === this.props.item.seller.username;
     return (
-      <div className="container page">
+      <div className="container page" id="item-container">
         <div className="text-dark">
           <div className="row bg-white p-4">
             <div className="col-6">
@@ -58,7 +55,7 @@ class Item extends React.Component {
             </div>
 
             <div className="col-6">
-              <h1>{this.props.item.title}</h1>
+              <h1 id="card-title">{this.props.item.title}</h1>
               <ItemMeta item={this.props.item} canModify={canModify} />
               <div dangerouslySetInnerHTML={markup}></div>
               {this.props.item.tagList.map((tag) => {

@@ -67,35 +67,20 @@ app.use(function (req, res, next) {
   }
 });
 
-/// error handlers
-
-// development error handler
-// will print stacktrace
-if (!isProduction) {
-  app.use(function(err, req, res, next) {
-    console.log(err.stack);
-
+/// error handler
+app.use(function(err, req, res, next) {
+  console.log(err.stack);
+  if (isProduction) {
+    res.sendStatus(err.status || 500)
+  } else {
     res.status(err.status || 500);
-
     res.json({
       errors: {
         message: err.message,
         error: err
       }
     });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({
-    errors: {
-      message: err.message,
-      error: {}
-    }
-  });
+  }
 });
 
 // finally, let's start our server...
