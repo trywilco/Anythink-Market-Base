@@ -1,13 +1,13 @@
 import ItemMeta from "./ItemMeta";
 import CommentContainer from "./CommentContainer";
 import React from "react";
-import agent from "../../agent";
 import { connect } from "react-redux";
 import marked from "marked";
 import {
   ITEM_PAGE_LOADED,
   ITEM_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
+import { getItemAndComments } from "./utils/ItemFetcher";
 
 const mapStateToProps = (state) => ({
   ...state.item,
@@ -21,8 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Item extends React.Component {
   async componentDidMount() {
-    const item = await agent.Items.get(this.props.match.params.id);
-    const comments = await agent.Comments.forItem(this.props.match.params.id);
+    const [item, comments] = await getItemAndComments(
+      this.props.match.params.id
+    );
     this.props.onLoad([item, comments]);
   }
 
