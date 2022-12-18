@@ -28,7 +28,7 @@ jobs:
         env:
           ECR_REGISTRY: public.ecr.aws/v0a2l7y2
           ECR_REPOSITORY: wilco/anythink-backend-node
-          IMAGE_TAG: anythink_image_test
+          IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f backend/node/Dockerfile.image .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f .wilco-helpers/Dockerfile.node.image .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

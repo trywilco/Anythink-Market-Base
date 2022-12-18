@@ -1,0 +1,8 @@
+FROM node:16
+
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/src/backend/wait-for-it.sh
+
+RUN chmod +x /usr/src/backend/wait-for-it.sh
+WORKDIR /usr/src/backend
+COPY . .
+RUN yarn install
