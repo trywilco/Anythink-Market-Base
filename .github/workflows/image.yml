@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build-backend:
+  build-backend-node:
     name: Build backend image
     runs-on: ubuntu-20.04
     steps:
