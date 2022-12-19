@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   build-backend-node:
-    name: Build backend image
+    name: Build backend node image
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
