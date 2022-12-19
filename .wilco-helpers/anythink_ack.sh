@@ -9,4 +9,4 @@ echo "  / ___ \  | | | | | |_| | | |_  | | | | | | | | | | |   <  "
 echo " /_/   \_\ |_| |_|  \__, |  \__| |_| |_| |_| |_| |_| |_|\_\ "
 echo "                    |___/                                   "
 
-echo '\n\e]8;;http://anythink.wilco.gg/chat\e\\Click here\e]8;;\e\\ to move back to Snack'
+echo '\n\e]8;;http://anythink.wilco.gg/chat\e\\Click here\e]8;;\e\\ to go back to Snack'
