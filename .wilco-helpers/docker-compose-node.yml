@@ -3,14 +3,14 @@ services:
   anythink-backend-node:
     build: ./backend
     container_name: anythink-backend-node
-    command: sh -c "cd backend && yarn install && /wait-for-it.sh mongodb-node:27017 -q -t 60 && yarn dev"
+    command: sh -c "./wait-for-it.sh mongodb-node:27017 -q -t 60 && yarn dev"
 
     environment:
       - NODE_ENV=development
       - PORT=3000
       - MONGODB_URI=mongodb://mongodb-node:27017/anythink-market
       - GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
-    working_dir: /usr/src
+    working_dir: /usr/src/backend
     volumes:
       - ./:/usr/src/
       - /usr/src/backend/node_modules
