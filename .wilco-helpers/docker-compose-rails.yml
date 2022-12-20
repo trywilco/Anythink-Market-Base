@@ -21,7 +21,7 @@ services:
   anythink-frontend-react:
     build: ./frontend
     container_name: anythink-frontend-react
-    command: sh -c "cd frontend && /wait-for-it.sh anythink-backend-rails:3000 -t 120 --strict -- curl --head -X GET --retry 30 --retry-connrefused --retry-delay 1 anythink-backend-rails:3000/api/ping  && yarn start"
+    command: sh -c "cd frontend && yarn install && /wait-for-it.sh anythink-backend-rails:3000 -t 120 --strict -- curl --head -X GET --retry 30 --retry-connrefused --retry-delay 1 anythink-backend-rails:3000/api/ping  && yarn start"
     environment:
       - NODE_ENV=development
       - PORT=3001
