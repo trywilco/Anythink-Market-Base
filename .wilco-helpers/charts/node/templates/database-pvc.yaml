@@ -6,7 +6,7 @@ metadata:
   name: {{ .Values.database.serviceName }}-0
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Mi
