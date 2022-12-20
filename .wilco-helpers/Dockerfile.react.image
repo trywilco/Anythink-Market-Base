@@ -1,0 +1,8 @@
+FROM node:16
+
+RUN curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh --output /wait-for-it.sh
+
+RUN chmod +x /wait-for-it.sh
+COPY /frontend/ /usr/src/frontend
+WORKDIR /usr/src/frontend
+RUN yarn install
