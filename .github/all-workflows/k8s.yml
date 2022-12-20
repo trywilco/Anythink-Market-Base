@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - main
+      
+concurrency:
+  group: k8s
+  cancel-in-progress: true
+  
 jobs:
   check-kubernetes-enabled:
     runs-on: ubuntu-latest
