@@ -1,5 +1,4 @@
-FROM node:16
-
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
-
-RUN chmod +x /wait-for-it.sh
+FROM public.ecr.aws/v0a2l7y2/wilco/anythink-backend-node:latest
+RUN chown node:node /wait-for-it.sh
+RUN chown node:node /usr/src/backend/node_modules
+USER node
