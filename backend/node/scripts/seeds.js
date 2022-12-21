@@ -20,7 +20,13 @@ async function main() {
     const user = new User();
     user.username = `user${i}`;
     user.email = `user${i}@gmail.com`;
-    await user.save();
+    try {
+      await user.save();
+    } catch (e) {
+      if (e?.errors?.username?.properties?.message === "is already taken.") {
+        continue;
+      }
+    }
 
     const item = new Item({
       slug: `slug${i}`,
