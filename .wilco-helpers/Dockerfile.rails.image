@@ -1,0 +1,11 @@
+FROM ruby:2.7.5
+
+RUN curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh --output /wait-for-it.sh
+
+RUN chmod +x /wait-for-it.sh
+COPY /backend/rails /usr/src/backend
+
+RUN apt-get update -qq && apt-get install -y build-essential nodejs
+
+WORKDIR /usr/src/backend
+RUN bundle install
