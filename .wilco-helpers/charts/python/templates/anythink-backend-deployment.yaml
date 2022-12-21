@@ -58,7 +58,7 @@ spec:
         - command:
             - sh
             - -c
-            - "poetry run alembic upgrade head"
+            - "poetry run alembic upgrade head && ./seeds.sh"
           env:
             - name: APP_ENV
               value: dev
