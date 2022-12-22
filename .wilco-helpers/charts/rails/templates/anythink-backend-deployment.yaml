@@ -56,7 +56,7 @@ spec:
         - command:
             - sh
             - -c
-            - "exec rails db:migrate"
+            - "rails db:migrate && ./seeds.sh"
           env:
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
