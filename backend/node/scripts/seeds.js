@@ -29,7 +29,7 @@ async function main() {
       seller: createdUser,
     };
     const createdItem = await Item.findOneAndUpdate(item, {}, options);
-    if (!createdItem.comments.length) {
+    if (!createdItem?.comments?.length) {
       let commentIds = [];
       for (let j = 0; j < 100; j++) {
         const comment = new Comment({
