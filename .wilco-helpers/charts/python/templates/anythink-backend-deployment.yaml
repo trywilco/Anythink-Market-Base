@@ -21,7 +21,7 @@ spec:
         - args:
             - sh
             - -c
-            - "poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }} app.main:app"
+            - "NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program poetry run uvicorn --host=0.0.0.0 --port={{ .Values.backend.containerPort }} app.main:app"
           env:
             - name: APP_ENV
               value: dev
@@ -31,6 +31,14 @@ spec:
               value: "True"
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.env.password }}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
+            - name: NEW_RELIC_APP_NAME
+              value: "Anythink Market"
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: new-relic-license-key
+                  key: new-relic-license-key
+                  optional: true
           image: "{{ include "anythink-tenant.backendRepository" .}}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           name: {{ .Values.backend.serviceName }}
