@@ -17,31 +17,32 @@ const connectedToDatabase = () => {
 async function main() {
   connectedToDatabase();
   for (let i = 0; i < 100; i++) {
-    const user = new User();
+    const user = {};
     user.username = `user${i}`;
     user.email = `user${i}@gmail.com`;
-    await user.save();
-
-    const item = new Item({
+    const options = { upsert: true, new: true };
+    const createdUser = await User.findOneAndUpdate(user, {}, options);
+    const item = {
       slug: `slug${i}`,
       title: `title ${i}`,
       description: `description ${i}`,
-      seller: user,
-    });
-    await item.save();
-
-    let commentIds = [];
-    for (let j = 0; j < 100; j++) {
-      const comment = new Comment({
-        body: `body ${j}`,
-        seller: user,
-        item: item,
-      });
-      await comment.save();
-      commentIds.push(comment._id);
+      seller: createdUser,
+    };
+    const createdItem = await Item.findOneAndUpdate(item, {}, options);
+    if (!createdItem?.comments?.length) {
+      let commentIds = [];
+      for (let j = 0; j < 100; j++) {
+        const comment = new Comment({
+          body: `body ${j}`,
+          seller: createdUser,
+          item: createdItem,
+        });
+        await comment.save();
+        commentIds.push(comment._id);
+      }
+      createdItem.comments = commentIds;
+      await createdItem.save();
     }
-    item.comments = commentIds;
-    await item.save();
   }
 }
 

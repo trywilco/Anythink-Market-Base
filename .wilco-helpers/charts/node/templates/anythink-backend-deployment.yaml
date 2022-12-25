@@ -21,7 +21,7 @@ spec:
         - args:
             - sh
             - -c
-            - yarn start
+            - "yarn seeds && yarn start"
           env:
             - name: MONGODB_URI
               value: "{{ .Values.database.connectionProtocol }}{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}/{{ .Values.database.databaseName }}"
