@@ -11,18 +11,18 @@ database_url = env_var['DATABASE_URL'].replace("postgres://", "postgresql://")
 
 engine = create_engine(database_url, echo=False)
 
-user_insert_statement = text("""INSERT INTO users(username, email, salt, bio, hashed_password) VALUES(:username, :email, :salt, :bio, :hashed_password)""")
+user_insert_statement = text("""INSERT INTO users(username, email, salt, bio, hashed_password) VALUES(:username, :email, :salt, :bio, :hashed_password) ON CONFLICT DO NOTHING""")
 select_last_user_id = text("""SELECT * FROM users ORDER BY id DESC LIMIT 1""")
-item_statement = text("""INSERT INTO items(slug, title, description, seller_id) VALUES(:slug, :title, :description, :seller_id)""")
+item_statement = text("""INSERT INTO items(slug, title, description, seller_id) VALUES(:slug, :title, :description, :seller_id) ON CONFLICT DO NOTHING""")
 select_last_item_id = text("""SELECT * FROM items ORDER BY id DESC LIMIT 1""")
-comment_statement = text("""INSERT INTO comments(body, seller_id, item_id) VALUES(:body, :seller_id, :item_id)""")
+comment_statement = text("""INSERT INTO comments(body, seller_id, item_id) VALUES(:body, :seller_id, :item_id) ON CONFLICT DO NOTHING""")
 
 letters = string.ascii_lowercase
 
 with engine.connect() as con:
     for i in range(100):
 
-        random_username = ''.join(random.choice(letters) for i in range(10))
+        random_username = f'user{i}'
         user = {'username': random_username, 'email':f'{random_username}@mail.com', 'salt': 'abc', 'bio': 'bio', 'hashed_password':'12345689'}
         con.execute(user_insert_statement, **user)
 
