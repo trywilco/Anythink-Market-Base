@@ -30,5 +30,17 @@ then
 fi
 
 printf "[===] SUCCESS: Your local 'main' branch is now up to date with origin.\n"
+
+docker_compose_code=$(docker-compose up -d)
+docker_compose_code=$?
+
+if ! test "$docker_compose_code" -eq 0
+then
+   printf "[==X] ERROR: Could not run docker-compose up. Aborting.\n"
+   sendEvent false "$docker_compose_code"
+   echo "[==X] DOCKER-COMPOSE UP ERROR: $docker_compose_code"
+   exit 1
+fi
+
 sendEvent true
 exit 0
