@@ -8,12 +8,12 @@ sendEvent() {
 }
 
 sendScriptRunningEvent() {
-  body='{"event":"start_quest_script_running", "metadata": {"remote": true}}'
+  body='{"event":"start_quest_script_running", "metadata": {"remote": false}}'
   sendEvent "$body"
 }
 
 sendScriptRanEvent() {
-  body='{"event":"start_quest_script_ran", "metadata": {"success": '$1', "remote": true, "error": "'$2'"}}'
+  body='{"event":"start_quest_script_ran", "metadata": {"success": '$1', "remote": false, "error": "'$2'"}}'
   sendEvent "$body"
 }
 
