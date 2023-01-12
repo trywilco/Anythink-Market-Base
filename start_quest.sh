@@ -35,6 +35,7 @@ if ! test "$git_exit_code" -eq 0
 then
    printf "[==X] ERROR: Could not reset local 'main' branch. Aborting.\n"
    sendScriptRanEvent false "$git_output"
+   echo "[==X] GIT ERROR: $git_output"
    exit 1
 fi
 
