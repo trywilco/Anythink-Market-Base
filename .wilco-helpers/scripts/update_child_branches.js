@@ -40,7 +40,7 @@ async function main() {
     map[quest.primaryId] = quest;
     return map;
   }, {});
-  branchHierarchyMap.main = ["quest_solution/onboarding"];
+  branchHierarchyMap.main = ["quest_solution/docker_localsetup"];
   for (const quest of data.quests) {
     if (quest.questDependency) {
       const questDependency = questsMap[quest.questDependency];
@@ -67,7 +67,7 @@ async function main() {
   console.log("\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
   console.log("Tree of quests:");
   console.log("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n");
-  printTreeView("onboarding", questHierarchyMap);
+  printTreeView("docker_localsetup", questHierarchyMap);
 
   if (args.onlyPrintTree) {
     return;
